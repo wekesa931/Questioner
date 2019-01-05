@@ -1,0 +1,213 @@
+body{
+    margin: 0;
+    background: #f3f3ed;
+}
+.navbar{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    background: #74749e;
+}
+.logo {
+    width: 6%;
+    float: right;
+}
+.logo-holder{
+    width: 31%;
+}
+.title-holder {
+    padding-top: 1%;
+    color: white;
+    font-family: sans-serif;
+}
+.searchbox-holder{
+    width: 32%;
+    padding-top: 1%;
+}
+form{
+   float: right;
+}
+main{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 1%;
+}
+.questions-holder,.feeds{
+    width: 25%;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 19px;
+    border: 1px solid #b9aeae;
+    box-shadow: 1px 1px 8px 0px;
+    background: white;
+}
+.meetup-holder{
+    width: 43%;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 19px;
+    border: 1px solid #b9aeae;
+    box-shadow: 1px 1px 8px 0px;
+    margin: 0 3%;
+    background: white;
+}
+.profile-name-holder{
+    font-family: sans-serif;
+    color: white;
+    font-size: 13px;
+    padding-top: 2%;
+}
+@media screen and (min-width: 1280px) {
+    .questions-holder,.feeds,.meetup-holder{
+        min-height: 90vh;
+    }
+    .hum-icon{
+        display: none;
+    }
+    .add-meetup{
+        display: none;
+    }
+  }
+@media screen and (max-width: 1280px) {
+    .logo-holder {
+        padding-top: 1%;
+        width: 26%;
+    }
+    .logo {
+        width: 10%;
+    }
+    .title-holder {
+        padding-top: 2%;
+    }
+    .searchbox-holder {
+        width: 38%;
+        padding-top: 3%;
+    }
+    .sidenav{
+        display: none;
+    }
+    .hum-icon{
+        display: none;
+    }
+  }
+@media screen and (max-width: 800px) {
+    .logo {
+        width: 70%;
+        margin-top: 23%;
+    }
+    .logo-holder {
+        width: 10%;
+    }
+    .title-holder {
+        padding-top: 4%;
+        font-size: 26px;
+    }
+    
+    .searchbox-holder {
+        display: none;
+    }
+    .hide{
+        display: none;
+    }
+    .questions-holder, .feeds {
+        width: 96%;
+        margin: 0 auto;
+        text-align: center;
+        font-family: sans-serif;
+        font-size: 19px;
+        border: 1px solid #b9aeae;
+        box-shadow: 1px 1px 8px 0px;
+        background: white;
+    }
+    .meetup-holder {
+        width: 96%;
+        margin: 0 auto;
+        text-align: center;
+        font-family: sans-serif;
+        font-size: 19px;
+        border: 1px solid #b9aeae;
+        box-shadow: 1px 1px 8px 0px;
+        margin: 6% auto;
+        background: white;
+    }
+
+
+    .sidenav{
+        background: #191818;
+        width: 100%;
+        position: absolute;
+        height: 88vh;
+        color: white;
+    }
+    .profile-name-holder{
+        display: none;
+    }
+    .fa{
+        float: right;
+    }
+    .hum-icon{
+        width: 54%;
+        font-size: 64px;
+        padding-top: 5%;
+        color: white;
+    }
+  }
+@media screen and (max-width: 480px) {
+    .logo {
+        width: 70%;
+        margin-top: 23%;
+    }
+    .logo-holder {
+        width: 10%;
+    }
+    .title-holder {
+        padding-top: 2%;
+        font-size: 15px;
+    }
+    
+    .searchbox-holder {
+        display: none;
+    }
+    .hide{
+        display: none;
+    }
+    .questions-holder, .feeds {
+        width: 100%;
+        text-align: center;
+        font-family: sans-serif;
+        font-size: 19px;
+        border: 1px solid #b9aeae;
+        box-shadow: 1px 1px 8px 0px;
+        background: white;
+    }
+    .meetup-holder {
+        width: 100%;
+        text-align: center;
+        font-family: sans-serif;
+        font-size: 19px;
+        border: 1px solid #b9aeae;
+        box-shadow: 1px 1px 8px 0px;
+        margin: 6% auto;
+        background: white;
+    }
+    .sidenav{
+        background: #191818;
+        width: 100%;
+        position: absolute;
+        height: 88vh;
+        color: white;
+    }
+    .profile-name-holder{
+        display: none;
+    }
+    .fa{
+        float: right;
+    }
+    .hum-icon{
+        width: 46%;
+        font-size: 29px;
+        padding-top: 5%;
+        color: white;
+    }
+  }

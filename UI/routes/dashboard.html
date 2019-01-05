@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Questioner</title>
+
+    <link rel="stylesheet" href="../static/styles/dashboard.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo-holder">
+            <img src="../static/images/download.png" alt="logo" class="logo">
+        </div>
+        <div class="title-holder">
+            <h3>Questioner</h3>
+        </div>
+        <div class="searchbox-holder">
+            <form action="/action_page.php">
+                <input type="text" placeholder="Search.." name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+            
+        </div>
+        <div class="hum-icon">
+            <i class="fa fa-bars"></i>
+        </div>
+        <div class="profile-pic-holder"></div>
+        <div class="profile-name-holder">
+            <p>my name</p>
+        </div>
+    </div>
+    <main>
+        <div class="add-meetup hide sidenav">
+            my profile
+        </div>
+        <div class="questions-holder">
+            <p>Asked Questions</p>
+        </div>
+        <div class="meetup-holder">
+            <p>Meetups</p>
+        </div>
+        <div class="feeds">
+            <p>Question feeds</p> 
+        </div>
+    </main>
+    <script src="../static/javascript/admin.js"></script>
+</body>
+</html>
