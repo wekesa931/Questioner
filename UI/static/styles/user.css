@@ -1,0 +1,142 @@
+body{
+    margin: 0;
+}
+.container{
+    padding-top: 2%;
+    border: 1px solid black;
+    width: 20%;
+    margin: 80px auto;
+    box-shadow: 1px 1px 17px 0px black;
+}
+
+input {
+    width: 80%;
+    margin-left: 6%;
+    margin-top: 5%;
+    padding: 4%;
+    font-size: 15px;
+}
+span{
+    color: blue;
+}
+.alt-message{
+    color: #4c4a37;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 11px;
+    text-align: center;
+    background-color: #f8f8fb;
+}
+.form-detail{
+    background-color: #f8f8fb;
+    padding-bottom: 5%;
+}
+button{
+    color: #fff !important;
+    text-transform: uppercase;
+    background: #e46361;
+    padding: 20px;
+    border-radius: 5px;
+    border: none;
+    width: 32%;
+    padding: 2%;
+    margin-left: 32%;
+}
+.logo{
+    padding-left: 44%;
+}
+.my-logo{
+    width: 20%;
+}
+h3 {
+    text-decoration: underline;
+    margin-top: 0%;
+    color: #7c795d;
+    font-family: 'Trocchi', serif;
+    font-size: 36px;
+    font-weight: normal;
+    line-height: 53px;
+    margin-bottom: 17px;
+}
+.title{
+    text-align: center;
+}
+.sign-pages{
+    display: flex;
+    width: 100%;
+    color: #6a7971;
+    font-family: 'Muli', sans-serif;
+}
+.sign-in-module{
+    padding-top: 4%;
+    padding-bottom: 2%;
+    width: 50%;
+    text-align: center;
+    font-size: 18px;
+    border-bottom: 1px solid #c5c5c5;;
+}
+.sign-up-module{
+    width: 50%;
+    text-align: center;
+    font-size: 18px;
+}
+.sign-in-module p, .sign-up-module p{
+    margin: 0;
+}
+.sign-up-mode{
+    background-color: #f8f8fb;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    border: 1px solid #c5c5c5;;
+    border-bottom: none;
+    border-right: none;
+    font-size: 25px;
+}
+.sign-in-mode{
+    background-color: #f8f8fb;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    border: 1px solid #c5c5c5;;
+    border-bottom: none;
+    border-left: none;
+    font-size: 25px;
+}
+.hide{
+    display: none;
+}
+
+.sign-in-module:hover, .sign-up-module:hover{
+    cursor: pointer;
+    font-size: 20px;
+}
+@media screen and (max-width: 1280px) {
+    .container {
+        width: 34%;
+    }
+  }
+
+
+@media screen and (max-width: 800px) {
+    .container {
+        padding-top: 6%;
+        border: 1px solid black;
+        width: 64%;
+        margin: 105px auto;
+        box-shadow: 1px 1px 17px 0px black;
+    }
+  }
+@media screen and (max-width: 480px) {
+    .container {
+        padding-top: 10%;
+        width: 100%;
+        margin: 0 0;
+        border: 0px solid black;
+        box-shadow: 0px 0px 0px 0px black;
+    }
+    .form-detail {
+        padding-bottom: 38%;
+    }
+  }
+
+  
+
+  
