@@ -1,6 +1,5 @@
 const navbar = document.querySelector('.fa-bars');
 const formholder = document.querySelector('.add-meetup');
-const btn = document.querySelector('.create-meetup-button');
 const psw = document.querySelector('.profile-info');
 const pswchange = document.querySelector('.change-password');
 const pswchangebtn = document.querySelector('.profile-name-holder');
@@ -25,7 +24,4 @@ postqsn.addEventListener('click',()=>{
     inpt.classList.toggle('hide');
 })
 
-btn.addEventListener('click',()=>{
-    formholder.classList.toggle('hide');
-})
 
