@@ -14,6 +14,7 @@ body{
 }
 .logo-holder{
     width: 31%;
+    padding-top: 0.4%;
 }
 .title-holder {
     padding-top: 1%;
@@ -115,6 +116,61 @@ button {
     display: none;
 }
 
+
+
+
+
+
+.user{
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid #f9f9d9;
+    box-shadow: 3px 3px 20px 0px #f9f9d9;
+    width: 90%;
+    margin: 0 auto;
+    font-size: 14px;
+    background: #f9f9d9;
+    min-height: 19vh;
+    padding-bottom: 3%;
+}
+.meetup-title-holder,.date-holder{
+    width: 47%;
+}
+.meetup-title-holder{
+    text-align: initial;
+    font-size: 14px;
+    padding-left: 1%;
+}
+.meetup-details{
+    width: 100%;
+}
+.date-holder{
+    margin-top: 2%;
+    font-size: 14px;
+    text-align: right;
+}
+.icons-holder,.delete-holder{
+    width: 47%
+}
+.delete{
+    background: red;
+    width: 23%;
+    padding: 2%;
+    font-size: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media screen and (max-width: 800px) {
     .logo {
         width: 70%;
@@ -145,7 +201,7 @@ button {
     }
     .hum-icon{
         display: block;
-        width: 54%;
+        width: 59%;
         padding-top: 4%;
         font-size: 62px;
         color: white;
