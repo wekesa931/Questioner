@@ -1,0 +1,230 @@
+body{
+    margin: 0;
+    background: #f3f3ed;
+}
+.navbar{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    background: #74749e;
+}
+.logo {
+    width: 6%;
+    float: right;
+}
+.logo-holder{
+    width: 31%;
+}
+.title-holder {
+    padding-top: 1%;
+    color: white;
+    font-family: sans-serif;
+}
+.searchbox-holder{
+    width: 32%;
+    padding-top: 1%;
+}
+main{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 1%;
+}
+
+.meetup-holder{
+    display: flex;
+    flex-wrap: wrap;
+    width: 70%;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 19px;
+    border: 1px solid #b9aeae;
+    min-height: 90vh;
+    box-shadow: 1px 1px 8px 0px;
+    margin: 0 auto;
+    background: white;
+}
+.profile-name-holder{
+    font-family: sans-serif;
+    color: white;
+    font-size: 13px;
+    padding-top: 2%;
+}
+.meetup-title-holder,.date-holder{
+    width: 47%;
+}
+.meetup-title-holder{
+    text-align: initial;
+    font-size: 14px;
+    padding-left: 1%;
+}
+.meetup-details{
+    width: 100%;
+}
+.date-holder{
+    margin-top: 2%;
+    font-size: 14px;
+    text-align: right;
+}
+.user{
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid #f9f9d9;
+    box-shadow: 3px 3px 20px 0px #f9f9d9;
+    width: 90%;
+    margin: 0 auto;
+    font-size: 14px;
+    background: #f9f9d9;
+    min-height: 19vh;
+    margin-bottom: 3%;
+}
+.existing-meetups{
+    width: 65%
+}
+.icons-holder,.delete-holder{
+    width: 47%
+}
+.delete{
+    background: red;
+    width: 23%;
+    padding: 2%;
+    font-size: 10px;
+}
+.add-meetup{
+    width: 25%;
+}
+input {
+    width: 100%;
+    margin-top: 5%;
+    padding: 4%;
+    font-size: 15px;
+}
+button {
+    color: #fff !important;
+    text-transform: uppercase;
+    background: #5a5a59;
+    padding: 20px;
+    border-radius: 5px;
+    border: none;
+    width: 45%;
+    padding: 6%;
+    margin-left: 32%;
+    font-size: 10px;
+}
+.hum-icon{
+    display: none;
+}
+
+@media screen and (max-width: 800px) {
+    .logo {
+        width: 70%;
+        margin-top: 23%;
+    }
+    .logo-holder {
+        width: 10%;
+    }
+    .title-holder {
+        padding-top: 4%;
+        font-size: 26px;
+    }
+    
+    .searchbox-holder {
+        display: none;
+    }
+    .hide{
+        display: none;
+    }
+    .existing-meetups {
+        width: 100%;
+    }
+    .meetup-holder {
+        width: 100%;
+    }
+    .profile-name-holder {
+        display: none;
+    }
+    .hum-icon{
+        display: block;
+        width: 54%;
+        padding-top: 4%;
+        font-size: 62px;
+        color: white;
+    }
+    .fa{
+        float: right;
+    }
+    .sidenav{
+        background: #e4e1e1;
+        width: 100%;
+        position: absolute
+    }
+    input {
+        font-size: 19px;
+        width: 85%;
+    }
+    button {
+        width: 29%;
+        font-size: 15px;
+    }
+    .form-detail{
+            padding-bottom: 9%;
+    }
+    .title-bar{
+        font-size: 27px;
+    }
+  }
+
+@media screen and (max-width: 480px) {
+    .logo {
+        width: 70%;
+        margin-top: 23%;
+    }
+    .logo-holder {
+        width: 10%;
+    }
+    .title-holder {
+        padding-top: 2%;
+        font-size: 15px;
+    }
+    
+    .searchbox-holder {
+        display: none;
+    }
+    .hide{
+        display: none;
+    }
+    .existing-meetups {
+        width: 100%;
+    }
+    .meetup-holder {
+        width: 100%;
+    }
+    .profile-name-holder {
+        display: none;
+    }
+    .hum-icon{
+        display: block;
+        width: 53%;
+        padding-top: 5%;
+        font-size: 36px;
+        color: white;
+    }
+    .fa{
+        float: right;
+    }
+    .sidenav{
+        background: #e4e1e1;
+        width: 100%;
+        position: absolute
+    }
+    input {
+        width: 85%;
+    }
+    button {
+        width: 46%;
+    }
+    .form-detail{
+            padding-bottom: 9%;
+    }
+    
+  }
