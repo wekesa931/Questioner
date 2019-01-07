@@ -14,6 +14,7 @@ body{
 }
 .logo-holder{
     width: 31%;
+    padding-top: 0.4%;
 }
 .title-holder {
     padding-top: 1%;
@@ -55,14 +56,140 @@ main{
 .profile-name-holder p{
     float: right;
 }
+.hide{
+    display: none;
+}
+.sub-btn button{
+    margin-top: 1%;
+}
 
 .profile-name-holder{
-    width: 19%;
+    cursor: pointer;
     font-family: sans-serif;
     color: white;
     font-size: 13px;
     padding-top: 2%;
 }
+.hum-icon{
+    display: none;
+}
+.comment-box{
+    width: 73%;
+    padding: 1%;
+}
+.comment{
+    width: 100%;
+}
+.vote{
+    width: 100%;
+    font-size: 15px;
+}
+.sub-btn{
+    width: 100%;
+}
+.fa-thumbs-up,.fa-thumbs-down{
+    margin: 0 1%;
+    cursor: pointer;
+}
+.vote {
+    padding-top: 3%;
+    width: 100%;
+    font-size: 26px;
+}
+.form input{
+    padding: 1%;
+    margin: 1%;
+}
+
+.form{
+    float: none;
+}
+
+.profile-pic-holder{
+    padding-top: 1%;
+    width: 10%;
+    margin-top: 1;
+}
+.circular-holder{
+    border: 1px solid #ff000000;
+    float: right;
+    overflow: hidden;
+    overflow: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 43px;
+}
+profile-pic{
+    width: 54px;;
+    float: right;
+}
+.change-full-profile{
+    position: absolute;
+    float: right;
+    margin: 85px 70%;
+    background: #0000005e;
+    padding: 5%;
+}
+.post-question{
+    width: 100%;
+}
+.post-question input{
+    float: right;
+    margin-right: 5%;
+}
+.question-item-holder{
+    border: 1px solid #fdfde4 !important;
+    box-shadow: 3px 3px 20px 10px #f7f7f2 !important;
+    background: white !important;
+}
+
+.user{
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid #f9f9d9;
+    box-shadow: 3px 3px 20px 0px #f9f9d9;
+    width: 90%;
+    margin: 0 auto;
+    font-size: 14px;
+    background:  #fdfde4;
+    min-height: 19vh;
+    padding-bottom: 3%;
+    margin-bottom: 3%;
+}
+.meetup-title-holder,.date-holder{
+    width: 47%;
+}
+.meetup-title-holder{
+    text-align: initial;
+    font-size: 14px;
+    padding-left: 1%;
+}
+.meetup-details{
+    width: 100%;
+}
+.date-holder{
+    margin-top: 2%;
+    font-size: 14px;
+    text-align: right;
+}
+.icons-holder,.delete-holder{
+    width: 47%
+}
+#input-question{
+    padding: 1%;
+    width: 70%;
+}
+#input-post-question{
+    padding: 1%;
+    width: 106px;
+}
+.question-input{
+    margin-bottom: 2%;
+}
+
+
+
+
 @media screen and (min-width: 1280px) {
     .questions-holder,.feeds,.meetup-holder{
         min-height: 90vh;
@@ -83,7 +210,7 @@ main{
     .logo-holder {
         padding-top: 1%;
         width: 26%;
-    }
+    }  
     .logo {
         width: 10%;
     }
@@ -94,6 +221,8 @@ main{
         width: 38%;
         padding-top: 3%;
     }
+
+
   }
 @media screen and (max-width: 800px) {
     .profile-name-holder{
@@ -114,9 +243,7 @@ main{
     .searchbox-holder {
         display: none;
     }
-    .hide{
-        display: none;
-    }
+    
     .questions-holder, .feeds {
         width: 96%;
         margin: 0 auto;
@@ -137,6 +264,57 @@ main{
         box-shadow: 1px 1px 8px 0px;
         margin: 6% auto;
         background: white;
+    }
+    .sidenav{
+        background: #00000086;
+        width: 100%;
+        position: absolute;
+        height: 88vh;
+        color: white;
+    }
+    .profile-name-holder{
+        display: none;
+    }
+    .fa{
+        float: right;
+    }
+    .profile-pic-holder{
+        display: none;
+    }
+    .hum-icon{
+        display: block;
+        width: 50%;
+        font-size: 64px;
+        padding-top: 5%;
+        color: white;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    .circular-container{
+        border: 1px solid transparent;
+        border-radius: 50%;
+        overflow: hidden;
+        width: 154px;
+        height: 130px;
+        margin: 29px auto;
+    }
+    .my-profile-picture{
+        width: 160px;
+    }
+    .profile-name-container{
+        text-align: center;
     }
   }
 @media screen and (max-width: 480px) {
@@ -176,5 +354,23 @@ main{
         box-shadow: 1px 1px 8px 0px;
         margin: 6% auto;
         background: white;
+    }
+    .sidenav{
+        background: #191818;
+        width: 100%;
+        position: absolute;
+        height: 88vh;
+        color: white;
+    }
+    .profile-name-holder{
+        display: none;
+    }
+    .fa{
+        float: right;
+    }
+    .hum-icon{
+        width: 46%;
+        font-size: 29px;
+        padding-top: 5%;
     }
   }

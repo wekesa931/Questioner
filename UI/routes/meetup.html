@@ -23,15 +23,138 @@
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
         </div>
-        <div class="profile-pic-holder"></div>
-        <div class="profile-name-holder">
-            <p>my name</p>
+        <div class="hum-icon">
+            <i class="fa fa-bars"></i>
         </div>
+
+
+
+
+
+        <div class="profile-pic-holder">
+            <div class="circular-holder">
+                <img src="../static/images/me.png" alt="profile picture" class="profile-pic">
+            </div>
+        </div>
+        <div class="profile-name-holder">
+            <p class="full-profile">Bill Wekesa</p>
+        </div>
+        <div class="change-full-profile hide">
+            <div class="change-main-password">
+                <form action="" class="form">
+                    <input type="text" name="oldpswd" placeholder="Enter old password" required>
+                    <br>
+                    <input type="text" name="newpswd" placeholder="Enter new password" required>
+                    <br><br>
+                    <button type="">
+                        Change Password
+                    </button>
+                </form>
+            </div>
+        </div>
+
+
+
+
     </div>
     <main>
+
+
+
+
+
+
+        <div class="add-meetup hide sidenav">
+            <div class="profile-pic-container">
+                <div class="circular-container">
+                    <img src="../static/images/me.png" alt="profile picture" class="my-profile-picture">
+                </div>
+            </div>
+            <div class="profile-name-container">
+                <p>Bill Wekesa</p>
+                <div class="profile-info">
+                    <p>Change password</p>
+                    <div class="change-password hide">
+                        <form action="" class="form">
+                            <input type="text" name="oldpswd" placeholder="Enter old password" required>
+                            <br>
+                            <input type="text" name="newpswd" placeholder="Enter new password" required>
+                            <br><br>
+                            <button type="">
+                                Change Password
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
         <div class="meetup-holder">
             <p>Meetups</p>
+            <div class="user">
+                <div class="meetup-title-holder"><h3>Meetup Name<h3/></div>
+                <div class="date-holder">posted on 12/12/2012</div>
+                <div class="meetup-details"><p>Subject of the meetup</p></div>
+                <div class="meetup-details"><p>meetup Description</p></div>
+                <div class="meetup-details"><p>meetup tags</p></div>
+                <div class="post-question"><input type="button" value="Post Question" id="btn-input"></div>
+            </div>
+            <div class="question-input hide">
+                <input type="text" value="Post question" id="input-question">
+                <input type="button" value="Post" id="input-post-question">
+            </div>
+            <div class="user question-item-holder">
+                <div class="meetup-title-holder"><h3></h3></div>
+                <div class="date-holder">posted on 12/12/2012</div>
+                <div class="meetup-details"><p>Question</p></div>
+                <div class="comment"><input type="text" class="comment-box" placeholder="Add comment"></div>
+                <div class="sub-btn">
+                    <button>Submit comment</button>
+                </div>
+                
+                <div class="vote">
+                    <i class="fa fa-thumbs-up"></i>
+                    <i class="fa fa-thumbs-down"></i>
+                </div>
+                
+            </div>
+            <div class="user question-item-holder">
+                <div class="meetup-title-holder"><h3></h3></div>
+                <div class="date-holder">posted on 12/12/2012</div>
+                <div class="meetup-details"><p>Question</p></div>
+                <div class="comment"><input type="text" class="comment-box" placeholder="Add comment"></div>
+                <div class="sub-btn">
+                    <button>Submit comment</button>
+                </div>
+                
+                <div class="vote">
+                    <i class="fa fa-thumbs-up"></i>
+                    <i class="fa fa-thumbs-down"></i>
+                </div>
+                
+            </div>
+            <div class="user question-item-holder">
+                <div class="meetup-title-holder"><h3><h3/></div>
+                <div class="date-holder">posted on 12/12/2012</div>
+                <div class="meetup-details"><p>Question</p></div>
+                <div class="comment"><input type="text" class="comment-box" placeholder="Add comment"></div>
+                <div class="sub-btn">
+                    <button>Submit comment</button>
+                </div>
+                
+                <div class="vote">
+                    <i class="fa fa-thumbs-up"></i>
+                    <i class="fa fa-thumbs-down"></i>
+                </div>
+                
+            </div>
         </div>
     </main>
+    <script src="../static/javascript/admin.js"></script>
 </body>
 </html>
