@@ -5,20 +5,21 @@ Ths is an application that sources questions from different users over a given s
 This repository contains the static user interface templates for the application. They include:
   1. Sign up and Sign in pages
   2. The user dashboard
-  3. The admin user dashoard
+  3. The admin user dashboard
   4. The meetup page
 ## Working of the application
 When the admin user creates a meetup, the user, once logged in, gets a notification of the questions on the meetup and they are prompted to join the meetup.
 
 ## Development
 The static pages are created with:
-[HTML]( https://www.w3schools.com/html/)
-[CSS]( https://www.w3schools.com/css/)
-[JavaScript]( https://www.w3schools.com/js/)
+1. [HTML]( https://www.w3schools.com/html/)
+2. [CSS]( https://www.w3schools.com/css/)
+3. [JavaScript]( https://www.w3schools.com/js/)
 
 ## Responsive Design
 The responsive design is achieved with `media-queries` and `flexbox`. An illustration is as shown
-```@media screen and (max-width: 480px) {
+```
+@media screen and (max-width: 480px) {
     .logo {
         width: 70%;
         margin-top: 23%;
@@ -27,8 +28,10 @@ The responsive design is achieved with `media-queries` and `flexbox`. An illustr
         width: 10%;
     }
    }
+
    ```
 **Media queries** enable the application adjust with screen width.
+
 [Further documentation on media queries can be found  HERE]( https://www.w3schools.com/css/css_rwd_mediaqueries.asp)
 **Flexbox** makes it easier to design flexible responsive layout structure without using float or positioning. The DOM elements can adjust automatically with changes in screen size hence achieving a responsive design.
 [Further documentation on flexbox can be found  HERE]( https://www.w3schools.com/css/css3_flexbox.asp)
