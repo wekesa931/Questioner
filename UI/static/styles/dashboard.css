@@ -67,16 +67,13 @@ main{
     font-size: 13px;
     padding-top: 2%;
 }
-
 .form input{
     padding: 1%;
     margin: 1%;
 }
-
 .form{
     float: none;
 }
-
 .profile-pic-holder{
     padding-top: 1%;
     width: 10%;
@@ -106,12 +103,6 @@ main{
 .hum-icon{
     display: none;
 }
-
-
-
-
-
-
 .user{
     display: flex;
     flex-wrap: wrap;
@@ -150,7 +141,6 @@ main{
     font-size: 10px;
 }
 
-
 @media screen and (min-width: 1280px) {
     .questions-holder,.feeds,.meetup-holder{
         min-height: 90vh;
@@ -162,6 +152,7 @@ main{
         display: none;
     }
   }
+
 @media screen and (max-width: 1280px) {
     .logo-holder {
         padding-top: 1%;
@@ -179,6 +170,7 @@ main{
     }
     
   }
+
 @media screen and (max-width: 800px) {
     .logo {
         width: 70%;
@@ -219,8 +211,6 @@ main{
         margin: 6% auto;
         background: white;
     }
-
-
     .sidenav{
         background: #191818;
         width: 100%;
@@ -242,7 +232,6 @@ main{
         padding-top: 5%;
         color: white;
     }
-
     .circular-container{
         border: 1px solid transparent;
         border-radius: 50%;
