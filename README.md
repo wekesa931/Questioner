@@ -38,10 +38,10 @@ The responsive design is achieved with `media-queries` and `flexbox`. An illustr
 
 ## Hosting
 The static sites have been hosted on github pages:
-[Admin Page]( https://wekesa931.github.io/Questioner/UI/routes/admin)
-[User log-in and sign-up Page]( https://wekesa931.github.io/Questioner/UI/routes/user)
-[User dashboard]( https://wekesa931.github.io/Questioner/UI/routes/dashboard)
-[meetup page]( https://wekesa931.github.io/Questioner/UI/routes/meetup)
+1. [Admin Page]( https://wekesa931.github.io/Questioner/UI/routes/admin)
+2. [User log-in and sign-up Page]( https://wekesa931.github.io/Questioner/UI/routes/user)
+3. [User dashboard]( https://wekesa931.github.io/Questioner/UI/routes/dashboard)
+4. [meetup page]( https://wekesa931.github.io/Questioner/UI/routes/meetup)
 
 ## Dependencies
 I used the following fonts from google;
