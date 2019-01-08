@@ -1,5 +1,5 @@
 # Questioner Application
-Ths is an application that sources questions from different users over a given subject and meetups are organised to answer them. The Admin user creates a meetup for a specific subject and the users, once logged in, pose their questions and comments on the subject of discussion.
+This is an application that sources questions from different users over a given subject and meetups are organised to answer them. The Admin user creates a meetup for a specific subject and the users, once logged in, post their questions and comments on the subject of discussion.
 
 ## Functionality of the application
 This repository contains the static user interface templates for the application. They include:
@@ -48,7 +48,7 @@ I used the following fonts from google;
 1. [Font Awesome]( https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css)
 
 ## Running the application
-1. Clone the repository to you local machine 
+1. Clone the repository to your local machine 
 ```
 $ git clone https://github.com/wekesa931/Questioner.git
 ```
