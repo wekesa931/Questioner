@@ -80,3 +80,11 @@ def get_meetup(meetup_id):
     return jsonify({
         'meetup':add_meetup
     })
+
+@mod.route('/v1/get_meetups', methods = ['GET'])
+def get_meetups():
+    meetup = FetchMeetup('')
+    fetch_meetups = meetup.get_all_meetups()
+    return jsonify({
+        'meetups':fetch_meetups
+    })
