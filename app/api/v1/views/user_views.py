@@ -1,5 +1,5 @@
 from flask import Blueprint, Flask, jsonify, request, redirect
-from app.api.v1.models.user_models import UserInfo, MeetupInfo, AddQuestion
+from app.api.v1.models.user_models import UserInfo, MeetupInfo, AddQuestion, FetchMeetup
 
 mod = Blueprint('api', __name__)
 
@@ -55,7 +55,6 @@ def create_meetup():
 @mod.route('/v1/post_question', methods = ['POST'])
 def post_question():
     question = request.get_json("question")
-    print(question)
     createdOn = question['createdOn']
     meetup = question['meetup']
     title = question['title']
@@ -72,4 +71,12 @@ def post_question():
     questions = question_object.add_question()
     return jsonify({
         'Question':questions
+    })
+
+@mod.route('/v1/meetups/<int:meetup_id>', methods = ['GET'])
+def get_meetup(meetup_id):
+    meetup = FetchMeetup(meetup_id)
+    add_meetup = meetup.get_meetup()
+    return jsonify({
+        'meetup':add_meetup
     })

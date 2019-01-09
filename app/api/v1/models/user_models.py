@@ -45,8 +45,13 @@ class MeetupInfo:
    
         meetups.update({self.number_of_users:db})
         return meetups
-    def specificUser(self):
-        return(users[self.meetup_id])
+
+class FetchMeetup:
+    def __init__(self, meetup_id):
+        self.meetup_id = meetup_id  
+        
+    def get_meetup(self):
+        return(meetups[self.meetup_id])
 
 
 class AddQuestion:
