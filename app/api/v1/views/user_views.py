@@ -1,5 +1,5 @@
 from flask import Blueprint, Flask, jsonify, request, redirect
-from app.api.v1.models.user_models import UserInfo
+from app.api.v1.models.user_models import UserInfo, MeetupInfo
 
 mod = Blueprint('api', __name__)
 
@@ -13,7 +13,7 @@ def order():
 
 @mod.route('/v1/user/auth/signup', methods = ['POST'])
 def user_signup():
-    user = request.get_json("item")
+    user = request.get_json("user")
     a = UserInfo(user,'')
     b = a.eachUser()
     return jsonify({
@@ -26,4 +26,13 @@ def user_login(user_id):
     d = c.specificUser()
     return jsonify({
         'users':d
+    })
+
+@mod.route('/v1/add_meetups', methods = ['POST'])
+def create_meetup():
+    meetup = request.get_json("meetups")
+    a = MeetupInfo(meetup,'')
+    b = a.add_meetup()
+    return jsonify({
+        'meetups':b
     })
