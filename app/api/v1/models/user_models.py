@@ -52,6 +52,9 @@ class FetchMeetup:
         
     def get_meetup(self):
         return(meetups[self.meetup_id])
+    
+    def get_all_meetups(self):
+        return(meetups)
 
 
 class AddQuestion:
