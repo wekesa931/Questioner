@@ -1,83 +1,36 @@
 users = {}
 
-meetups = {}
-
-questions = {}
-
 class UserInfo:
-    def __init__(self, details, user_id):
-        self.details = details
-        self.user_id = user_id
-        self.number_of_users = len(users) + 1    
-    def eachUser(self):
-        
-        db = {"user_id":self.number_of_users}
-        for k, v in self.details.items():
-            if len(self.details) == 0:
-                continue
-            db.update({k:v})
-            users.update({self.number_of_users:db})
-        return users
-    def specificUser(self):
-        return(users[self.user_id])
-
-class MeetupInfo:
-    def __init__(self, id, createdOn, location, topics, happeningOn, tags, images=None):
+    def __init__(self, id, firstname, lastname, othername, email, phoneNumber, password):
         self.id = id
-        self.createdOn = createdOn
-        self.location = location
-        self.images = images
-        self.topics = topics
-        self.happeningOn = happeningOn
-        self.tags = tags
-        self.number_of_users = len(meetups) + 1   
+        self.firstname = firstname
+        self.lastname = lastname
+        self.othername = othername
+        self.email = email
+        self.phoneNumber = phoneNumber
+        self.password = password
+        self.number_of_users = len(users) + 1    
 
-    def add_meetup(self):
+    def eachUser(self):
         db={
             "id":self.number_of_users,
-            "createdOn":self.createdOn,
-            "location":self.location,
-            "images":self.images,
-            "topics":self.topics,
-            "happeningOn":self.happeningOn,
-            "tags":self.tags
+            "firstname":self.firstname,
+            "lastname":self.lastname,
+            "othername":self.othername,
+            "email":self.email,
+            "phoneNumber":self.phoneNumber,
+            "password":self.password
         }
-   
-        meetups.update({self.number_of_users:db})
-        return meetups
+        users.update({self.number_of_users:db})
+        return users
 
-class FetchMeetup:
-    def __init__(self, meetup_id):
-        self.meetup_id = meetup_id  
-        
-    def get_meetup(self):
-        return(meetups[self.meetup_id])
-    
-    def get_all_meetups(self):
-        return(meetups)
+    @staticmethod
+    def get_user(id):
+        return(users[id])
+
+    @staticmethod
+    def get_all_users():
+        return(users)
 
 
-class AddQuestion:
-    def __init__(self, id, createdOn, meetup, title, body, votes):
-        self.id = id
-        self.createdOn = createdOn
-        self.meetup = meetup
-        self.title = title
-        self.body = body
-        self.votes = votes
-        self.number_of_questions = len(questions) + 1   
 
-    def add_question(self):
-        db={
-            "id":self.number_of_questions,
-            "createdOn":self.createdOn,
-            "meetup":self.meetup,
-            "title":self.title,
-            "body":self.body,
-            "votes":self.votes
-        }
-   
-        questions.update({self.number_of_questions:db})
-        return questions
-    def specificQuestion(self):
-        return(questions[self.id])
