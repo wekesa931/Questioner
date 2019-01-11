@@ -16,7 +16,6 @@ class TestApplication(unittest.TestCase):
                 "password":"Tintinabu12"
             }
         self.meetups = {
-                "createdOn":"12/12/2020",
                 "location":"online",
                 "images":"youtube.com/images",
                 "topics":"javascript",
@@ -46,7 +45,7 @@ class TestApplication(unittest.TestCase):
     def test_add_meetup_failure(self):
         meetups = {}
         response = self.client.post('/api/v1/add_meetups', json=meetups, content_type='application/json')
-        self.assertIn('No body given', response.data)
+        self.assertIn(u'No body given', response.data.decode())
         self.assertEqual(response.status_code, 400)
 
     def test_get_meetups_sucessful(self):

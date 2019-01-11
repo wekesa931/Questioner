@@ -13,7 +13,6 @@ class MeetupInfo:
     def add_meetup(self):
         db={
             "id":self.number_of_users,
-            "createdOn":self.createdOn,
             "location":self.location,
             "images":self.images,
             "topics":self.topics,

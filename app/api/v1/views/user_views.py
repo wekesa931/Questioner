@@ -39,7 +39,6 @@ class UserViews:
                                 "phoneNumber",
                                 "password"]):
             return jsonify({"message":"Some fields are missing"}), 400
-            return {"message": "Some fields are missing"}, 400
         if not validate.check_password(password):
             return jsonify({"message":"password is not valid"}), 400
         if not validate.check_email(email):
