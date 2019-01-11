@@ -31,3 +31,24 @@ class MeetupInfo:
     @staticmethod
     def get_all_meetups():
         return(meetups)
+
+class Reservation:
+    def __init__(self, id):
+        self.id = id
+        identified_meetup = meetups[self.id]
+        self.db={
+            "meetup":self.id,
+            "topic":identified_meetup["topics"]
+        }
+
+    def attend_meetup(self):
+        self.db["response"] = "YES"        
+        return self.db
+        
+    def reject_meetup(self):
+        self.db["response"] = "NO"        
+        return self.db
+
+    def not_certain(self):
+        self.db["response"] = "MAYBE"        
+        return self.db
