@@ -1,4 +1,3 @@
-#import app.api.v1.views.user_views as app
 import json
 import unittest
 from app import create_app
