@@ -33,22 +33,15 @@ class MeetupInfo:
         return(meetups)
 
 class Reservation:
-    def __init__(self, id):
-        self.id = id
-        identified_meetup = meetups[self.id]
+    def __init__(self, meetup_id, topic, status):
+        self.meetup_id = meetup_id
+        self.topic = topic
+        self.status = status
         self.db={
-            "meetup":self.id,
-            "topic":identified_meetup["topics"]
+            "meetup":self.meetup_id,
+            "topic":self.topic
         }
 
-    def attend_meetup(self):
-        self.db["response"] = "YES"        
-        return self.db
-        
-    def reject_meetup(self):
-        self.db["response"] = "NO"        
-        return self.db
-
-    def not_certain(self):
-        self.db["response"] = "MAYBE"        
+    def meetup_status(self):
+        self.db["status"] = self.status        
         return self.db
