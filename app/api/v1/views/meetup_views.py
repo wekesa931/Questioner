@@ -7,6 +7,10 @@ class MeetupViews:
     @mtp.route('/v1/add_meetups', methods = ['POST'])
     def create_meetup():
         meetup = request.get_json("meetups")
+        if not meetup:
+            return jsonify({
+                "message":"No body given"
+            }), 400
         createdOn = meetup['createdOn']
         location = meetup['location']
         images = meetup['images']
@@ -33,6 +37,10 @@ class MeetupViews:
     def get_meetup(meetup_id):
         meetup = MeetupInfo
         get_meetup = meetup.get_meetup(meetup_id)
+        if get_meetup == {}:
+            return jsonify({
+                "message":"meetup not found"
+            }), 404
         response = jsonify({
             'meetup':get_meetup
         })
@@ -43,6 +51,10 @@ class MeetupViews:
     def get_meetups():
         meetup = MeetupInfo
         fetch_meetups = meetup.get_all_meetups()
+        if len(fetch_meetups) == 0:
+            return jsonify({
+                "message":"no meetups found"
+            }), 404
         response = jsonify({
             'meetups':fetch_meetups
         })

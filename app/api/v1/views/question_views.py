@@ -4,21 +4,22 @@ from app.api.v1.models.question_models import AddQuestion
 qsn = Blueprint('questions_api', __name__)
 
 class QuestionsVIews:
-    @qsn.route('/v1/post_question', methods = ['POST'])
-    def post_question():
+    @qsn.route('/v1/<int:meetup_id>/post_question', methods = ['POST'])
+    def post_question(meetup_id):
         question = request.get_json("question")
+        if not question:
+            return jsonify({
+                "message":"No body given"
+            }), 400
         createdOn = question['createdOn']
-        meetup = question['meetup']
         title = question['title']
         body = question['body']
-        votes = question['votes']
         question_object = AddQuestion(
                             '',
                             createdOn,
-                            meetup,
+                            meetup_id,
                             title,
-                            body,
-                            votes
+                            body
                         )
         questions = question_object.add_question()
         response = jsonify({
