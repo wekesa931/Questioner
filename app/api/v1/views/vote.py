@@ -16,6 +16,7 @@ class VoteOnQuestions:
             'votes': votes
         })
         response.status_code = 200
+        AddQuestion.update_question_upvote(question_id)
         return response   
 
     
@@ -32,5 +33,6 @@ class VoteOnQuestions:
             'votes': votes
         })
         response.status_code = 200
+        AddQuestion.update_question_downvote(question_id)
         return response    
     

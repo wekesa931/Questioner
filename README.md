@@ -20,7 +20,7 @@ The appliction has been developed with:
 6. The user can comment on specific questions.
 7. A user can update their password and other account settings
 ## The following are the API Endpoints
-| Left-aligned | Center-aligned | Right-aligned |
+| METHOD | END-POINT | DESCRIPTION |
 | :---         |     :---      |          :--- |
 | GET          |/api/v1/meetups/<int:meetup_id>   | Fetch a specific meetup record    |
 | POST         |/api/v1/user/auth/login      | Log in a User     |
@@ -52,7 +52,7 @@ Install the reuirements
 ```
 - Run the application
 ```
- $ export FLASK_ENV=development
+ $ export flask_config="development"
  $ python run.py
 ```
 ## Testing the application
