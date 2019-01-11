@@ -56,7 +56,7 @@ Install the reuirements
  $ python run.py
 ```
 ## Testing the application
-##### 1. Local testing of the code
+##### 1. To test your code locally;
 Install pytest
 ```
  $ pip install pytest

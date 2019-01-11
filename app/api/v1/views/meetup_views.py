@@ -11,7 +11,6 @@ class MeetupViews:
             return jsonify({
                 "message":"No body given"
             }), 400
-        createdOn = meetup['createdOn']
         location = meetup['location']
         images = meetup['images']
         topics = meetup['topics']
@@ -19,7 +18,6 @@ class MeetupViews:
         tags = meetup['tags']
         meetup_object = MeetupInfo(
                             '',
-                            createdOn,
                             location,
                             topics,
                             happeningOn,

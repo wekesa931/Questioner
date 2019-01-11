@@ -1,9 +1,8 @@
 meetups = {}
 
 class MeetupInfo:
-    def __init__(self, id, createdOn, location, topics, happeningOn, tags, images=None):
+    def __init__(self, id, location, topics, happeningOn, tags, images=None):
         self.id = id
-        self.createdOn = createdOn
         self.location = location
         self.images = images
         self.topics = topics
