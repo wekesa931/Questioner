@@ -24,3 +24,11 @@ class AddQuestion:
     @staticmethod
     def get_question(id):
         return(questions[id])
+
+    @staticmethod
+    def update_question_upvote(id):
+        questions[id]['votes'] += 1
+
+    @staticmethod
+    def update_question_downvote(id):
+        questions[id]['votes'] -= 1

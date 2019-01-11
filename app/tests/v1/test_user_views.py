@@ -10,9 +10,10 @@ class TestApplication(unittest.TestCase):
                 "firstname":"bill",
                 "lastname":"wekesa",
                 "othername":"adams",
-                "email":"ill@wek",
+                "username":"wekebill",
+                "email":"ill@wek.com",
                 "phoneNumber":"526",
-                "password":"tintinabulation"
+                "password":"Tintinabu12"
             }
         self.meetups = {
                 "createdOn":"12/12/2020",

@@ -1,11 +1,12 @@
 users = {}
 
 class UserInfo:
-    def __init__(self, id, firstname, lastname, othername, email, phoneNumber, password):
+    def __init__(self, id, firstname, lastname, othername, username, email, phoneNumber, password):
         self.id = id
         self.firstname = firstname
         self.lastname = lastname
         self.othername = othername
+        self.username = username
         self.email = email
         self.phoneNumber = phoneNumber
         self.password = password
@@ -17,6 +18,7 @@ class UserInfo:
             "firstname":self.firstname,
             "lastname":self.lastname,
             "othername":self.othername,
+            "username":self.username,
             "email":self.email,
             "phoneNumber":self.phoneNumber,
             "password":self.password
