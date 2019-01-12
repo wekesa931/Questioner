@@ -1,7 +1,7 @@
 # Questioner
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 
-[![Build Status](https://travis-ci.com/wekesa931/Questioner.svg?branch=develop)](https://travis-ci.com/wekesa931/Questioner)  [![Coverage Status](https://coveralls.io/repos/github/wekesa931/Questioner/badge.svg?branch=master)](https://coveralls.io/github/wekesa931/Questioner?branch=master)
+[![Build Status](https://travis-ci.com/wekesa931/Questioner.svg?branch=develop)](https://travis-ci.com/wekesa931/Questioner)  [![Coverage Status](https://coveralls.io/repos/github/wekesa931/Questioner/badge.svg?branch=develop)](https://coveralls.io/github/wekesa931/Questioner?branch=develop)
 
 This is an application that sources questions from different users over a given subject and meetups are organised to answer them.
 ## Project Details
