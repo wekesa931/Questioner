@@ -1,5 +1,8 @@
 from flask import Blueprint, Flask, jsonify, request, redirect
 from app.api.v1.models.meetup_models import MeetupInfo
+from app.validators.user_validators import Validators
+
+validate = Validators()
 
 mtp = Blueprint('meetup_api', __name__)
 
@@ -8,14 +11,21 @@ class MeetupViews:
     def create_meetup():
         meetup = request.get_json("meetups")
         if not meetup:
-            return jsonify({
-                "message":"No body given"
-            }), 400
+            return jsonify({"message":"No data found"}), 400
+        if not all(val in meetup for val in [
+                                "location",
+                                "images", 
+                                "topics", 
+                                "happeningOn",
+                                "tags",]):
+            return jsonify({"message":"Some fields are missing"}), 400
+            
         location = meetup['location']
         images = meetup['images']
         topics = meetup['topics']
         happeningOn = meetup['happeningOn']
         tags = meetup['tags']
+        
         meetup_object = MeetupInfo(
                             '',
                             location,
@@ -25,11 +35,9 @@ class MeetupViews:
                             images
                             )
         meetups = meetup_object.add_meetup()
-        response = jsonify({
+        return jsonify({
             'meetups':meetups
-        })
-        response.status_code = 201
-        return response
+        }), 201
 
     @mtp.route('/v1/meetups/<int:meetup_id>', methods = ['GET'])
     def get_meetup(meetup_id):

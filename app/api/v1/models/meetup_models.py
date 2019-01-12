@@ -24,7 +24,9 @@ class MeetupInfo:
         return meetups
     @staticmethod
     def get_meetup(id):
-        return(meetups[id])
+        if meetups[id]:
+            return meetups[id]
+        return False
 
     @staticmethod
     def get_all_meetups():
