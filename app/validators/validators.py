@@ -15,3 +15,5 @@ class Validators():
                 if dict_value == username:
                     return True
         return False
+    def check_username(self):
+        pass
