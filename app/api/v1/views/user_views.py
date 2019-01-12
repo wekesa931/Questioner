@@ -1,6 +1,6 @@
 from flask import Blueprint, Flask, jsonify, request
 from app.api.v1.models.user_models import UserInfo 
-from app.validators.validators import Validators
+from app.validators.user_validators import Validators
 
 validate = Validators()
 

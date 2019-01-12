@@ -71,40 +71,41 @@ class TestApplication(unittest.TestCase):
 
     def test_add_user_successful(self):
         response = self.client.post('/api/v1/user/auth/signup', json=self.users, content_type='application/json')
-        self.assertIn('bill', response.data)
+        self.assertIn(u'bill', response.data.decode())
         self.assertEqual(response.status_code, 201)
 
     def test_if_no_user_info_provided(self):
         users={}
         response = self.client.post('/api/v1/user/auth/signup', json=users, content_type='application/json')
         self.assertEqual(response.status_code, 400)
-        self.assertIn('No data found', response.data)
+        #Python 3, strings are Unicode, but when transmitting on the network, the data needs to be bytes strings instead
+        self.assertIn(u'No data found', response.data.decode())
     
     def test_if_username_is_taken(self):
         self.client.post('/api/v1/user/auth/signup', json=self.users, content_type='application/json')
         response = self.client.post('/api/v1/user/auth/signup', json=self.users_two, content_type='application/json')
         self.assertEqual(response.status_code, 400)
-        self.assertIn('username taken', response.data)
+        self.assertIn(u'username taken', response.data.decode())
 
     def test_if_email_is_taken(self):
         self.client.post('/api/v1/user/auth/signup', json=self.users, content_type='application/json')
         response = self.client.post('/api/v1/user/auth/signup', json=self.users_three, content_type='application/json')
         self.assertEqual(response.status_code, 400)
-        self.assertIn('email taken', response.data)
+        self.assertIn(u'email taken', response.data.decode())
 
     def test_if_email_is_valid(self):
         response = self.client.post('/api/v1/user/auth/signup', json=self.users_five, content_type='application/json')
         self.assertEqual(response.status_code, 400)
-        self.assertIn('email is not valid', response.data)
+        self.assertIn(u'email is not valid', response.data.decode())
 
     def test_if_password_is_valid(self):
         response = self.client.post('/api/v1/user/auth/signup', json=self.users_four, content_type='application/json')
         self.assertEqual(response.status_code, 400)
-        self.assertIn('password is not valid', response.data)
+        self.assertIn(u'password is not valid', response.data.decode())
 
     def test_add_meetup_successful(self):
         response = self.client.post('/api/v1/add_meetups', json=self.meetups, content_type='application/json')
-        self.assertIn('online', response.data)
+        self.assertIn(u'online', response.data.decode())
         self.assertEqual(response.status_code, 201)
 
     def test_add_meetup_failure(self):
@@ -115,7 +116,7 @@ class TestApplication(unittest.TestCase):
 
     def test_get_meetups_sucessful(self):
         response = self.client.get('/api/v1/get_meetups')
-        self.assertIn('online', response.data)
+        self.assertIn(u'online', response.data.decode())
         self.assertEqual(response.status_code, 200)
 
     def test_get_meetup_failure(self):
@@ -125,18 +126,18 @@ class TestApplication(unittest.TestCase):
     
     def test_get_specific_meetup_sucessful(self):
         response = self.client.get('/api/v1/meetups/1')
-        self.assertIn('online', response.data)
+        self.assertIn(u'online', response.data.decode())
         self.assertEqual(response.status_code, 200)
 
     def test_add_question_successful(self):
         response = self.client.post('/api/v1/1/post_question', json=self.questions, content_type='application/json')
-        self.assertIn('lets learn', response.data)
+        self.assertIn(u'lets learn', response.data.decode())
         self.assertEqual(response.status_code, 201)
 
     def test_add_question_failure(self):
         questions = {}
         response = self.client.post('/api/v1/1/post_question', json=questions, content_type='application/json')
-        self.assertIn('No body given', response.data)
+        self.assertIn(u'No body given', response.data.decode())
         self.assertEqual(response.status_code, 400)
 
 if __name__ == '__main__':
