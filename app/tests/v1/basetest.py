@@ -104,4 +104,4 @@ class TestApplication(unittest.TestCase):
         self.app = None
 
     if __name__ == '__main__':
-    unittest.main()
+            unittest.main()
