@@ -3,14 +3,16 @@ from app.api.v1.models.user_models import UserInfo
 from app.validators.user_validators import Validators
 from app.validators.shared_validators import check_fields
 
-
 validate = Validators()
 
+#set up user views blueprints
 mod = Blueprint('api', __name__)
 
 class UserViews:
+    """ Defines the user route """
     @mod.route('/v1/user/auth/all_users', methods = ['GET'])
     def get_all_users():
+        """ fetch all users from the database """
         user = UserInfo
         all_users = user.get_all_users()
         return jsonify({
@@ -19,13 +21,13 @@ class UserViews:
 
     @mod.route('/v1/user/auth/signup', methods = ['POST'])
     def user_signup():
+        """ defines user sign up """
         user_info = request.get_json("user")
         validate_info = ['firstname','lastname','othername','username','email','phoneNumber','password']
+        #validate posted information
         error = check_fields(user_info, validate_info)
         if len(error) > 0:
-            return jsonify({
-                "message":error
-            }), 400
+            return jsonify({"message":error}), 400
         firstname = user_info['firstname']
         lastname = user_info['lastname']
         othername = user_info['othername']
