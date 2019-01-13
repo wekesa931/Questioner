@@ -1,11 +1,11 @@
 meetups = {}
 
 class MeetupInfo:
-    def __init__(self, id, location, topics, happeningOn, tags, images=None):
+    def __init__(self, id, location, topic, happeningOn, tags, images=None):
         self.id = id
         self.location = location
         self.images = images
-        self.topics = topics
+        self.topic = topic
         self.happeningOn = happeningOn
         self.tags = tags
         self.number_of_users = len(meetups) + 1   
@@ -15,7 +15,7 @@ class MeetupInfo:
             "id":self.number_of_users,
             "location":self.location,
             "images":self.images,
-            "topics":self.topics,
+            "topic":self.topic,
             "happeningOn":self.happeningOn,
             "tags":self.tags
         }

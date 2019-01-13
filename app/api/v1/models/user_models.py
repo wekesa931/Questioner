@@ -33,6 +33,3 @@ class UserInfo:
     @staticmethod
     def get_all_users():
         return(users)
-
-
-

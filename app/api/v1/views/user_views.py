@@ -13,11 +13,9 @@ class UserViews:
     def get_all_users():
         user = UserInfo
         all_users = user.get_all_users()
-        response = jsonify({
+        return jsonify({
             'users':all_users
-        })
-        response.status_code = 200
-        return response
+        }), 200
 
     @mod.route('/v1/user/auth/signup', methods = ['POST'])
     def user_signup():
@@ -28,7 +26,6 @@ class UserViews:
             return jsonify({
                 "message":error
             }), 400
-    
         firstname = user_info['firstname']
         lastname = user_info['lastname']
         othername = user_info['othername']
@@ -36,7 +33,6 @@ class UserViews:
         email = user_info['email']
         phoneNumber = user_info['phoneNumber']
         password = user_info['password']
-
         
         if not validate.check_password(password):
             return jsonify({"message":"password is not valid"}), 400
@@ -46,23 +42,22 @@ class UserViews:
             return jsonify({"message":"username taken!"}), 400
         if validate.check_repeated(email):
             return jsonify({"message":"email taken!"}), 400
-        
-
         user = UserInfo('', firstname, lastname, othername, username, email, phoneNumber, password)
-
         users_db = user.eachUser()
-        response = jsonify({
-            'users':users_db
-        })
-        response.status_code = 201
-        return response
+        return jsonify({
+            'status': '201',
+            'data':[{
+                'users':users_db
+            }]
+        }), 201
 
     @mod.route('/v1/user/auth/login/<int:user_id>', methods = ['GET'])
     def user_login(user_id):
         user = UserInfo
         each_user = user.get_user(user_id)
-        response = jsonify({
-            'users':each_user
-        })
-        response.status_code = 200
-        return response
+        return jsonify({
+            'status': '200',
+            'data':[{
+                'users':each_user
+            }]
+        }), 201

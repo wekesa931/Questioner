@@ -1,5 +1,3 @@
-from flask import jsonify
-
 def check_fields(form_data, data_keys):
     keylist = []
     error_message = {}
@@ -16,4 +14,3 @@ def check_fields(form_data, data_keys):
                 if form_data[key_item].strip() == "":
                     error_message['value error'] = "{} is missing a value".format(key_item)
     return error_message
-

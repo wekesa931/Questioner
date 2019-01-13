@@ -55,10 +55,26 @@ class TestApplication(unittest.TestCase):
         self.meetups = {
                 "location":"online",
                 "images":"youtube.com/images",
-                "topics":"javascript",
+                "topic":"javascript",
                 "happeningOn":"12/12/2030",
                 "tags":"classes"
             }
+        self.meetups_one = {
+                "location":"",
+                "images":"youtube.com/images",
+                "topic":"javascript",
+                "happeningOn":"12/12/2030",
+                "tags":"classes"
+            }
+        self.meetups_two = {
+                "images":"youtube.com/images",
+                "topic":"javascript",
+                "happeningOn":"12/12/2030",
+                "tags":"classes"
+            }
+        self.reservation = { 
+                "status":"YES"
+        }
         self.questions = {
                 "createdOn":'12/12/2020',
                 "title":'lets learn',
@@ -102,7 +118,9 @@ class TestApplication(unittest.TestCase):
         response = self.client.post('/api/v1/user/auth/signup', json=self.users_four, content_type='application/json')
         self.assertEqual(response.status_code, 400)
         self.assertIn(u'password is not valid', response.data.decode())
+        
 
+    """ test the meetup """
     def test_add_meetup_successful(self):
         response = self.client.post('/api/v1/add_meetups', json=self.meetups, content_type='application/json')
         self.assertIn(u'online', response.data.decode())
@@ -129,6 +147,30 @@ class TestApplication(unittest.TestCase):
         self.assertIn(u'online', response.data.decode())
         self.assertEqual(response.status_code, 200)
 
+    def test_create_reservation(self):
+        response = self.client.post('/api/v1/1/attend', json=self.reservation, content_type='application/json')
+        self.assertIn(u'YES', response.data.decode())
+        self.assertEqual(response.status_code, 200)
+
+    def test_if_meetup_data_available(self):
+        self.client.post('/api/v1/add_meetups', json=self.meetups, content_type='application/json')
+        response = self.client.post('/api/v1/add_meetups', json=self.meetups_one, content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+        self.assertIn(u'location is missing', response.data.decode())
+
+    def test_if_meetup_field_available(self):
+        self.client.post('/api/v1/add_meetups', json=self.meetups, content_type='application/json')
+        response = self.client.post('/api/v1/add_meetups', json=self.meetups_two, content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+        self.assertIn(u'location is missing', response.data.decode())
+
+
+
+
+
+
+
+
     def test_add_question_successful(self):
         response = self.client.post('/api/v1/1/post_question', json=self.questions, content_type='application/json')
         self.assertIn(u'lets learn', response.data.decode())
@@ -137,7 +179,7 @@ class TestApplication(unittest.TestCase):
     def test_add_question_failure(self):
         questions = {}
         response = self.client.post('/api/v1/1/post_question', json=questions, content_type='application/json')
-        self.assertIn(u'No body given', response.data.decode())
+        self.assertIn(u'No data found', response.data.decode())
         self.assertEqual(response.status_code, 400)
 
 if __name__ == '__main__':
