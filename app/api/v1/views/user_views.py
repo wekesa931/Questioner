@@ -1,6 +1,8 @@
 from flask import Blueprint, Flask, jsonify, request
 from app.api.v1.models.user_models import UserInfo 
 from app.validators.user_validators import Validators
+from app.validators.shared_validators import check_fields
+
 
 validate = Validators()
 
@@ -20,8 +22,13 @@ class UserViews:
     @mod.route('/v1/user/auth/signup', methods = ['POST'])
     def user_signup():
         user_info = request.get_json("user")
-        if not user_info:
-            return jsonify({"message":"No data found"}), 400
+        validate_info = ['firstname','lastname','othername','username','email','phoneNumber','password']
+        error = check_fields(user_info, validate_info)
+        if len(error) > 0:
+            return jsonify({
+                "message":error
+            }), 400
+    
         firstname = user_info['firstname']
         lastname = user_info['lastname']
         othername = user_info['othername']
@@ -30,15 +37,7 @@ class UserViews:
         phoneNumber = user_info['phoneNumber']
         password = user_info['password']
 
-        if not all(val in user_info for val in [
-                                "firstname",
-                                "lastname", 
-                                "othername", 
-                                "username",
-                                "email",
-                                "phoneNumber",
-                                "password"]):
-            return jsonify({"message":"Some fields are missing"}), 400
+        
         if not validate.check_password(password):
             return jsonify({"message":"password is not valid"}), 400
         if not validate.check_email(email):
@@ -49,16 +48,7 @@ class UserViews:
             return jsonify({"message":"email taken!"}), 400
         
 
-        user = UserInfo(
-                            '',
-                            firstname,
-                            lastname,
-                            othername,
-                            username,
-                            email,
-                            phoneNumber,
-                            password
-                        )
+        user = UserInfo('', firstname, lastname, othername, username, email, phoneNumber, password)
 
         users_db = user.eachUser()
         response = jsonify({
