@@ -1,9 +1,11 @@
+import datetime
+
 questions = {}
+today = datetime.date.today()
 
 class AddQuestion:
-    def __init__(self, id, createdOn, meetup_id, title, body):
+    def __init__(self, id, meetup_id, title, body):
         self.id = id
-        self.createdOn = createdOn
         self.meetup_id = meetup_id
         self.title = title
         self.body = body
@@ -12,18 +14,21 @@ class AddQuestion:
     def add_question(self):
         db={
             "id":self.number_of_questions,
-            "createdOn":self.createdOn,
+            "createdOn":"{:%d, %b %Y}".format(today),
             "meetup":self.meetup_id,
             "title":self.title,
             "body":self.body,
-            "votes":self.votes
+            "votes":self.votes,
+            "isAdmin":"False"
         }
-   
         questions.update({self.number_of_questions:db})
         return questions
     @staticmethod
     def get_question(id):
-        return(questions[id])
+        for key_id, value in questions.items():
+            if key_id == id:
+                return questions[id]
+        return {}
 
     @staticmethod
     def update_question_upvote(id):
