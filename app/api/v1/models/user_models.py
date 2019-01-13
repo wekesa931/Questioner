@@ -1,6 +1,7 @@
 users = {}
 
 class UserInfo:
+    """ Defines the user information """
     def __init__(self, id, firstname, lastname, othername, username, email, phoneNumber, password):
         self.id = id
         self.firstname = firstname
@@ -13,6 +14,7 @@ class UserInfo:
         self.number_of_users = len(users) + 1    
 
     def eachUser(self):
+        """ Gets user information and appends to database """
         db={
             "id":self.number_of_users,
             "firstname":self.firstname,
@@ -28,8 +30,10 @@ class UserInfo:
 
     @staticmethod
     def get_user(id):
+        """ returns specific user """
         return(users[id])
 
     @staticmethod
     def get_all_users():
+        """ returns all users """
         return(users)

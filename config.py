@@ -6,7 +6,6 @@ class Config(object):
     """Parent configuration class."""
     DEBUG = True
     TESTING = False
-    SECRET = os.getenv('SECRET')
 
 class Development(Config):
     """Configurations for Development."""
