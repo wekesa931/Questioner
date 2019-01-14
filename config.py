@@ -9,7 +9,7 @@ class Config(object):
 
 class Development(Config):
     """Configurations for Development."""
-    TESTING = True
+    DEBUG = True
 
 class Testing(Config):
     """Configurations for Testing, with a separate test database."""
