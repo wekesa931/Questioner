@@ -5,7 +5,7 @@ def create_app(config_name):
     """ create the flask instance """
     app = Flask(__name__)
     """ Enable us use the defined configurations in config file """
-    app.config.from_object(app_config(config_name))
+    app.config.from_object(app_config[config_name])
     
     """ Import the blueprints from views files """
     from app.api.v1.views.user_views import mod
