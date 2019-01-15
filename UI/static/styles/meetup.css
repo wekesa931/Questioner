@@ -84,7 +84,11 @@ main{
     font-size: 15px;
 }
 .sub-btn{
+    margin-top: 1%;
     width: 100%;
+}
+#btn-input{
+    margin-top: 2%;
 }
 .fa-thumbs-up,.fa-thumbs-down{
     margin: 0 1%;
@@ -143,33 +147,55 @@ main{
     display: flex;
     flex-wrap: wrap;
     border: 1px solid #f9f9d9;
-    box-shadow: 3px 3px 20px 0px #f9f9d9;
+    box-shadow: 3px 3px 20px 0px #c7c795;
     width: 90%;
     margin: 0 auto;
     font-size: 14px;
-    background:  #ffffca;
+    background: #f9f9d9;
     min-height: 19vh;
-    padding-bottom: 3%;
+    padding: 1%;
     margin-bottom: 3%;
 }
 .meetup-title-holder,.date-holder{
-    width: 47%;
+    width: 100%;
+}
+.meetup-image{
+    width: 6%;
+}
+.meet-up-image{
+    width: 88%;
+}
+.meetup-date-holder{
+    width: 87%;
 }
 .meetup-title-holder{
     text-align: initial;
     font-size: 14px;
     padding-left: 1%;
+    text-align: center;
+    text-decoration: underline;
+}
+.fa-tag {
+    font-weight: 900;
+    margin-right: 3%;
 }
 .meetup-details{
     width: 100%;
+    text-align: justify;
 }
-.date-holder{
+.date-holder {
     margin-top: 2%;
     font-size: 14px;
     text-align: right;
+    display: flex;
+    flex-wrap: wrap;
 }
 .icons-holder,.delete-holder{
     width: 47%
+}
+.commet-statements{
+    text-align: justify;
+    border-top: 1px solid #c1bebe;
 }
 #input-question{
     padding: 1%;
