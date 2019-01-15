@@ -15,20 +15,18 @@ const cmnbtn = document.querySelector('.comments');
 navbar.addEventListener('click',()=>{
     formholder.classList.toggle('hide');
  })
- postqsn.addEventListener('click',()=>{
-    inpt.classList.toggle('hide');
-})
-
-
-cmnbtn.addEventListener('click',()=>{
-    viewcmn.classList.toggle('hide-item-view');
- })
 
 pswchangebtn.addEventListener('click',()=>{
     mainpswchange.classList.toggle('hide');
 })
 
-viewqsn.addEventListener('click',()=>{
+ cmnbtn.addEventListener('click',()=>{
+    viewcmn.classList.toggle('hide-item-view');
+ })
+ viewqsn.addEventListener('click',()=>{
     qsn_views.classList.toggle('hide-item-view');
  })
 
+ postqsn.addEventListener('click',()=>{
+    inpt.classList.toggle('hide');
+})
