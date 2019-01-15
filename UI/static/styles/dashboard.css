@@ -107,32 +107,50 @@ main{
     display: flex;
     flex-wrap: wrap;
     border: 1px solid #f9f9d9;
-    box-shadow: 3px 3px 20px 0px #f9f9d9;
+    box-shadow: 3px 3px 20px 0px #c7c795;
     width: 90%;
     margin: 0 auto;
     font-size: 14px;
     background: #f9f9d9;
     min-height: 19vh;
-    padding-bottom: 3%;
+    padding: 1%;
+    margin-bottom: 3%;
 }
 .meetup-title-holder,.date-holder{
-    width: 47%;
+    width: 100%;
 }
 .meetup-title-holder{
     text-align: initial;
     font-size: 14px;
     padding-left: 1%;
+    text-align: center;
+    text-decoration: underline;
 }
 .meetup-details{
     width: 100%;
+    text-align: justify;
 }
-.date-holder{
+.date-holder {
     margin-top: 2%;
     font-size: 14px;
     text-align: right;
+    display: flex;
+    flex-wrap: wrap;
 }
-.icons-holder,.delete-holder{
+.icons-holder{
     width: 47%
+}
+.delete-holder{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.btn-one{
+    margin-left: 2%;
+    width: 10%;
+}
+.btn-two{
+    width: 100%;
 }
 .delete{
     background: red;
@@ -140,6 +158,59 @@ main{
     padding: 2%;
     font-size: 10px;
 }
+.attend,.maybe,.not-attend{
+    width: 116%;
+    padding: 12%;
+    margin-top: 20%;
+    background: #464646;
+}
+.meetup-image{
+    width: 10%;
+}
+.meet-up-image{
+    width: 88%;
+}
+.meetup-date-holder{
+    width: 87%;
+}
+.fa-tag {
+    font-weight: 900;
+    margin-right: 3%;
+}
+.view-qns {
+    background: #09a209;
+    width: 19%;
+    padding: 2%;
+}
+button {
+    color: #fff !important;
+    text-transform: uppercase;
+    background: #5a5a59;
+    padding: 20px;
+    border-radius: 5px;
+    border: none;
+    width: 45%;
+    padding: 6%;
+    margin-left: 32%;
+    font-size: 10px;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+.comments{
+    background: #6b6b6b;
+    width: 59%;
+    padding: 6%;
+    margin-bottom: 6%;
+}
+.btn-one-view{
+    width: 50%;
+}
+.hide-item-view{
+    display: none;
+}
+
 
 @media screen and (min-width: 1280px) {
     .questions-holder,.feeds,.meetup-holder{

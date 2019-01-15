@@ -1,0 +1,49 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-size: 13px;
+}
+  
+li {
+    float: left;
+    padding: 3%;
+    margin-left: 4%;
+    cursor: pointer;
+}
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover {
+    background-color: #111;
+  }
+  .profile-name-holder {
+    font-family: sans-serif;
+    color: white;
+    font-size: 13px;
+    padding-top: 1%;
+    width: 40%;
+}
+.welcome{
+        margin: 10% auto;
+        text-align: center;
+        width: 38%;
+        border: 1px solid #ccc7c7;
+        padding: 3% 2% 0 2%;
+        box-shadow: 3px 3px 20px 0px #ccc7c7;
+        background: white;
+}
+img{
+    width: 5%;
+}
+.logo-holder {
+    width: 17%;
+    padding-top: 0.4%;
+}

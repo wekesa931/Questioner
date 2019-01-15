@@ -34,14 +34,85 @@
                 <div class="title-bar"><p>Created Meetups</p></div>
                 <div class="created-meetups">
                     <div class="user">
-                        <div class="meetup-title-holder"><h3>Meetup Name<h3/></div>
-                        <div class="date-holder">posted on 12/12/2012</div>
-                        <div class="meetup-details"><p>Subject of the meetup</p></div>
-                        <div class="meetup-details"><p>meetup Description</p></div>
-                        <div class="meetup-details"><p>meetup tags</p></div>
-                        <div class="meetup-details">Place of meetup and the time</div>
-                        <div class="icons-holder">Place of meetup and the time</div>
-                        <div class="delete-holder "><button class="delete">Delete</button></div>
+                        <div class="date-holder">
+                            <div class="meetup-image">
+                                <img src="https://www.google-melange.com/archive/gsoc/2015/orgs/python/logo-200.png" alt="myimage" class="meet-up-image">
+                            </div>
+                            <div class="meetup-date-holder">
+                                <p>posted on 12/12/2012</p>
+                            </div>
+                        </div>
+                        <div class="meetup-title-holder"><h3>Andela Open day: Flask framework</h3></div>
+    
+                        <div class="meetup-details"><p>
+                                Flask is a micro web framework written in Python. It is classified as a 
+                                microframework because it does not require particular tools or libraries. 
+                                It has no database abstraction layer, form validation, or any other components
+                                where pre-existing third-party libraries provide common functions.
+                            </p></div>
+                        <div class="meetup-details"><p>Happening online on <span>12/12/2010</span></p></div>
+                        <div class="meetup-details">
+                            <i class="fa fa-tag" aria-hidden="true">Python</i>
+                            <i class="fa fa-tag" aria-hidden="true">Flask</i>
+                        </div>
+                        <div class="delete-holder ">
+                            <div class="btn-one"><button class="delete view-qs">View Questions</button></div>
+                            <div class="btn-two"><button class="delete">Delete</button></div>                            
+                        </div>
+                    </div>
+                    <div class="user">
+                        <div class="date-holder">
+                            <div class="meetup-image">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Windows_live_square.svg/2000px-Windows_live_square.svg.png" alt="myimage" class="meet-up-image">
+                            </div>
+                            <div class="meetup-date-holder">
+                                <p>posted on 12/12/2012</p>
+                            </div>
+                        </div>
+                        <div class="meetup-title-holder"><h3>MIcrosoft systems dvelopment: C Sharp</h3></div>
+    
+                        <div class="meetup-details"><p>
+                                Flask is a micro web framework written in Python. It is classified as a 
+                                microframework because it does not require particular tools or libraries. 
+                                It has no database abstraction layer, form validation, or any other components
+                                where pre-existing third-party libraries provide common functions.
+                            </p></div>
+                        <div class="meetup-details"><p>Happening online on <span>12/12/2010</span></p></div>
+                        <div class="meetup-details">
+                            <i class="fa fa-tag" aria-hidden="true">Microsoft</i>
+                            <i class="fa fa-tag" aria-hidden="true">C#</i>
+                        </div>
+                        <div class="delete-holder ">
+                            <div class="btn-one"><button class="delete view-qs">View Questions</button></div>
+                            <div class="btn-two"><button class="delete">Delete</button></div>                            
+                        </div>
+                    </div>
+                    <div class="user">
+                        <div class="date-holder">
+                            <div class="meetup-image">
+                                <img src="https://www.standardmedia.co.ke/images/wednesday/hwngqdof9b5pejel1ji5bb46a811c1ac.jpg" alt="myimage" class="meet-up-image">
+                            </div>
+                            <div class="meetup-date-holder">
+                                <p>posted on 12/12/2012</p>
+                            </div>
+                        </div>
+                        <div class="meetup-title-holder"><h3>Google APIs: Maps</h3></div>
+    
+                        <div class="meetup-details"><p>
+                                Flask is a micro web framework written in Python. It is classified as a 
+                                microframework because it does not require particular tools or libraries. 
+                                It has no database abstraction layer, form validation, or any other components
+                                where pre-existing third-party libraries provide common functions.
+                            </p></div>
+                        <div class="meetup-details"><p>Happening online on <span>12/12/2010</span></p></div>
+                        <div class="meetup-details">
+                            <i class="fa fa-tag" aria-hidden="true">Maps</i>
+                            <i class="fa fa-tag" aria-hidden="true">Maps</i>
+                        </div>
+                        <div class="delete-holder ">
+                            <div class="btn-one"><button class="delete view-qs open">View Questions</button></div>
+                            <div class="btn-two"><button class="delete">Delete</button></div>                            
+                        </div>
                     </div>
                 </div>
             </div>
@@ -49,13 +120,13 @@
                 <div class="title-bar"><p>Add Meetup</p></div>
                 <div class="form-detail">
                     <form action="">
-                        <input type="text" name="meetupname" placeholder="Meetup Name" required>
+                        <input type="text" name="meetupname" placeholder="Meetup Topic" required>
                         <br>
                         <input type="text" name="meetupsubject" placeholder="Meetup Subject" required>
                         <br>
-                        <input type="text" name="meetuptag" placeholder="Meetup Tag" required>
+                        <input type="text" name="meetuptag" placeholder="Meetup Tags" required>
                         <br>
-                        <input type="textarea" name="aboutmeetup" placeholder="Meetup Description" required>
+                        <input type="textarea" name="happeningon" placeholder="Meetup Date" required>
                         <br>
                         <input type="file" name="meetuppic" accept="image/*">
                         <br><br>
@@ -63,6 +134,64 @@
                             Create Meetup
                         </button>
                     </form>
+                    <div class="view-meetup hide-item-view">
+                        <div class="meet-up-container">
+                            <div class="user">
+                                <div class="meetup-title-holder"><h3>Andela Open day: Flask framework</h3></div>
+            
+                                <div class="meetup-details meetup-border">
+                                    <h4>From: Bill Wekesa</h4>
+                                    <p>
+                                        Lorem Ipsum has been the industry's standard dummy text ever since the 
+                                        1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                    </p>
+                                    <div class="delete-holder ">
+                                        <div class="btn-one"><button class="delete comments">View comments</button></div>                      
+                                    </div>
+                                    <div class="view-comments hide-item-view">
+                                        <p>
+                                            It is a long established fact that a reader will be distracted by the readable content of a 
+                                            page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less 
+                                            <span><h4>- Bill Wekesa</h4></span>
+                                        </p>
+                                        <p>
+                                            It is a long established fact that a reader will be distracted by the readable content of a 
+                                            page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less 
+                                            <span><h4>- Bill Wekesa</h4></span>
+                                        </p>
+                                        <p>
+                                            It is a long established fact that a reader will be distracted by the readable content of a 
+                                            page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less 
+                                            <span><h4>- Bill Wekesa</h4></span>
+                                        </p>
+                                    </div>
+
+                                </div>
+                                <div class="meetup-details meetup-border">
+                                    <h4>From: Marvin Kisanda</h4>
+                                    <p>
+                                        Lorem Ipsum has been the industry's standard dummy text ever since the 
+                                        1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                    </p>
+                                    <div class="delete-holder ">
+                                        <div class="btn-one"><button class="delete comments">View comments</button></div>                      
+                                    </div>
+
+                                </div>
+                                <div class="meetup-details meetup-border">
+                                    <h4>From: John Thubo</h4>
+                                    <p>
+                                        Lorem Ipsum has been the industry's standard dummy text ever since the 
+                                        1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                    </p>
+                                    <div class="delete-holder ">
+                                        <div class="btn-one"><button class="delete comments">View comments</button></div>                      
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
