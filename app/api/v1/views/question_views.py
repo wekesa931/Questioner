@@ -2,6 +2,7 @@ from flask import Blueprint, Flask, jsonify, request
 from app.api.v1.models.question_models import AddQuestion
 from app.api.v1.models.meetup_models import MeetupInfo
 from app.validators.shared_validators import check_fields
+from app.validators.token_validation import token_required
 
 #set up question views blueprints
 qsn = Blueprint('questions_api', __name__)
@@ -9,7 +10,8 @@ qsn = Blueprint('questions_api', __name__)
 class QuestionsVIews:
     """ Defines the question route """
     @qsn.route('/v1/<int:meetup_id>/post_question', methods = ['POST'])
-    def post_question(meetup_id):
+    @token_required
+    def post_question(meetup_id, user_id):
         """ fetch the posted information from the user input """
         meetup = MeetupInfo
         get_meetup = meetup.get_meetup(meetup_id) 

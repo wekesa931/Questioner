@@ -4,7 +4,7 @@ class TestUser(TestApplication):
     """ Test the user endpoints """
     def test_add_user_successful(self):
         """ Test if user added successfully """
-        response = self.client.post('/api/v1/user/auth/signup', json=self.users, content_type='application/json')
+        response = self.client.post('/api/v1/user/auth/signup', json=self.users_register, content_type='application/json')
         self.assertIn(u'bill', response.data.decode())
         self.assertEqual(response.status_code, 201)
 

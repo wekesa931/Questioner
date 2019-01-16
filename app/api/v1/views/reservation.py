@@ -2,6 +2,7 @@ from flask import Blueprint, Flask, jsonify, request
 from app.api.v1.models.reservation_models import Reservation
 from app.api.v1.models.meetup_models import MeetupInfo
 from app.validators.shared_validators import check_fields
+from app.validators.token_validation import token_required
 
 #set up reservation views blueprints
 rsv = Blueprint('rsv_api', __name__)
@@ -9,7 +10,8 @@ rsv = Blueprint('rsv_api', __name__)
 class GetReservation:
     """ Defines the meeup route """
     @rsv.route('/v1/<int:meetup_id>/attend', methods = ['POST'])
-    def attend_meetup(meetup_id):
+    @token_required
+    def attend_meetup(user_id, meetup_id):
         meetup = MeetupInfo
         get_meetup = meetup.get_meetup(meetup_id) 
         #validate obtained information
