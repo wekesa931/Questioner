@@ -1,6 +1,7 @@
 from flask import Blueprint, Flask, jsonify, request
 from app.api.v1.models.meetup_models import MeetupInfo
 from app.validators.shared_validators import check_fields
+from app.validators.token_validation import token_required
 
 #set up meetup views blueprints
 mtp = Blueprint('meetup_api', __name__)
@@ -8,9 +9,11 @@ mtp = Blueprint('meetup_api', __name__)
 class MeetupViews:
     """ Defines the meetup route """
     @mtp.route('/v1/add_meetups', methods = ['POST'])
-    def create_meetup():
+    @token_required
+    def create_meetup(user_id):
         """ fetch the posted information from the user """
         meetup = request.get_json("meetups")
+        print(user_id)
         #validate user information
         validate_info = ['location','images','topic',
                                 'happeningOn','tags']
@@ -35,7 +38,8 @@ class MeetupViews:
         }), 201
 
     @mtp.route('/v1/meetups/<int:meetup_id>', methods = ['GET'])
-    def get_meetup(meetup_id):
+    @token_required
+    def get_meetup(user_id, meetup_id):
         """ Gets  specific meetup id """
         meetup = MeetupInfo
         get_meetup = meetup.get_meetup(meetup_id)
@@ -51,7 +55,8 @@ class MeetupViews:
        }), 200
 
     @mtp.route('/v1/get_meetups', methods = ['GET'])
-    def get_meetups():
+    @token_required
+    def get_meetups(user_id):
         """ gets all meetups """
         meetup = MeetupInfo
         fetch_meetups = meetup.get_all_meetups()

@@ -19,6 +19,15 @@ class TestApplication(unittest.TestCase):
                 "phoneNumber":"526",
                 "password":"Tintinabu12"
             }
+        self.users_register = {
+                "firstname":"john",
+                "lastname":"terense",
+                "othername":"dodo",
+                "username":"teredo",
+                "email":"terense@wek.com",
+                "phoneNumber":"5246",
+                "password":"Tintinabu12"
+            }
         
         self.users_two = {
                 "firstname":"bill",
@@ -91,13 +100,13 @@ class TestApplication(unittest.TestCase):
                 "title":"",
                 "body":"ill@wek"
         }
-        self.upvote = {
+        self.vote = {
                 "body": "ill@wek",
                 "question": 1,
                 "title": "adams",
-                "votes": 1
+                "votes": 2
             }
-        
+
     def tearDown(self):
         """ Pull down data to original after testing """
         self.app.testing = False

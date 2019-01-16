@@ -20,17 +20,17 @@ The appliction has been developed with:
 6. The user can comment on specific questions.
 7. A user can update their password and other account settings
 ## The following are the API Endpoints
-| METHOD | END-POINT | DESCRIPTION |
-| :---         |     :---      |          :--- |
-| GET          |/api/v1/meetups/<int:meetup_id>   | Fetch a specific meetup record    |
-| POST         |/api/v1/user/auth/login      | Log in a User     |
-| POST         |/api/v1/add_meetups     | Create a meetup record     |
-| POST        |/api/v1/post_question    | Create a question record     | 
-| POST         |/api/v1/user/auth/signup |  Register a user   |
-| POST         |/api/v1/meetups/<meetup-id/rsvps>      | User can book to join a meetup    |
-| GET          |/api/v1/get_meetups   | Gets all meetups records   |
-| PATCH        |/api/v1/questions/<questions-id>/upvote   | upvote on a meetup question  |
-| PATCH        |/api/v1/questions/<questions-id/downvote   | downvote on a meetup question     |
+| METHOD | END-POINT | DESCRIPTION |   PROTECTED |
+| :---         |     :---      |          :--- | :--- |
+| POST         |/api/v1/user/auth/signup |  Register a user   |FALSE|
+| POST         |/api/v1/user/auth/login      | Log in a User     |FALSE|
+| POST         |/api/v1/add_meetups     | Create a meetup record     |TRUE|
+| GET          |/api/v1/get_meetups   | Gets all meetups records   |TRUE|
+| GET          |/api/v1/meetups/<meetup_id>   | Fetch a specific meetup record    |TRUE|
+| POST         |/api/v1/meetups/<meetup_id>/rsvps     | User can book to join a meetup    |TRUE|
+| POST        |/api/v1/post_question    | Create a question record     | TRUE|
+| PATCH        |/api/v1/<questions_id>/upvote   | upvote on a meetup question  |TRUE|
+| PATCH        |/api/v1/<questions_id>/downvote   | downvote on a meetup question     |TRUE|
 
 ## Running the Aplication
 #### Requirements include

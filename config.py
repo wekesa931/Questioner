@@ -6,6 +6,7 @@ class Config(object):
     """Parent configuration class."""
     DEBUG = True
     TESTING = False
+    SECRET = 'werdtfyug45678fgut4547gihnhpih'
 
 class Development(Config):
     """Configurations for Development."""
