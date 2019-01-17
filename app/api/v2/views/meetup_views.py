@@ -1,5 +1,5 @@
 from flask import Blueprint, Flask, jsonify, request
-from app.api.v1.models.meetup_models import MeetupInfo
+from app.api.v2.models.meetup_models import MeetupInfo
 from app.validators.shared_validators import check_fields
 from app.validators.token_validation import token_required
 
@@ -13,7 +13,7 @@ class MeetupViews:
     def create_meetup(user_id):
         """ fetch the posted information from the user """
         meetup = request.get_json("meetups")
-        print(user_id)
+        
         #validate user information
         validate_info = ['location','images','topic',
                                 'happeningOn','tags']
@@ -27,7 +27,7 @@ class MeetupViews:
         happeningOn = meetup['happeningOn']
         tags = meetup['tags']
         #Meetup information is sent to database
-        meetup_object = MeetupInfo('',location,topic,happeningOn,
+        meetup_object = MeetupInfo(location,topic,happeningOn,
                                             tags,images)
         meetups = meetup_object.add_meetup()
         return jsonify({
@@ -41,26 +41,28 @@ class MeetupViews:
     @token_required
     def get_meetup(user_id, meetup_id):
         """ Gets  specific meetup id """
-        meetup = MeetupInfo
-        get_meetup = meetup.get_meetup(meetup_id)
-        if get_meetup == {}:
-            return jsonify({
-                "message":"meetup not found"
-            }), 404
-        return jsonify({
-            'status': '200',
-            'data':[{
-                'meetup':get_meetup
-            }]
-       }), 200
+        all_meetups = MeetupInfo.get_meetups()
+        print(all_meetups)
+        for meetup in all_meetups:
+            
+            if meetup['id'] == meetup_id:
+                return jsonify({
+                    'status': '200',
+                    'data':[{
+                        'meetup':meetup
+                    }]
+                }), 200
+            else:
+                return jsonify({
+                        "message":"meetup not found"
+                    }), 404
 
     @mtp_two.route('/v2/get_meetups', methods = ['GET'])
     @token_required
     def get_meetups(user_id):
         """ gets all meetups """
-        meetup = MeetupInfo
-        fetch_meetups = meetup.get_all_meetups()
-        if len(fetch_meetups) == 0:
+        all_meetups = MeetupInfo.get_meetups()
+        if len(all_meetups) == 0:
             return jsonify({"message":"no meetups found"}), 404
 
         return jsonify({
