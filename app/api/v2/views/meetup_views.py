@@ -42,9 +42,7 @@ class MeetupViews:
     def get_meetup(user_id, meetup_id):
         """ Gets  specific meetup id """
         all_meetups = MeetupInfo.get_meetups()
-        print(all_meetups)
-        for meetup in all_meetups:
-            
+        for meetup in all_meetups:            
             if meetup['id'] == meetup_id:
                 return jsonify({
                     'status': '200',
@@ -64,10 +62,9 @@ class MeetupViews:
         all_meetups = MeetupInfo.get_meetups()
         if len(all_meetups) == 0:
             return jsonify({"message":"no meetups found"}), 404
-
         return jsonify({
             'status': '200',
             'data':[{
-                'meetup':fetch_meetups
+                'meetup':all_meetups
             }]
        }), 200

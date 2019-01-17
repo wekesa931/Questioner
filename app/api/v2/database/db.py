@@ -20,7 +20,7 @@ create_tables = (
     location VARCHAR(255) NOT NULL,
     images VARCHAR(255) NOT NULL,
     topic VARCHAR(255) NOT NULL,
-    happeningOn TIMESTAMP NOT NULL,
+    happeningOn VARCHAR(255) NOT NULL,
     tags VARCHAR(255) NOT NULL
     
     ) 
@@ -29,7 +29,7 @@ create_tables = (
     CREATE TABLE IF NOT EXISTS question(
     id SERIAL PRIMARY KEY,
     createdOn timestamp with time zone DEFAULT now(),
-    createdBy VARCHAR(255) NOT NULL,
+    createdBy INTEGER NOT NULL,
     meetup_id INTEGER NOT NULL,
     title VARCHAR(255) NOT NULL,
     body VARCHAR(255) NOT NULL,
