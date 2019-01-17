@@ -49,7 +49,7 @@ class UserViews:
         if validate.check_repeated(email):
             return jsonify({"message":"email taken!"}), 400
         user = UserInfo(firstname, lastname, othername, username, email, phoneNumber, password, isAdmin)
-        users_db = user.eachUser()
+        users_db = user.add_user()
         return jsonify({
             'status': '201',
             'data':[{
@@ -62,8 +62,8 @@ class UserViews:
         user_info = request.get_json("login")
         username = user_info['username']
         password = user_info['password']
-        user = UserInfo()
-        all_users = user.add_user()
+        user = UserInfo
+        all_users = user.get_all_users()
         for user_id, user in all_users.items():
             if user['username'] == username and user['password'] == password:
                 secret_key = current_app.config['SECRET']
