@@ -1,4 +1,4 @@
-from app.tests.v1.basetest import TestApplication
+from app.tests.v2.basetest import TestApplication
 import json
 
 class TestQuestion(TestApplication):
@@ -6,18 +6,18 @@ class TestQuestion(TestApplication):
     
     def test_add_question_successful(self):
         """ test if question is successfuly added """
-        self.client.post('/api/v1/user/auth/signup', json=self.users, content_type='application/json')
-        results = self.client.post('/api/v1/user/auth/login', json=self.users, content_type='application/json')
+        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
         token = json.loads(results.data.decode())['token']
         self.client.post(
-            '/api/v1/add_meetups',
+            '/api/v2/add_meetups',
             headers = dict(Authorization = "Bearer " + token),
             json=self.meetups,
             content_type='application/json'
             )
         
         response = self.client.post(
-            '/api/v1/1/post_question',
+            '/api/v2/1/post_question',
             headers = dict(Authorization = "Bearer " + token),
             json=self.questions, 
             content_type='application/json'
@@ -28,18 +28,18 @@ class TestQuestion(TestApplication):
     def test_add_question_failure(self):
         """ test if question fails validation """
         questions = {}
-        self.client.post('/api/v1/user/auth/signup', json=self.users, content_type='application/json')
-        results = self.client.post('/api/v1/user/auth/login', json=self.users, content_type='application/json')
+        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
         token = json.loads(results.data.decode())['token']
         self.client.post(
-            '/api/v1/add_meetups',
+            '/api/v2/add_meetups',
             headers = dict(Authorization = "Bearer " + token),
             json=self.meetups,
             content_type='application/json'
             )
 
         response = self.client.post(
-            '/api/v1/1/post_question',
+            '/api/v2/1/post_question',
             headers = dict(Authorization="Bearer " + token),
             json=questions,
             content_type='application/json'
@@ -49,17 +49,17 @@ class TestQuestion(TestApplication):
 
     def test_if_question_data_available(self):
         """ test if specific question id is existent """
-        self.client.post('/api/v1/user/auth/signup', json=self.users, content_type='application/json')
-        results = self.client.post('/api/v1/user/auth/login', json=self.users, content_type='application/json')
+        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
         token = json.loads(results.data.decode())['token']
         self.client.post(
-            '/api/v1/add_meetups',
+            '/api/v2/add_meetups',
             headers = dict(Authorization = "Bearer " + token),
             json=self.meetups,
             content_type='application/json'
             )
         response = self.client.post(
-            '/api/v1/1/post_question',
+            '/api/v2/1/post_question',
             headers = dict(Authorization="Bearer " + token),
             json=self.question_one, 
             content_type='application/json'
@@ -69,25 +69,25 @@ class TestQuestion(TestApplication):
 
     def test_upvote(self):
         """ test the upvote api """
-        self.client.post('/api/v1/user/auth/signup', json=self.users, content_type='application/json')
-        results = self.client.post('/api/v1/user/auth/login', json=self.users, content_type='application/json')
+        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
         token = json.loads(results.data.decode())['token']
         self.client.post(
-            '/api/v1/add_meetups',
+            '/api/v2/add_meetups',
             headers = dict(Authorization = "Bearer " + token),
             json=self.meetups,
             content_type='application/json'
             )
         
         response = self.client.post(
-            '/api/v1/1/post_question',
+            '/api/v2/1/post_question',
             headers = dict(Authorization = "Bearer " + token),
             json=self.questions, 
             content_type='application/json'
             )
 
         res = self.client.patch(
-            '/api/v1/1/upvote',
+            '/api/v2/1/upvote',
             headers = dict(Authorization = "Bearer " + token)
             )
         self.assertEqual(res.status_code, 200)
@@ -95,25 +95,25 @@ class TestQuestion(TestApplication):
 
     def test_downvote(self):
         """ test the downvote api """
-        self.client.post('/api/v1/user/auth/signup', json=self.users, content_type='application/json')
-        results = self.client.post('/api/v1/user/auth/login', json=self.users, content_type='application/json')
+        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
         token = json.loads(results.data.decode())['token']
         self.client.post(
-            '/api/v1/add_meetups',
+            '/api/v2/add_meetups',
             headers = dict(Authorization = "Bearer " + token),
             json=self.meetups,
             content_type='application/json'
             )
         
         response = self.client.post(
-            '/api/v1/1/post_question',
+            '/api/v2/1/post_question',
             headers = dict(Authorization = "Bearer " + token),
             json=self.questions, 
             content_type='application/json'
             )
 
         res = self.client.patch(
-            '/api/v1/1/downvote',
+            '/api/v2/1/downvote',
             headers = dict(Authorization = "Bearer " + token)
             )
         self.assertEqual(res.status_code, 200)

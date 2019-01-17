@@ -1,19 +1,13 @@
-drop_tables = (
-    """ DROP TABLE IF EXISTS users CASCADE """
-    """ DROP TABLE IF EXISTS meetups CASCADE """
-    """ DROP TABLE IF EXISTS questions CASCADE """
-)
-
 create_tables = (
     """ 
     CREATE TABLE IF NOT EXISTS users(
-    user_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     firstname VARCHAR(255) NOT NULL,
     lastname VARCHAR(255) NOT NULL,
     othername VARCHAR(255) NOT NULL,
     username VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
-    phoneNumber INTEGER NOT NULL,
+    phoneNumber VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     registered timestamp with time zone DEFAULT now(),
     isAdmin BOOLEAN NOT NULL
@@ -21,7 +15,7 @@ create_tables = (
     """,
     """ 
     CREATE TABLE IF NOT EXISTS meetups(
-    meetup_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     createdOn timestamp with time zone DEFAULT now(),
     location VARCHAR(255) NOT NULL,
     images VARCHAR(255) NOT NULL,
@@ -33,7 +27,7 @@ create_tables = (
     """,
     """ 
     CREATE TABLE IF NOT EXISTS question(
-    question_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     createdOn timestamp with time zone DEFAULT now(),
     createdBy VARCHAR(255) NOT NULL,
     meetup_id INTEGER NOT NULL,

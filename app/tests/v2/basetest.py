@@ -1,8 +1,7 @@
 import json
 import unittest #this is a unit testing framework
 from app import create_app
-
-
+from app.api.v2.database.db_migrations import db
 
 class TestApplication(unittest.TestCase):
     def setUp(self):
@@ -17,7 +16,8 @@ class TestApplication(unittest.TestCase):
                 "username":"wekebill",
                 "email":"ill@wek.com",
                 "phoneNumber":"526",
-                "password":"Tintinabu12"
+                "password":"Tintinabu12",
+                "isAdmin":False
             }
         self.users_register = {
                 "firstname":"john",
@@ -26,7 +26,8 @@ class TestApplication(unittest.TestCase):
                 "username":"teredo",
                 "email":"terense@wek.com",
                 "phoneNumber":"5246",
-                "password":"Tintinabu12"
+                "password":"Tintinabu12",
+                "isAdmin":False
             }
         
         self.users_two = {
@@ -36,7 +37,8 @@ class TestApplication(unittest.TestCase):
                 "username":"wekebill",
                 "email":"ill@wek.com",
                 "phoneNumber":"526",
-                "password":"Tintinabu12"
+                "password":"Tintinabu12",
+                "isAdmin":False
         }
         self.users_three = {
                 "firstname":"bill",
@@ -45,7 +47,8 @@ class TestApplication(unittest.TestCase):
                 "username":"wekesabill",
                 "email":"ill@wek.com",
                 "phoneNumber":"526",
-                "password":"Tintinabu12"
+                "password":"Tintinabu12",
+                "isAdmin":False
         }
         self.users_four = {
                 "firstname":"bill",
@@ -54,7 +57,8 @@ class TestApplication(unittest.TestCase):
                 "username":"wekbill",
                 "email":"il@wek.com",
                 "phoneNumber":"526",
-                "password":"tintinabu"
+                "password":"tintinabu",
+                "isAdmin":False
         }
         self.users_five = {
                 "firstname":"bill",
@@ -63,7 +67,8 @@ class TestApplication(unittest.TestCase):
                 "username":"wekbill",
                 "email":"ilwek.com",
                 "phoneNumber":"526",
-                "password":"Tintinabu12"
+                "password":"Tintinabu12",
+                "isAdmin":False
         }
 
         """ set up meetup information test data """
@@ -109,6 +114,7 @@ class TestApplication(unittest.TestCase):
 
     def tearDown(self):
         """ Pull down data to original after testing """
+        db.drop_tables()
         self.app.testing = False
         self.app = None
 
