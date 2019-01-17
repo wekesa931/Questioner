@@ -38,6 +38,12 @@ class TestMeetup(TestApplication):
         self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
         results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
         token = json.loads(results.data.decode())['token']
+        self.client.post(
+            '/api/v2/add_meetups',
+            headers = dict(Authorization = "Bearer " + token),
+            json=self.meetups,
+            content_type='application/json'
+            )
         response = self.client.get(
             '/api/v2/get_meetups',
             headers = dict(Authorization="Bearer " + token))
@@ -50,7 +56,10 @@ class TestMeetup(TestApplication):
         self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
         results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
         token = json.loads(results.data.decode())['token']
-        self.client.post('/api/v2/add_meetups', json=self.meetups, 
+        self.client.post(
+            '/api/v2/add_meetups',
+            headers = dict(Authorization = "Bearer " + token),
+            json=self.meetups,
             content_type='application/json'
             )
         response = self.client.get('/api/v2/meetups/1',
@@ -76,6 +85,12 @@ class TestMeetup(TestApplication):
         self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
         results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
         token = json.loads(results.data.decode())['token']
+        self.client.post(
+            '/api/v2/add_meetups',
+            headers = dict(Authorization = "Bearer " + token),
+            json=self.meetups,
+            content_type='application/json'
+            )
         response = self.client.get('/api/v2/meetups/1',
             headers = dict(Authorization="Bearer " + token))
         self.assertIn(u'online', response.data.decode())
