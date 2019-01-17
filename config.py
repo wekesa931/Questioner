@@ -11,10 +11,12 @@ class Config(object):
 class Development(Config):
     """Configurations for Development."""
     DEBUG = True
+    DATABASE_URL = os.getenv('api_database_url')
 
 class Testing(Config):
     """Configurations for Testing, with a separate test database."""
     TESTING = True
+    DATABASE_URL = os.getenv('test_database_url')
 
 class Production(Config):
     """Configurations for Production."""
@@ -25,3 +27,4 @@ app_config = {
     "testing": Testing,
     "production": Production
 }
+
