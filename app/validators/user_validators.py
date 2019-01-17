@@ -1,5 +1,6 @@
 import re
-from app.api.v1.models.user_models import users
+from app.api.v2.models.user_models import UserInfo
+
 
 class Validators():
     """ Validates user information on regisration """
@@ -11,10 +12,12 @@ class Validators():
         """ must have @ special character """
         return re.match('[^@]+@[^@]+\.[^@]+',email) 
 
-    def check_repeated(self, username):
+    def check_repeated(self, item):
         """ Checks for repeated username """
-        for key_item, value_item in users.items():
-            for dict_key, dict_value in value_item.items():
-                if dict_value == username:
+        all_users = UserInfo.get_all_users()
+        for user in all_users:
+            for dict_key, dict_value in user.items():
+                if dict_value == item:
                     return True
         return False
+        

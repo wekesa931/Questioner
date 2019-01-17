@@ -13,7 +13,10 @@ def check_fields(form_data, data_keys):
             if key_item not in keylist:
                 error_message['key error'] = "{} is missing".format(key_item)
             else:
-                if form_data[key_item].strip() == "":
-                    """ Confirms all fields have values """
-                    error_message['value error'] = "{} is missing a value".format(key_item)
+                if type(form_data[key_item]) is str:
+                    if form_data[key_item].strip() == "":
+                        """ Confirms all fields have values """
+                        error_message['value error'] = "{} is missing a value".format(key_item)
+                else:
+                    pass
     return error_message
