@@ -16,8 +16,8 @@ class UserViews:
     @mod_two.route('/v2/user/auth/all_users', methods = ['GET'])
     def get_all_users():
         """ fetch all users from the database """
-        user = UserInfo
-        all_users = user.get_all_users()
+        user = UserInfo()
+        all_users = user.add_user()
         return jsonify({
             'users':all_users
         }), 200
@@ -62,8 +62,8 @@ class UserViews:
         user_info = request.get_json("login")
         username = user_info['username']
         password = user_info['password']
-        user = UserInfo
-        all_users = user.get_all_users()
+        user = UserInfo()
+        all_users = user.add_user()
         for user_id, user in all_users.items():
             if user['username'] == username and user['password'] == password:
                 secret_key = current_app.config['SECRET']
