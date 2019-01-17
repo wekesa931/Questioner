@@ -1,39 +1,62 @@
-meetups = {}
+from urllib.parse import urlparse
+import os
+import psycopg2
+from psycopg2.extras import RealDictCursor
 
 class MeetupInfo:
-    """ Meetup information from user input """
-    def __init__(self, id, location, topic, happeningOn, tags, images=None):
-        self.id = id
+    """ Defines the user information """
+    def __init__(self, location, topic, happeningOn, tags, images):
+        self.db_config = os.getenv('api_database_url')
+        self.response = urlparse(self.db_config)
+        self.config = {
+            'database': self.response.path[1:],
+            'user': self.response.username,
+            'password': self.response.password,
+            'host': self.response.hostname
+        }
         self.location = location
         self.images = images
         self.topic = topic
         self.happeningOn = happeningOn
-        self.tags = tags
-        self.number_of_users = len(meetups) + 1   
+        self.tags = tags 
 
     def add_meetup(self):
-        """ takes the captured information and appends them to meetups db """
-        db={
-            "id":self.number_of_users,
-            "location":self.location,
-            "images":self.images,
-            "topic":self.topic,
-            "happeningOn":self.happeningOn,
-            "tags":self.tags
-        }
-        #Append the db dictionary to meetups
-        meetups.update({self.number_of_users:db})
-        return meetups
-    #static methods have no relationship with the class state
-    @staticmethod
-    def get_meetup(id):
-        """ Check if meetup is present """
-        for key_id, value in meetups.items():
-            if key_id == id:
-                return meetups[id]
-        return {}
+        con, response = psycopg2.connect(**self.config), None
+        cur = con.cursor(cursor_factory=RealDictCursor)
+        try:
+            query = "INSERT INTO meetups(location,images,topic,happeningOn,tags) VALUES(%s, %s, %s, %s, %s) RETURNING *; "
+            cur.execute(query, (
+                self.location, 
+                self.images,
+                self.topic,
+                self.happeningOn,
+                self.tags
+            ))
+            con.commit()
+            response = cur.fetchone()
+        except Exception as e:
+            con.close()
+        con.close()
+        return response
 
     @staticmethod
-    def get_all_meetups():
-        """ Gets all meetups """
-        return(meetups)
+    def get_meetups():
+        db_config = os.getenv('api_database_url')
+        response = urlparse(db_config)
+        config = {
+            'database': response.path[1:],
+            'user': response.username,
+            'password': response.password,
+            'host': response.hostname
+        }
+        con, response = psycopg2.connect(**config), None
+        cur = con.cursor(cursor_factory=RealDictCursor)
+        try:
+            query = "SELECT * FROM meetups; "
+            cur.execute(query)
+            meetups = cur.fetchall()
+            con.close()
+            return meetups
+        except Exception as e:
+            con.close()
+            return e
