@@ -37,3 +37,16 @@ class QuestionsVIews:
                 return jsonify({
                 "message":"meetup not found"
                 }), 404
+
+    @qsn_two.route('/v2/<int:meetup_id>/get_all_questions', methods = ['GET'])
+    @token_required
+    def get_all_question(meetup_id, user_id):
+        all_questions = AddQuestion.get_questions()
+        if len(all_questions) == 0:
+            return jsonify({"message":"no questions found"}), 404
+        return jsonify({
+            'status': '200',
+            'data':[{
+                'questions':all_questions
+            }]
+        }), 200
