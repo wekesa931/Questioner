@@ -19,6 +19,7 @@ class AddQuestion:
         self.title = title
         self.body = body  
         self.votes = 0
+
     def add_question(self):
         """ Appends user information to user db """
         con, response = psycopg2.connect(**self.config), None
@@ -54,9 +55,36 @@ class AddQuestion:
         try:
             query = "SELECT * FROM question; "
             cur.execute(query)
-            question = cur.fetchall()
+            questions = cur.fetchall()
             con.close()
-            return question
+            return questions
         except Exception as e:
             con.close()
             return e
+
+
+    @staticmethod
+    def update_question(votes,question_id):
+        db_config = os.getenv('api_database_url')
+        response = urlparse(db_config)
+        config = {
+            'database': response.path[1:],
+            'user': response.username,
+            'password': response.password,
+            'host': response.hostname
+        }
+        con, response = psycopg2.connect(**config), None
+        cur = con.cursor(cursor_factory=RealDictCursor)
+        try:
+            query = "UPDATE question SET votes=%s WHERE id=%s;"
+            cur.execute(query, (
+                votes, 
+                question_id
+            ))
+            con.commit()
+            response = True
+        except Exception as e:
+            con.close()
+            response = False
+        con.close()
+        return response

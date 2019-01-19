@@ -66,3 +66,26 @@ class UserInfo:
         except Exception as e:
             con.close()
             return e
+    
+    @staticmethod
+    def get_one_user(user_id):
+        db_config = os.getenv('api_database_url')
+        response = urlparse(db_config)
+        config = {
+            'database': response.path[1:],
+            'user': response.username,
+            'password': response.password,
+            'host': response.hostname
+        }
+        con, response = psycopg2.connect(**config), None
+        cur = con.cursor(cursor_factory=RealDictCursor)
+        try:
+            query = "SELECT * FROM users WHERE id='{}'".format(user_id)
+            cur.execute(query)
+            users = cur.fetchone()
+            con.close()
+            return users
+        except Exception as e:
+            con.close()
+            return e
+    
