@@ -35,6 +35,16 @@ create_tables = (
     body VARCHAR(255) NOT NULL,
     votes INTEGER NOT NULL
     ) 
+    """,
+    """ 
+    CREATE TABLE IF NOT EXISTS reservations(
+    id SERIAL PRIMARY KEY,
+    createdOn timestamp with time zone DEFAULT now(),
+    user_id INTEGER NOT NULL,
+    meetup_id INTEGER NOT NULL,
+    topic VARCHAR(255) NOT NULL,
+    status VARCHAR(255) NOT NULL
+    ) 
     """
 
 )

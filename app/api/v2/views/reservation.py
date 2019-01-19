@@ -1,6 +1,6 @@
 from flask import Blueprint, Flask, jsonify, request
-from app.api.v1.models.reservation_models import Reservation
-from app.api.v1.models.meetup_models import MeetupInfo
+from app.api.v2.models.reservation_models import Reservation
+from app.api.v2.models.meetup_models import MeetupInfo
 from app.validators.shared_validators import check_fields
 from app.validators.token_validation import token_required
 
@@ -12,19 +12,18 @@ class GetReservation:
     @rsv_two.route('/v2/<int:meetup_id>/attend', methods = ['POST'])
     @token_required
     def attend_meetup(user_id, meetup_id):
-        meetup = MeetupInfo
-        get_meetup = meetup.get_meetup(meetup_id) 
-        #validate obtained information
-        if get_meetup == {}:
-            return jsonify({"message":"meetup not found"}), 404
-        attendance = request.get_json("rsvp")
-        validate_info = ['status']
-        #validate obtained information
-        error = check_fields(attendance, validate_info)
-        if len(error) > 0:
-            return jsonify({"message":error}), 400
-        topic = get_meetup["topic"]
-        status = attendance["status"]
-        confirmed = Reservation(meetup_id,topic,status)
-        rsvp = confirmed.meetup_status()
-        return jsonify({'Reservation':rsvp}), 200
+        all_meetups = MeetupInfo.get_meetups()
+        for meetup in all_meetups:
+            if meetup['id'] == meetup_id:
+                attendance = request.get_json("rsvp")
+                validate_info = ['status']
+                error = check_fields(attendance, validate_info)
+                if len(error) > 0:
+                    return jsonify({"message":error}), 400
+                topic = meetup["topic"]
+                status = attendance["status"]
+                confirmed = Reservation(user_id, meetup_id, topic, status)
+                rsvp = confirmed.make_reservation()
+                return jsonify({'Reservation':rsvp}), 200
+            else:
+                return jsonify({"message":"meetup not found"}), 404
