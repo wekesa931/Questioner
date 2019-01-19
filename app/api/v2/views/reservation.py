@@ -19,11 +19,20 @@ class GetReservation:
                 validate_info = ['status']
                 error = check_fields(attendance, validate_info)
                 if len(error) > 0:
-                    return jsonify({"message":error}), 400
+                    return jsonify({
+                        'status':400,
+                        "message":error
+                        }), 400
                 topic = meetup["topic"]
                 status = attendance["status"]
                 confirmed = Reservation(user_id, meetup_id, topic, status)
                 rsvp = confirmed.make_reservation()
-                return jsonify({'Reservation':rsvp}), 200
-            else:
-                return jsonify({"message":"meetup not found"}), 404
+                return jsonify({
+                    'status':200,
+                    'data':[{'Reservation':rsvp}]
+                }), 200
+       
+        return jsonify({
+            'status': 404,
+            "message": "no meetup found"
+        }), 404

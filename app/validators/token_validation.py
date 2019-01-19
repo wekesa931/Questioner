@@ -9,17 +9,22 @@ def token_required(f):
         token = request.headers.get('Authorization', None)
 
         if token == None:
-            return jsonify({'message':'Token is missing!'}), 403
+            return jsonify({
+                'status': 403,
+                'message':'Token is missing!'
+            }), 403
         else:
             try:
                 token = token.split("Bearer ")
                 token = token[1]
                 secret=current_app.config['SECRET']
                 data = jwt.decode(token, secret)
-                print(data)
                 user_id = data['user_id']
             except:
-                return jsonify({'message':'Token is invalid'}), 403
+                return jsonify({
+                    'status': 403,
+                    'message':'Token is invalid'
+                }), 403
             return f(user_id=user_id, *args, **kwargs)
     return decorated
     

@@ -45,6 +45,15 @@ create_tables = (
     topic VARCHAR(255) NOT NULL,
     status VARCHAR(255) NOT NULL
     ) 
+    """,
+    """ 
+    CREATE TABLE IF NOT EXISTS comments(
+    id SERIAL PRIMARY KEY,
+    createdOn timestamp with time zone DEFAULT now(),
+    user_id INTEGER NOT NULL,
+    question_id INTEGER NOT NULL,
+    comments VARCHAR(255) NOT NULL
+    ) 
     """
 
 )

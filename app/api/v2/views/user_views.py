@@ -29,7 +29,10 @@ class UserViews:
         #validate posted information
         error = check_fields(user_info, validate_info)
         if len(error) > 0:
-            return jsonify({"message":error}), 400
+            return jsonify({
+                'status': 400,
+                "message":error
+                }), 400
         firstname = user_info['firstname']
         lastname = user_info['lastname']
         othername = user_info['othername']
@@ -40,17 +43,29 @@ class UserViews:
         isAdmin = user_info['isAdmin']
         
         if not validate.check_password(password):
-            return jsonify({"message":"password is not valid"}), 400
+            return jsonify({
+                'status': 400,
+                "message":"password is not valid"
+                }), 400
         if not validate.check_email(email):
-            return jsonify({"message":"email is not valid"}), 400
+            return jsonify({
+                'status': 400,
+                "message":"email is not valid"
+            }), 400
         if validate.check_repeated(username):
-            return jsonify({"message":"username taken!"}), 400
+            return jsonify({
+                'status': 400,
+                "message":"username taken!"
+            }), 400
         if validate.check_repeated(email):
-            return jsonify({"message":"email taken!"}), 400
+            return jsonify({
+                'status': 400,
+                "message":"email taken!"
+            }), 400
         user = UserInfo(firstname, lastname, othername, username, email, phoneNumber, password, isAdmin)
         users_db = user.add_user()
         return jsonify({
-            'status': '201',
+            'status': 201,
             'data':[{
                 'users':users_db
             }]
@@ -72,7 +87,11 @@ class UserViews:
                         }, secret_key)
                     return jsonify({'token':token.decode('UTF-8')})
                 else:
-                    return jsonify({'message':'Wrong password!'}), 400 
-            else:
-                return jsonify({'message':'Username not found!'}), 400  
+                    return jsonify({
+                        'status': 400,
+                        'message':'Wrong password!'
+                    }), 400 
+        return jsonify({
+            
+            'message':'Username not found!'}), 400  
         

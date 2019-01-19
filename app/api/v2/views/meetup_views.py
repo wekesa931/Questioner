@@ -1,4 +1,5 @@
 from flask import Blueprint, Flask, jsonify, request
+from app.api.v2.models.user_models import UserInfo
 from app.api.v2.models.meetup_models import MeetupInfo
 from app.validators.shared_validators import check_fields
 from app.validators.token_validation import token_required
@@ -19,7 +20,10 @@ class MeetupViews:
                                 'happeningOn','tags']
         error = check_fields(meetup, validate_info)
         if len(error) > 0:
-            return jsonify({"message":error}), 400
+            return jsonify({
+                "status": 400,
+                "message":error
+            }), 400
             
         location = meetup['location']
         images = meetup['images']
@@ -31,7 +35,7 @@ class MeetupViews:
                                             tags,images)
         meetups = meetup_object.add_meetup()
         return jsonify({
-            'status': '201',
+            'status': 201,
             'data':[{
                 'meetups':meetups
             }]
@@ -45,15 +49,15 @@ class MeetupViews:
         for meetup in all_meetups:            
             if meetup['id'] == meetup_id:
                 return jsonify({
-                    'status': '200',
+                    'status': 200,
                     'data':[{
                         'meetup':meetup
                     }]
                 }), 200
-            else:
-                return jsonify({
-                        "message":"meetup not found"
-                    }), 404
+        return jsonify({
+            "status": 404,
+            "message":"meetup not found"
+        }), 404
 
     @mtp_two.route('/v2/get_meetups', methods = ['GET'])
     @token_required
@@ -63,8 +67,35 @@ class MeetupViews:
         if len(all_meetups) == 0:
             return jsonify({"message":"no meetups found"}), 404
         return jsonify({
-            'status': '200',
+            'status': 200,
             'data':[{
                 'meetup':all_meetups
             }]
-       }), 200
+        }), 200
+
+    @mtp_two.route('/v2/meetups/<int:meetup_id>/delete', methods = ['DELETE'])
+    @token_required
+    def del_meetup(user_id, meetup_id):
+        """ Gets  specific meetup id """
+        user = UserInfo.get_one_user(user_id)
+        print(user)
+        if user['isadmin']:
+            all_meetups = MeetupInfo.get_meetups()
+            for meetup in all_meetups:            
+                if meetup['id'] == meetup_id:
+                    remove_meetup = MeetupInfo.del_meetup(meetup_id)
+                    return jsonify({
+                            'status': 200,
+                            'data':[{
+                                'message':'meetup deleted successfully!'
+                            }]
+                    }), 200        
+            return jsonify({
+                "status": 400,
+                "message":"meetup not found"
+            }), 404
+        else:
+            return jsonify({
+                "status": 400,
+                "message":"You are not permitted!"
+            }), 403
