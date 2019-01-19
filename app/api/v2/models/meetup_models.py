@@ -60,3 +60,24 @@ class MeetupInfo:
         except Exception as e:
             con.close()
             return e
+
+    @staticmethod
+    def del_meetup(meetup_id):
+        db_config = os.getenv('api_database_url')
+        response = urlparse(db_config)
+        config = {
+            'database': response.path[1:],
+            'user': response.username,
+            'password': response.password,
+            'host': response.hostname
+        }
+        con, response = psycopg2.connect(**config), None
+        cur = con.cursor(cursor_factory=RealDictCursor)
+        try:
+            query = "DELETE FROM meetups WHERE id='{}'".format(meetup_id)
+            cur.execute(query)
+            con.close()
+            return True
+        except Exception as e:
+            con.close()
+            return False

@@ -17,7 +17,7 @@ class VoteOnQuestions:
                 votes = question['votes'] + 1
                 updated_qsn = AddQuestion.update_question(votes,question_id)
                 return jsonify({
-                    'status': '200',
+                    'status': 200,
                     'data':[{
                         'question':question['id'],
                         'title':question['title'],
@@ -27,7 +27,10 @@ class VoteOnQuestions:
                     }]
                 }), 200
             else:
-                return jsonify({"message":"question not found"}), 404
+                return jsonify({
+                    'status': 404,
+                    "message":"question not found"
+                }), 404
     
     @vt_two.route('/v2/<int:question_id>/downvote', methods = ['PATCH'])
     @token_required
@@ -41,7 +44,7 @@ class VoteOnQuestions:
                     votes = votes - 1
                 updated_qsn = AddQuestion.update_question(votes,question_id)
                 return jsonify({
-                    'status': '200',
+                    'status': 200,
                     'data':[{
                         'question':question['id'],
                         'title':question['title'],
@@ -50,4 +53,7 @@ class VoteOnQuestions:
                     }]
                 }), 200
             else:
-                return jsonify({"message":"question not found"}), 404
+                return jsonify({
+                    'status': 404,
+                    "message":"question not found"
+                }), 404
