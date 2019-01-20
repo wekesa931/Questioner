@@ -5,7 +5,7 @@ from psycopg2.extras import RealDictCursor
 
 class MeetupInfo:
     """ Defines the user information """
-    def __init__(self, location, topic, happeningOn, tags, images):
+    def __init__(self, user_id, location, topic, happeningOn, tags, images):
         self.db_config = os.getenv('api_database_url')
         self.response = urlparse(self.db_config)
         self.config = {
@@ -14,6 +14,7 @@ class MeetupInfo:
             'password': self.response.password,
             'host': self.response.hostname
         }
+        self.user_id = user_id
         self.location = location
         self.images = images
         self.topic = topic
@@ -24,8 +25,9 @@ class MeetupInfo:
         con, response = psycopg2.connect(**self.config), None
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
-            query = "INSERT INTO meetups(location,images,topic,happeningOn,tags) VALUES(%s, %s, %s, %s, %s) RETURNING *; "
+            query = "INSERT INTO meetups(user_id,location,images,topic,happeningOn,tags) VALUES(%s, %s, %s, %s, %s, %s) RETURNING *; "
             cur.execute(query, (
+                self.user_id,
                 self.location, 
                 self.images,
                 self.topic,
