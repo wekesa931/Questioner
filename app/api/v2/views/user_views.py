@@ -25,7 +25,11 @@ class UserViews:
     def user_signup():
         """ defines user sign up """
         user_info = request.get_json("user")
-        validate_info = ['firstname','lastname','othername','username','email','phoneNumber','password', 'isAdmin']
+        all_users = UserInfo.get_all_users()
+        isadmin = False
+        if len(all_users)==0:
+            isadmin = True
+        validate_info = ['firstname','lastname','othername','username','email','phoneNumber','password']
         #validate posted information
         error = check_fields(user_info, validate_info)
         if len(error) > 0:
@@ -40,7 +44,6 @@ class UserViews:
         email = user_info['email']
         phoneNumber = user_info['phoneNumber']
         password = user_info['password']
-        isAdmin = user_info['isAdmin']
         
         if not validate.check_password(password):
             return jsonify({
@@ -62,7 +65,7 @@ class UserViews:
                 'status': 400,
                 "message":"email taken!"
             }), 400
-        user = UserInfo(firstname, lastname, othername, username, email, phoneNumber, password, isAdmin)
+        user = UserInfo(firstname, lastname, othername, username, email, phoneNumber, password, isadmin)
         users_db = user.add_user()
         return jsonify({
             'status': 201,

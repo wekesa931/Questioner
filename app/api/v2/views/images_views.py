@@ -1,5 +1,6 @@
 from flask import Blueprint, Flask, jsonify, request
 from app.api.v2.models.images_models import AddImage
+from app.api.v2.models.user_models import UserInfo
 from app.api.v2.models.meetup_models import MeetupInfo
 from app.validators.shared_validators import check_fields
 from app.validators.token_validation import token_required
@@ -12,6 +13,12 @@ class ImageViews:
     @token_required
     def add_image(user_id,meetup_id):
         """ fetch the posted information from the user """
+        check_admin = UserInfo.get_admin(user_id)
+        if not check_admin:
+            return jsonify({
+                'status': 403,
+                'message': 'Permission denied!'
+            }), 403
         image = request.get_json("image")
         validate_info = ['image']
         error = check_fields(image, validate_info)

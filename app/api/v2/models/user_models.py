@@ -88,4 +88,11 @@ class UserInfo:
         except Exception as e:
             con.close()
             return e
+
+    @staticmethod
+    def get_admin(user_id):
+        user = UserInfo.get_one_user(user_id)
+        if user['isadmin'] == True:
+            return True
+        return False
     
