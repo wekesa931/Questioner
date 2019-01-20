@@ -2,6 +2,7 @@ from flask import Blueprint, Flask, jsonify, request, make_response, current_app
 from app.api.v2.models.user_models import UserInfo
 from app.validators.user_validators import Validators
 from app.validators.shared_validators import check_fields
+from werkzeug.security import check_password_hash
 import jwt
 import datetime
 
@@ -79,16 +80,23 @@ class UserViews:
         user_info = request.get_json("login")
         username = user_info['username']
         password = user_info['password']
+
         all_users = UserInfo.get_all_users()
         for user in all_users:
             if user['username'] == username:
-                if user['password'] == password:
+                if check_password_hash(user['password'], password):
                     secret_key = current_app.config['SECRET']
                     token = jwt.encode({
                         'user_id':user['id'],
                         'exp':datetime.datetime.utcnow() + datetime.timedelta(minutes=30) 
                         }, secret_key)
-                    return jsonify({'token':token.decode('UTF-8')})
+                    return jsonify({
+                        'status': 200,
+                        'data':[{
+                            'token':token.decode('UTF-8'),
+                            'user': user
+                        }]
+                    })
                 else:
                     return jsonify({
                         'status': 400,
