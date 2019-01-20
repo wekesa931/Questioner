@@ -1,8 +1,14 @@
+'''
+Database migrations allow us to:
+Recreate a database from scratch
+Make it clear at all times what state a database is in
+Migrate in a deterministic way from your current version of the database to a newer one
+Kind of like git
+'''
 from flask import current_app
 from app.api.v2.database.db import create_tables_command
 from app.api.v2.database.drop_table import drop_tables_command
 import psycopg2
-#holds function helpers
 import psycopg2.extras
 import os
 from urllib.parse import urlparse
@@ -10,7 +16,9 @@ from urllib.parse import urlparse
 class Database:
     def __init__(self):
         self.db_config = os.getenv('api_database_url')
-        #break down the URL into parts
+        '''
+        urlparse break URL strings up in components 
+        '''
         self.response = urlparse(self.db_config)
         self.config = {
             'database': self.response.path[1:],
