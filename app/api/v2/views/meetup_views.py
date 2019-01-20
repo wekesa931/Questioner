@@ -15,6 +15,12 @@ class MeetupViews:
     @token_required
     def create_meetup(user_id):
         """ fetch the posted information from the user """
+        check_admin = UserInfo.get_admin(user_id)
+        if check_admin == False:
+            return jsonify({
+                'status': 403,
+                'message': 'Permission denied!'
+            }), 403
         meetup = request.get_json("meetups")
         validate_info = ['location','images','topic',
                                 'happeningOn','tags']
@@ -80,25 +86,25 @@ class MeetupViews:
     @token_required
     def del_meetup(user_id, meetup_id):
         """ Gets  specific meetup id """
-        user = UserInfo.get_one_user(user_id)
-        print(user)
-        if user['isadmin']:
-            all_meetups = MeetupInfo.get_meetups()
-            for meetup in all_meetups:            
-                if meetup['id'] == meetup_id:
-                    remove_meetup = MeetupInfo.del_meetup(meetup_id)
-                    return jsonify({
-                            'status': 200,
-                            'data':[{
-                                'message':'meetup deleted successfully!'
-                            }]
-                    }), 200        
+        check_admin = UserInfo.get_admin(user_id)
+        if check_admin == False:
             return jsonify({
-                "status": 400,
-                "message":"meetup not found"
-            }), 404
-        else:
-            return jsonify({
-                "status": 400,
-                "message":"You are not permitted!"
+                'status': 403,
+                'message': 'Permission denied!'
             }), 403
+        user = UserInfo.get_one_user(user_id)
+        all_meetups = MeetupInfo.get_meetups()
+        for meetup in all_meetups:            
+            if meetup['id'] == meetup_id:
+                remove_meetup = MeetupInfo.del_meetup(meetup_id)
+                return jsonify({
+                        'status': 200,
+                        'data':[{
+                            'message':'meetup deleted successfully!'
+                        }]
+                }), 200        
+        return jsonify({
+            "status": 400,
+            "message":"meetup not found"
+        }), 404
+        
