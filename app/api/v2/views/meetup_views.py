@@ -36,7 +36,7 @@ class MeetupViews:
         topic = meetup['topic']
         happeningOn = meetup['happeningOn']
         tags = meetup['tags']
-        meetup_object = MeetupInfo(location,topic,happeningOn,
+        meetup_object = MeetupInfo(user_id,location,topic,happeningOn,
                                             tags,images)
         meetups = meetup_object.add_meetup()
         return jsonify({
