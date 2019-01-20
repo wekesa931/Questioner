@@ -54,6 +54,15 @@ create_tables = (
     question_id INTEGER NOT NULL,
     comments VARCHAR(255) NOT NULL
     ) 
+    """,
+    """ 
+    CREATE TABLE IF NOT EXISTS tags(
+    id SERIAL PRIMARY KEY,
+    createdOn timestamp with time zone DEFAULT now(),
+    meetup_id INTEGER NOT NULL,
+    topic VARCHAR(255) NOT NULL,
+    tag_item VARCHAR(255) NOT NULL
+    ) 
     """
 
 )

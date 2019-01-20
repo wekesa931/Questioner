@@ -21,6 +21,7 @@ def create_app(config_name):
     from app.api.v2.views.question_views import qsn_two
     from app.api.v2.views.reservation import rsv_two
     from app.api.v2.views.vote import vt_two
+    from app.api.v2.views.tags_views import tgs_two
 
 
 
@@ -36,7 +37,8 @@ def create_app(config_name):
     app.register_blueprint(api.v2.views.meetup_views.mtp_two, url_prefix='/api')
     app.register_blueprint(api.v2.views.question_views.qsn_two, url_prefix='/api')
     app.register_blueprint(api.v2.views.reservation.rsv_two, url_prefix='/api')
-    app.register_blueprint(api.v2.views.vote.vt_two, url_prefix='/api') 
+    app.register_blueprint(api.v2.views.vote.vt_two, url_prefix='/api')
+    app.register_blueprint(api.v2.views.tags_views.tgs_two, url_prefix='/api') 
 
     configure_extensions()
     
