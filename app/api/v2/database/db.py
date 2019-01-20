@@ -63,6 +63,15 @@ create_tables = (
     topic VARCHAR(255) NOT NULL,
     tag_item VARCHAR(255) NOT NULL
     ) 
+    """,
+    """ 
+    CREATE TABLE IF NOT EXISTS images(
+    id SERIAL PRIMARY KEY,
+    createdOn timestamp with time zone DEFAULT now(),
+    meetup_id INTEGER NOT NULL,
+    topic VARCHAR(255) NOT NULL,
+    image VARCHAR(255) NOT NULL
+    ) 
     """
 
 )

@@ -3,9 +3,9 @@ import os
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
-class AddTags:
+class AddImage:
     """ Defines the details of te user """
-    def __init__(self,meetup_id,topic,tag_item):
+    def __init__(self,meetup_id,topic,image):
         self.db_config = os.getenv('api_database_url')
         self.response = urlparse(self.db_config)
         self.config = {
@@ -16,18 +16,18 @@ class AddTags:
         }
         self.meetup_id = meetup_id
         self.topic = topic
-        self.tag_item = tag_item
+        self.image = image
 
-    def add_tags(self):
+    def add_image(self):
         """ Appends user information to user db """
         con, response = psycopg2.connect(**self.config), None
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
-            query = "INSERT INTO tags(meetup_id,topic,tag_item) VALUES(%s,%s,%s) RETURNING *; "
+            query = "INSERT INTO images(meetup_id,topic,image) VALUES(%s,%s,%s) RETURNING *; "
             cur.execute(query, (
                 self.meetup_id, 
                 self.topic,
-                self.tag_item
+                self.image
             ))
             con.commit()
             response = cur.fetchone()
@@ -37,7 +37,7 @@ class AddTags:
         return response
 
     @staticmethod
-    def get_tags():
+    def get_image():
         db_config = os.getenv('api_database_url')
         response = urlparse(db_config)
         config = {
@@ -49,21 +49,21 @@ class AddTags:
         con, response = psycopg2.connect(**config), None
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
-            query = "SELECT * FROM tags; "
+            query = "SELECT * FROM images; "
             cur.execute(query)
-            tags = cur.fetchall()
+            image = cur.fetchall()
             con.close()
-            return tags
+            return image
         except Exception as e:
             con.close()
             return e
 
     @staticmethod
-    def single_tag(meetup_id):
-        tag_list = []
-        all_tags=AddTags.get_tags()
-        for tag in all_tags:
-            if tag['meetup_id'] == meetup_id:
-                tag_item = tag['tag_item']
-                tag_list.append(tag_item)
-        return tag_list
+    def single_image(meetup_id):
+        image_list = []
+        all_images=AddImage.get_image()
+        for image in all_images:
+            if image['meetup_id'] == meetup_id:
+                image_item = image['image']
+                image_list.append(image_item)
+        return image_list
