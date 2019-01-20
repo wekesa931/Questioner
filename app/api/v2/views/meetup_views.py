@@ -1,5 +1,7 @@
 from flask import Blueprint, Flask, jsonify, request
 from app.api.v2.models.user_models import UserInfo
+from app.api.v2.models.images_models import AddImage
+from app.api.v2.models.tags_models import AddTags
 from app.api.v2.models.meetup_models import MeetupInfo
 from app.validators.shared_validators import check_fields
 from app.validators.token_validation import token_required
@@ -14,8 +16,6 @@ class MeetupViews:
     def create_meetup(user_id):
         """ fetch the posted information from the user """
         meetup = request.get_json("meetups")
-        
-        #validate user information
         validate_info = ['location','images','topic',
                                 'happeningOn','tags']
         error = check_fields(meetup, validate_info)
@@ -30,7 +30,6 @@ class MeetupViews:
         topic = meetup['topic']
         happeningOn = meetup['happeningOn']
         tags = meetup['tags']
-        #Meetup information is sent to database
         meetup_object = MeetupInfo(location,topic,happeningOn,
                                             tags,images)
         meetups = meetup_object.add_meetup()
@@ -45,13 +44,17 @@ class MeetupViews:
     @token_required
     def get_meetup(user_id, meetup_id):
         """ Gets  specific meetup id """
+        images = AddImage.single_image(meetup_id)
+        tags = AddTags.single_tag(meetup_id)
         all_meetups = MeetupInfo.get_meetups()
         for meetup in all_meetups:            
             if meetup['id'] == meetup_id:
                 return jsonify({
                     'status': 200,
                     'data':[{
-                        'meetup':meetup
+                        'meetup':meetup,
+                        'images':images,
+                        'tags':tags
                     }]
                 }), 200
         return jsonify({
