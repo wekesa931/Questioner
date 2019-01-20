@@ -2,6 +2,7 @@ from urllib.parse import urlparse
 import os
 import psycopg2
 from psycopg2.extras import RealDictCursor
+from werkzeug.security import generate_password_hash
 
 class UserInfo:
     """ Defines the user information """
@@ -20,7 +21,7 @@ class UserInfo:
         self.username = username
         self.email = email
         self.phoneNumber = phoneNumber
-        self.password = password 
+        self.password = generate_password_hash(password)
         self.isAdmin = isAdmin  
 
     def add_user(self):
