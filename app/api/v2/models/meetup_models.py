@@ -74,8 +74,9 @@ class MeetupInfo:
         con, response = psycopg2.connect(**config), None
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
-            query = "DELETE FROM meetups WHERE id='{}'".format(meetup_id)
+            query = "DELETE FROM meetups WHERE id='{}';".format(meetup_id)
             cur.execute(query)
+            con.commit()
             con.close()
             return True
         except Exception as e:

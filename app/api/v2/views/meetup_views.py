@@ -94,9 +94,11 @@ class MeetupViews:
             }), 403
         user = UserInfo.get_one_user(user_id)
         all_meetups = MeetupInfo.get_meetups()
+        print(meetup_id)
         for meetup in all_meetups:            
             if meetup['id'] == meetup_id:
                 remove_meetup = MeetupInfo.del_meetup(meetup_id)
+                print(remove_meetup)
                 return jsonify({
                         'status': 200,
                         'data':[{
