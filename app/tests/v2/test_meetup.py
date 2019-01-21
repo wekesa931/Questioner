@@ -7,7 +7,7 @@ class TestMeetup(TestApplication):
         """ test if meetups are added successfuly """
         self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
         results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
-        token = json.loads(results.data.decode())['token']
+        token = json.loads(results.data.decode())['data'][0]['token']
         response = self.client.post(
             '/api/v2/add_meetups',
             headers = dict(Authorization="Bearer " + token),
@@ -23,7 +23,7 @@ class TestMeetup(TestApplication):
 
         self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
         results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
-        token = json.loads(results.data.decode())['token']
+        token = json.loads(results.data.decode())['data'][0]['token']
         response = self.client.post(
             '/api/v2/add_meetups',
             headers = dict(Authorization="Bearer " + token),
@@ -37,7 +37,7 @@ class TestMeetup(TestApplication):
         """ test if meetups are returned on call """   
         self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
         results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
-        token = json.loads(results.data.decode())['token']
+        token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
             '/api/v2/add_meetups',
             headers = dict(Authorization = "Bearer " + token),
@@ -55,7 +55,7 @@ class TestMeetup(TestApplication):
         meetups = {}
         self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
         results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
-        token = json.loads(results.data.decode())['token']
+        token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
             '/api/v2/add_meetups',
             headers = dict(Authorization = "Bearer " + token),
@@ -72,7 +72,13 @@ class TestMeetup(TestApplication):
 
         self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
         results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
-        token = json.loads(results.data.decode())['token']
+        token = json.loads(results.data.decode())['data'][0]['token']
+        self.client.post(
+            '/api/v2/add_meetups',
+            headers = dict(Authorization = "Bearer " + token),
+            json=self.meetups,
+            content_type='application/json'
+            )
         response = self.client.post(
             '/api/v2/1/attend',
             headers = dict(Authorization="Bearer " + token),
@@ -84,7 +90,7 @@ class TestMeetup(TestApplication):
         """ test if specific meetup can be obtained """
         self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
         results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
-        token = json.loads(results.data.decode())['token']
+        token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
             '/api/v2/add_meetups',
             headers = dict(Authorization = "Bearer " + token),
@@ -96,11 +102,28 @@ class TestMeetup(TestApplication):
         self.assertIn(u'online', response.data.decode())
         self.assertEqual(response.status_code, 200)
 
+    def test_get_specific_meetup_failure(self):
+        """ test if specific meetup can be obtained """
+        meetups = {}
+        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
+        token = json.loads(results.data.decode())['data'][0]['token']
+        self.client.post(
+            '/api/v2/add_meetups',
+            headers = dict(Authorization = "Bearer " + token),
+            json=meetups,
+            content_type='application/json'
+            )
+        response = self.client.get('/api/v2/meetups/1',
+            headers = dict(Authorization="Bearer " + token))
+        self.assertIn(u'meetup not found', response.data.decode())
+        self.assertEqual(response.status_code, 404)
+
     def test_if_meetup_data_available(self):
         """ test if meetup fields are available """
         self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
         results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
-        token = json.loads(results.data.decode())['token']
+        token = json.loads(results.data.decode())['data'][0]['token']
         response = self.client.post(
             '/api/v2/add_meetups',
             headers = dict(Authorization="Bearer " + token),
@@ -112,10 +135,30 @@ class TestMeetup(TestApplication):
         """ test if meetup data is available """
         self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
         results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
-        token = json.loads(results.data.decode())['token']
+        token = json.loads(results.data.decode())['data'][0]['token']
         response = self.client.post(
             '/api/v2/add_meetups',
             headers = dict(Authorization="Bearer " + token),
             json=self.meetups_two, content_type='application/json')
         self.assertEqual(response.status_code, 400)
         self.assertIn(u'location is missing', response.data.decode())
+
+    def test_delete_meetup_successful(self):
+        """ test if meetups are added successfuly """
+        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
+        token = json.loads(results.data.decode())['data'][0]['token']
+        res = self.client.post(
+            '/api/v2/add_meetups',
+            headers = dict(Authorization="Bearer " + token),
+            json=self.meetups, 
+            content_type='application/json'
+            )
+        response = self.client.delete(
+            '/api/v2/meetups/1/delete',
+            headers = dict(Authorization="Bearer " + token),
+            json=self.meetups, 
+            content_type='application/json'
+            )
+        self.assertIn(u'meetup deleted successfully!', response.data.decode())
+        self.assertEqual(response.status_code, 200)

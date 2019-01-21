@@ -26,11 +26,10 @@ class VoteOnQuestions:
                         'updated Question': updated_qsn
                     }]
                 }), 200
-            else:
-                return jsonify({
-                    'status': 404,
-                    "message":"question not found"
-                }), 404
+        return jsonify({
+            'status': 404,
+            "message":"question not found"
+        }), 404
     
     @vt_two.route('/v2/<int:question_id>/downvote', methods = ['PATCH'])
     @token_required

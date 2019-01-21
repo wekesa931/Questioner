@@ -95,6 +95,21 @@ class TestApplication(unittest.TestCase):
         self.reservation = { 
                 "status":"YES"
         }
+        self.comment = {
+                "comment":"welcome to the world"
+        }
+        self.image = {
+                "image":"my awesome image"
+        }
+        self.image_one = {
+                "image":""
+        }
+        self.tags = {
+                "tags":"my tag"
+        }
+        self.tag_one = {
+                "tags":""
+        }
 
         """ set up questions information test data """
         self.questions = {
@@ -105,11 +120,14 @@ class TestApplication(unittest.TestCase):
                 "title":"",
                 "body":"ill@wek"
         }
+        self.question_two = {
+                "body":"ill@wek"
+        }
         self.vote = {
                 "body": "ill@wek",
                 "question": 1,
                 "title": "adams",
-                "votes": 2
+                "votes": 1
             }
 
     def tearDown(self):

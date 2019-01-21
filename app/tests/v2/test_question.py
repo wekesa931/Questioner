@@ -8,7 +8,7 @@ class TestQuestion(TestApplication):
         """ test if question is successfuly added """
         self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
         results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
-        token = json.loads(results.data.decode())['token']
+        token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
             '/api/v2/add_meetups',
             headers = dict(Authorization = "Bearer " + token),
@@ -30,7 +30,7 @@ class TestQuestion(TestApplication):
         questions = {}
         self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
         results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
-        token = json.loads(results.data.decode())['token']
+        token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
             '/api/v2/add_meetups',
             headers = dict(Authorization = "Bearer " + token),
@@ -51,7 +51,7 @@ class TestQuestion(TestApplication):
         """ test if specific question id is existent """
         self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
         results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
-        token = json.loads(results.data.decode())['token']
+        token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
             '/api/v2/add_meetups',
             headers = dict(Authorization = "Bearer " + token),
@@ -67,11 +67,31 @@ class TestQuestion(TestApplication):
         self.assertEqual(response.status_code, 400)
         self.assertIn(u'title is missing a value', response.data.decode())
 
+    def test_if_question_field_available(self):
+        """ test if specific question id is existent """
+        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
+        token = json.loads(results.data.decode())['data'][0]['token']
+        self.client.post(
+            '/api/v2/add_meetups',
+            headers = dict(Authorization = "Bearer " + token),
+            json=self.meetups,
+            content_type='application/json'
+            )
+        response = self.client.post(
+            '/api/v2/1/post_question',
+            headers = dict(Authorization="Bearer " + token),
+            json=self.question_two, 
+            content_type='application/json'
+            )
+        self.assertEqual(response.status_code, 400)
+        self.assertIn(u'title is missing', response.data.decode())
+
     def test_upvote(self):
         """ test the upvote api """
         self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
         results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
-        token = json.loads(results.data.decode())['token']
+        token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
             '/api/v2/add_meetups',
             headers = dict(Authorization = "Bearer " + token),
@@ -88,16 +108,18 @@ class TestQuestion(TestApplication):
 
         res = self.client.patch(
             '/api/v2/1/upvote',
-            headers = dict(Authorization = "Bearer " + token)
+            headers = dict(Authorization = "Bearer " + token),
+            json=self.vote, 
+            content_type='application/json'
             )
-        self.assertEqual(res.status_code, 200)
         self.assertIn(u'1', res.data.decode())
+        self.assertEqual(response.status_code, 201)
 
     def test_downvote(self):
         """ test the downvote api """
         self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
         results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
-        token = json.loads(results.data.decode())['token']
+        token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
             '/api/v2/add_meetups',
             headers = dict(Authorization = "Bearer " + token),
@@ -116,5 +138,33 @@ class TestQuestion(TestApplication):
             '/api/v2/1/downvote',
             headers = dict(Authorization = "Bearer " + token)
             )
-        self.assertEqual(res.status_code, 200)
         self.assertIn(u'0', res.data.decode())
+        self.assertEqual(response.status_code, 201)
+
+    def test_add_comment(self):
+        """ test the downvote api """
+        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
+        token = json.loads(results.data.decode())['data'][0]['token']
+        self.client.post(
+            '/api/v2/add_meetups',
+            headers = dict(Authorization = "Bearer " + token),
+            json=self.meetups,
+            content_type='application/json'
+            )
+        
+        response = self.client.post(
+            '/api/v2/1/post_question',
+            headers = dict(Authorization = "Bearer " + token),
+            json=self.questions, 
+            content_type='application/json'
+            )
+
+        res = self.client.post(
+            '/api/v2/1/comment',
+            headers = dict(Authorization = "Bearer " + token),
+            json=self.comment, 
+            content_type='application/json'
+            )
+        self.assertIn(u'welcome', res.data.decode())
+        self.assertEqual(response.status_code, 201)
