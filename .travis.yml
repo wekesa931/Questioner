@@ -7,7 +7,7 @@ install:
   - pip install coverage
   - pip install pytest pytest-cov
 script:
-  - pytest --cov=app/api app/tests/
+  - pytest --cov=app/api/v2 app/tests/v2
 
 after_success:
   - coveralls
