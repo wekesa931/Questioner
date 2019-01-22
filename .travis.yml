@@ -6,6 +6,9 @@ install:
   - pip install coveralls
   - pip install coverage
   - pip install pytest pytest-cov
+
+before script:
+  - export api_database_url="postgres://wekesa@localhost/test_db"
 script:
   - pytest --cov=app/api/v2 app/tests/v2
 

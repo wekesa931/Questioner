@@ -9,7 +9,7 @@ rsv_two = Blueprint('rsv_api', __name__)
 
 class GetReservation:
     """ Defines the meeup route """
-    @rsv_two.route('/v2/<int:meetup_id>/attend', methods = ['POST'])
+    @rsv_two.route('/v2/<int:meetup_id>/rsvp', methods = ['POST'])
     @token_required
     def attend_meetup(user_id, meetup_id):
         all_meetups = MeetupInfo.get_meetups()
