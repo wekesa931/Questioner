@@ -1,19 +1,11 @@
-from urllib.parse import urlparse
-import os
 import psycopg2
 from psycopg2.extras import RealDictCursor
+from app.api.v2.database.db_configs import database_configuration
 
 class MeetupInfo:
     """ Defines the user information """
     def __init__(self, user_id, location, topic, happeningOn, tags, images):
-        self.db_config = os.getenv('api_database_url')
-        self.response = urlparse(self.db_config)
-        self.config = {
-            'database': self.response.path[1:],
-            'user': self.response.username,
-            'password': self.response.password,
-            'host': self.response.hostname
-        }
+        self.config = database_configuration()
         self.user_id = user_id
         self.location = location
         self.images = images
@@ -43,14 +35,7 @@ class MeetupInfo:
 
     @staticmethod
     def get_meetups():
-        db_config = os.getenv('api_database_url')
-        response = urlparse(db_config)
-        config = {
-            'database': response.path[1:],
-            'user': response.username,
-            'password': response.password,
-            'host': response.hostname
-        }
+        config = database_configuration()
         con, response = psycopg2.connect(**config), None
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
@@ -65,14 +50,7 @@ class MeetupInfo:
 
     @staticmethod
     def del_meetup(meetup_id):
-        db_config = os.getenv('api_database_url')
-        response = urlparse(db_config)
-        config = {
-            'database': response.path[1:],
-            'user': response.username,
-            'password': response.password,
-            'host': response.hostname
-        }
+        config = database_configuration()
         con, response = psycopg2.connect(**config), None
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
