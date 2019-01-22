@@ -19,6 +19,7 @@ class UserViews:
         """ fetch all users from the database """
         all_users = UserInfo.get_all_users()
         return jsonify({
+            'status': 200,
             'users':all_users
         }), 200
 
@@ -99,10 +100,10 @@ class UserViews:
                     })
                 else:
                     return jsonify({
-                        'status': 400,
+                        'status': 403,
                         'message':'Wrong password!'
-                    }), 400 
+                    }), 403 
         return jsonify({
-            
-            'message':'Username not found!'}), 400  
+            'status': 404,
+            'message':'Username not found!'}), 404  
         

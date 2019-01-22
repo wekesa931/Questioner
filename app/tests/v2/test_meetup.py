@@ -80,7 +80,7 @@ class TestMeetup(TestApplication):
             content_type='application/json'
             )
         response = self.client.post(
-            '/api/v2/1/attend',
+            '/api/v2/1/rsvp',
             headers = dict(Authorization="Bearer " + token),
             json=self.reservation, content_type='application/json')
         self.assertIn(u'YES', response.data.decode())

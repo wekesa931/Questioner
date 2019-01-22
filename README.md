@@ -78,4 +78,7 @@ Create a project and test the endpoints.
 - [coveralls](https://coveralls.io/) checks the test coverage of your application.
 
 ### Hosting
-The application is hosted on [HEROKU]().Use postman for testing.
+The application is hosted on [HEROKU](https://wekesa-questioner-app.herokuapp.com/).Use postman for testing.
+
+### Documentation
+The application is documented on [SWAGGER](https://app.swaggerhub.com/apis/questioner4/wekesa-questioner/1.0.0#/).
