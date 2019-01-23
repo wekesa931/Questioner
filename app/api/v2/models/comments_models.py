@@ -1,19 +1,11 @@
-from urllib.parse import urlparse
-import os
 import psycopg2
 from psycopg2.extras import RealDictCursor
+from app.api.v2.database.db_configs import database_configuration
 
 class AddComment:
     """ Defines the details of te user """
     def __init__(self, user_id, question_id, comment):
-        self.db_config = os.getenv('api_database_url')
-        self.response = urlparse(self.db_config)
-        self.config = {
-            'database': self.response.path[1:],
-            'user': self.response.username,
-            'password': self.response.password,
-            'host': self.response.hostname
-        }
+        self.config = database_configuration()
         self.user_id = user_id
         self.question_id = question_id
         self.comment = comment
@@ -38,14 +30,7 @@ class AddComment:
 
     @staticmethod
     def get_comments():
-        db_config = os.getenv('api_database_url')
-        response = urlparse(db_config)
-        config = {
-            'database': response.path[1:],
-            'user': response.username,
-            'password': response.password,
-            'host': response.hostname
-        }
+        config = database_configuration()
         con, response = psycopg2.connect(**config), None
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:

@@ -10,22 +10,11 @@ from app.api.v2.database.db import create_tables_command
 from app.api.v2.database.drop_table import drop_tables_command
 import psycopg2
 import psycopg2.extras
-import os
-from urllib.parse import urlparse
+from app.api.v2.database.db_configs import database_configuration
 
 class Database:
     def __init__(self):
-        self.db_config = os.getenv('api_database_url')
-        '''
-        urlparse break URL strings up in components 
-        '''
-        self.response = urlparse(self.db_config)
-        self.config = {
-            'database': self.response.path[1:],
-            'user': self.response.username,
-            'password': '',
-            'host': self.response.hostname
-        }
+        self.config = database_configuration()
 
     def migrations(self):
         connection = psycopg2.connect(**self.config)

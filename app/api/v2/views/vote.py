@@ -51,8 +51,8 @@ class VoteOnQuestions:
                         'votes': votes
                     }]
                 }), 200
-            else:
-                return jsonify({
-                    'status': 404,
-                    "message":"question not found"
-                }), 404
+         
+        return jsonify({
+            'status': 404,
+            "message":"question not found"
+        }), 404

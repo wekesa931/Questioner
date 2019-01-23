@@ -1,19 +1,11 @@
-from urllib.parse import urlparse
-import os
 import psycopg2
 from psycopg2.extras import RealDictCursor
+from app.api.v2.database.db_configs import database_configuration
 
 class Reservation:
     """ Defines reservations status """
     def __init__(self, user_id, meetup_id, topic, status):
-        self.db_config = os.getenv('api_database_url')
-        self.response = urlparse(self.db_config)
-        self.config = {
-            'database': self.response.path[1:],
-            'user': self.response.username,
-            'password': self.response.password,
-            'host': self.response.hostname
-        }
+        self.config = database_configuration()
         self.user_id = user_id
         self.meetup_id = meetup_id
         self.topic = topic
