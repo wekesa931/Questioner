@@ -12,7 +12,7 @@ class QuestionsVIews:
     """ Defines the question route """
     @qsn_two.route('/v2/<int:meetup_id>/post_question', methods = ['POST'])
     @token_required
-    def post_question(meetup_id, user_id):
+    def post_question(meetup_id,is_admin,user_id):
         """ fetch the posted information from the user input """
         all_meetups = MeetupInfo.get_meetups()
         for meetup in all_meetups:
@@ -42,7 +42,7 @@ class QuestionsVIews:
 
     @qsn_two.route('/v2/<int:meetup_id>/get_all_questions', methods = ['GET'])
     @token_required
-    def get_all_question(meetup_id, user_id):
+    def get_all_question(meetup_id,is_admin,user_id):
         all_questions = AddQuestion.get_questions()
         all_meetups = MeetupInfo.get_meetups()
         if len(all_meetups) == 0:
@@ -70,7 +70,7 @@ class QuestionsVIews:
        
     @qsn_two.route('/v2/<int:question_id>/comment', methods = ['POST'])
     @token_required
-    def post_comment(user_id, question_id):
+    def post_comment(user_id, is_admin,question_id):
         all_questions = AddQuestion.get_questions()
         for question in all_questions:
             if question['id'] == question_id:

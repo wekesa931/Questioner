@@ -11,10 +11,9 @@ class TagsViews:
     """ Defines the meetup route """
     @tgs_two.route('/v2/meetup/<int:meetup_id>/tags', methods = ['POST'])
     @token_required
-    def add_tags(user_id,meetup_id):
+    def add_tags(user_id,is_admin,meetup_id):
         """ fetch the posted information from the user """
-        check_admin = UserInfo.get_admin(user_id)
-        if check_admin == False:
+        if is_admin == False:
             return jsonify({
                 'status': 403,
                 'message': 'Permission denied!'

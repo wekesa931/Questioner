@@ -19,12 +19,15 @@ def token_required(f):
                 token = token[1]
                 secret=current_app.config['SECRET']
                 data = jwt.decode(token, secret)
+                print(data)
                 user_id = data['user_id']
+                is_admin = data['isadmin']
+                print(is_admin)
             except:
                 return jsonify({
                     'status': 403,
                     'message':'Token is invalid'
                 }), 403
-            return f(user_id=user_id, *args, **kwargs)
+            return f(user_id=user_id, is_admin=is_admin, *args, **kwargs)
     return decorated
     
