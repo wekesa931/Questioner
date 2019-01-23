@@ -9,7 +9,7 @@ class VoteOnQuestions:
     """ Defines the upvote route """
     @vt_two.route('/v2/<int:question_id>/upvote', methods = ['PATCH'])
     @token_required
-    def upvote_question(user_id, question_id):
+    def upvote_question(user_id,is_admin ,question_id):
         """ defines question upvote """
         all_questions = AddQuestion.get_questions()
         for question in all_questions:            
@@ -33,7 +33,7 @@ class VoteOnQuestions:
     
     @vt_two.route('/v2/<int:question_id>/downvote', methods = ['PATCH'])
     @token_required
-    def down_question(user_id, question_id):
+    def down_question(user_id,is_admin, question_id):
         """ Defines the downvote route """
         all_questions = AddQuestion.get_questions()
         for question in all_questions:            

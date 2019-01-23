@@ -11,7 +11,7 @@ class GetReservation:
     """ Defines the meeup route """
     @rsv_two.route('/v2/<int:meetup_id>/rsvp', methods = ['POST'])
     @token_required
-    def attend_meetup(user_id, meetup_id):
+    def attend_meetup(user_id,is_admin, meetup_id):
         all_meetups = MeetupInfo.get_meetups()
         for meetup in all_meetups:
             if meetup['id'] == meetup_id:
