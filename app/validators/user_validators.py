@@ -20,4 +20,6 @@ class Validators():
                 if dict_value == item:
                     return True
         return False
+    def check_date(self,happeningOn):
+        return re.match('^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$',happeningOn) 
         

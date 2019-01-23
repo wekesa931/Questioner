@@ -10,7 +10,8 @@ create_tables = (
     phoneNumber VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     registered timestamp with time zone DEFAULT now(),
-    isAdmin BOOLEAN NOT NULL
+    isAdmin BOOLEAN NOT NULL,
+    is_super BOOLEAN DEFAULT FALSE
     ) 
     """,
     """ 
@@ -21,7 +22,7 @@ create_tables = (
     location VARCHAR(255) NOT NULL,
     images VARCHAR(255) NOT NULL,
     topic VARCHAR(255) NOT NULL,
-    happeningOn VARCHAR(255) NOT NULL,
+    happeningOn DATE NOT NULL,
     tags VARCHAR(255) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
     ) 

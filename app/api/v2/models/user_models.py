@@ -5,7 +5,7 @@ from app.api.v2.database.db_configs import database_configuration
 
 class UserInfo:
     """ Defines the user information """
-    def __init__(self, firstname, lastname, othername, username, email, phoneNumber, password, isAdmin):
+    def __init__(self, firstname, lastname, othername, username, email, phoneNumber, password, isAdmin, is_super):
         self.config = database_configuration()
         self.firstname = firstname
         self.lastname = lastname
@@ -14,13 +14,14 @@ class UserInfo:
         self.email = email
         self.phoneNumber = phoneNumber
         self.password = generate_password_hash(password)
-        self.isAdmin = isAdmin  
+        self.isAdmin = isAdmin
+        self.is_super = is_super  
 
     def add_user(self):
         con, response = psycopg2.connect(**self.config), None
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
-            query = "INSERT INTO users(firstname,lastname,othername,username,email,phoneNumber,password,isAdmin) VALUES(%s,%s,%s,%s,%s,%s,%s,%s) RETURNING *; "
+            query = "INSERT INTO users(firstname,lastname,othername,username,email,phoneNumber,password,isAdmin,is_super) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING *; "
             cur.execute(query, (
                 self.firstname, 
                 self.lastname,
@@ -29,7 +30,8 @@ class UserInfo:
                 self.email,
                 self.phoneNumber,
                 self.password,
-                self.isAdmin
+                self.isAdmin,
+                self.is_super
             ))
             con.commit()
             response = cur.fetchone()
@@ -69,9 +71,28 @@ class UserInfo:
             return e
 
     @staticmethod
-    def get_admin(user_id):
+    def update_user(is_admin, normal_user_id):
+        config = database_configuration()
+        con, response = psycopg2.connect(**config), None
+        cur = con.cursor(cursor_factory=RealDictCursor)
+        try:
+            query = "UPDATE users SET isadmin=%s WHERE id=%s;"
+            cur.execute(query, (
+                is_admin, 
+                normal_user_id
+            ))
+            con.commit()
+            response = True
+        except Exception as e:
+            con.close()
+            response = False
+        con.close()
+        return response
+
+    @staticmethod
+    def get_super(user_id):
         user = UserInfo.get_one_user(user_id)
-        if user['isadmin'] == True:
+        if user['is_super'] == True:
             return True
         return False
     
