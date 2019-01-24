@@ -15,14 +15,14 @@ mtp_two = Blueprint('meetup_api', __name__)
 
 class MeetupViews:
     """ Defines the meetup route """
-    @mtp_two.route('/v2/add_meetups', methods = ['POST'])
+    @mtp_two.route('/v2/meetups', methods = ['POST'])
     @token_required
     def create_meetup(is_admin,user_id):
         """ fetch the posted information from the user """
         if not is_admin:
             return jsonify({
                 'status': 403,
-                'message': 'Permission denied!'
+                'error': 'Permission denied!'
             }), 403
         meetup = request.get_json("meetups")
         validate_info = ['location','images','topic',
@@ -59,30 +59,29 @@ class MeetupViews:
         """ Gets  specific meetup id """
         images = AddImage.single_image(meetup_id)
         tags = AddTags.single_tag(meetup_id)
-        all_meetups = MeetupInfo.get_meetups()
-        for meetup in all_meetups:            
-            if meetup['id'] == meetup_id:
-                images.append(meetup['images'])
-                tags.append(meetup['tags'])
-                return jsonify({
-                    'status': 200,
-                    'data':[{
-                        'meetup':{
-                            'Date created':meetup['createdon'],
-                            'Date happening':meetup['happeningon'],
-                            'Images':images,
-                            'Location':meetup['location'],
-                            'Tags':tags,
-                            'Meetup topic':meetup['topic']
-                            }
-                    }]
-                }), 200
+        current_meetup = MeetupInfo.get_one_meetup(meetup_id)         
+        if current_meetup:
+            images.append(current_meetup['images'])
+            tags.append(current_meetup['tags'])
+            return jsonify({
+                'status': 200,
+                'data':[{
+                    'meetup':{
+                        'Date created':current_meetup['createdon'],
+                        'Date happening':current_meetup['happeningon'],
+                        'Images':images,
+                        'Location':current_meetup['location'],
+                        'Tags':tags,
+                        'Meetup topic':current_meetup['topic']
+                        }
+                }]
+            }), 200
         return jsonify({
             "status": 404,
-            "message":"meetup not found"
+            "error":"meetup not found"
         }), 404
 
-    @mtp_two.route('/v2/get_meetups', methods = ['GET'])
+    @mtp_two.route('/v2/meetups', methods = ['GET'])
     @token_required
     def get_meetups(user_id,is_admin):
         """ gets all meetups """
@@ -96,7 +95,7 @@ class MeetupViews:
             }]
         }), 200
 
-    @mtp_two.route('/v2/meetups/<int:meetup_id>/delete', methods = ['DELETE'])
+    @mtp_two.route('/v2/meetups/<int:meetup_id>', methods = ['DELETE'])
     @token_required
     def del_meetup(user_id,is_admin,meetup_id):
         """ Gets  specific meetup id """
@@ -105,19 +104,17 @@ class MeetupViews:
                 'status': 403,
                 'message': 'Permission denied!'
             }), 403
-        user = UserInfo.get_one_user(user_id)
-        all_meetups = MeetupInfo.get_meetups()
-        for meetup in all_meetups:            
-            if meetup['id'] == meetup_id:
-                remove_meetup = MeetupInfo.del_meetup(meetup_id)
-                return jsonify({
-                        'status': 200,
-                        'data':[{
-                            'message':'meetup deleted successfully!'
-                        }]
-                }), 200        
+        current_meetup = MeetupInfo.get_one_meetup(meetup_id)         
+        if current_meetup:           
+            MeetupInfo.del_meetup(meetup_id)
+            return jsonify({
+                    'status': 200,
+                    'data':[{
+                        'message':'meetup deleted successfully!'
+                    }]
+            }), 200        
         return jsonify({
             "status": 400,
-            "message":"meetup not found"
+            "error":"meetup not found"
         }), 404
         

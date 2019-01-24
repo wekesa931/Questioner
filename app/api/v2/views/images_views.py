@@ -19,7 +19,7 @@ class ImageViews:
         if not is_admin:
             return jsonify({
                 'status': 403,
-                'message': 'Permission denied!'
+                'error': 'Permission denied!'
             }), 403
         image = request.get_json("image")
         validate_info = ['image']
@@ -27,27 +27,26 @@ class ImageViews:
         if len(error) > 0:
             return jsonify({
                 "status": 400,
-                "message":error
+                "error":error
             }), 400
         if not validate.check_url(image['image']):
             return jsonify({
                 'status': 400,
-                "message":"URL is not valid"
+                "error":"URL is not valid"
             }), 400
-        all_meetups = MeetupInfo.get_meetups()
-        for meetup in all_meetups:
-            if meetup['id'] == meetup_id:
-                image_item = image['image']
-                topic = meetup['topic']
-                image_object = AddImage(meetup_id,topic,image_item)
-                add_image_item = image_object.add_image()
-                return jsonify({
-                    'status': 201,
-                    'data':[{
-                        'image':add_image_item
-                    }]
-                }), 201
+        meetup = MeetupInfo.get_one_meetup(meetup_id)
+        if meetup:
+            image_item = image['image']
+            topic = meetup['topic']
+            image_object = AddImage(meetup_id,topic,image_item)
+            add_image_item = image_object.add_image()
+            return jsonify({
+                'status': 201,
+                'data':[{
+                    'image':add_image_item
+                }]
+            }), 201
         return jsonify({
             "status": 400,
-            "message":'meetup {} not found'.format(meetup_id)
+            "error":'meetup {} not found'.format(meetup_id)
         }), 400

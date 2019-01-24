@@ -34,5 +34,5 @@ class GetReservation:
        
         return jsonify({
             'status': 404,
-            "message": "no meetup found"
+            "error": "no meetup found"
         }), 404
