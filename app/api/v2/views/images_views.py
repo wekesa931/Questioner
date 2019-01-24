@@ -2,8 +2,11 @@ from flask import Blueprint, Flask, jsonify, request
 from app.api.v2.models.images_models import AddImage
 from app.api.v2.models.user_models import UserInfo
 from app.api.v2.models.meetup_models import MeetupInfo
+from app.validators.user_validators import Validators
 from app.validators.shared_validators import check_fields
 from app.validators.token_validation import token_required
+
+validate = Validators()
 
 imgs_two = Blueprint('imagestags_api', __name__)
 
@@ -11,10 +14,9 @@ class ImageViews:
     """ Defines the meetup route """
     @imgs_two.route('/v2/meetup/<int:meetup_id>/image', methods = ['POST'])
     @token_required
-    def add_image(user_id,meetup_id):
+    def add_image(user_id,meetup_id,is_admin):
         """ fetch the posted information from the user """
-        check_admin = UserInfo.get_admin(user_id)
-        if not check_admin:
+        if not is_admin:
             return jsonify({
                 'status': 403,
                 'message': 'Permission denied!'
@@ -26,6 +28,11 @@ class ImageViews:
             return jsonify({
                 "status": 400,
                 "message":error
+            }), 400
+        if not validate.check_url(image['image']):
+            return jsonify({
+                'status': 400,
+                "message":"URL is not valid"
             }), 400
         all_meetups = MeetupInfo.get_meetups()
         for meetup in all_meetups:
