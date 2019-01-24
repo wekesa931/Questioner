@@ -10,14 +10,13 @@ class TestQuestion(TestApplication):
         results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
-            '/api/v2/add_meetups',
+            '/api/v2/meetups',
             headers = dict(Authorization = "Bearer " + token),
             json=self.meetups,
             content_type='application/json'
             )
-        
         response = self.client.post(
-            '/api/v2/1/post_question',
+            '/api/v2/1/question',
             headers = dict(Authorization = "Bearer " + token),
             json=self.questions, 
             content_type='application/json'
@@ -32,14 +31,14 @@ class TestQuestion(TestApplication):
         results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
-            '/api/v2/add_meetups',
+            '/api/v2/meetups',
             headers = dict(Authorization = "Bearer " + token),
             json=self.meetups,
             content_type='application/json'
             )
 
         response = self.client.post(
-            '/api/v2/1/post_question',
+            '/api/v2/1/question',
             headers = dict(Authorization="Bearer " + token),
             json=questions,
             content_type='application/json'
@@ -53,13 +52,13 @@ class TestQuestion(TestApplication):
         results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
-            '/api/v2/add_meetups',
+            '/api/v2/meetups',
             headers = dict(Authorization = "Bearer " + token),
             json=self.meetups,
             content_type='application/json'
             )
         response = self.client.post(
-            '/api/v2/1/post_question',
+            '/api/v2/1/question',
             headers = dict(Authorization="Bearer " + token),
             json=self.question_one, 
             content_type='application/json'
@@ -73,13 +72,13 @@ class TestQuestion(TestApplication):
         results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
-            '/api/v2/add_meetups',
+            '/api/v2/meetups',
             headers = dict(Authorization = "Bearer " + token),
             json=self.meetups,
             content_type='application/json'
             )
         response = self.client.post(
-            '/api/v2/1/post_question',
+            '/api/v2/1/question',
             headers = dict(Authorization="Bearer " + token),
             json=self.question_two, 
             content_type='application/json'
@@ -93,14 +92,14 @@ class TestQuestion(TestApplication):
         results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
-            '/api/v2/add_meetups',
+            '/api/v2/meetups',
             headers = dict(Authorization = "Bearer " + token),
             json=self.meetups,
             content_type='application/json'
             )
         
         response = self.client.post(
-            '/api/v2/1/post_question',
+            '/api/v2/1/question',
             headers = dict(Authorization = "Bearer " + token),
             json=self.questions, 
             content_type='application/json'
@@ -121,14 +120,14 @@ class TestQuestion(TestApplication):
         results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
-            '/api/v2/add_meetups',
+            '/api/v2/meetups',
             headers = dict(Authorization = "Bearer " + token),
             json=self.meetups,
             content_type='application/json'
             )
         
         response = self.client.post(
-            '/api/v2/1/post_question',
+            '/api/v2/1/question',
             headers = dict(Authorization = "Bearer " + token),
             json=self.questions, 
             content_type='application/json'
@@ -147,14 +146,14 @@ class TestQuestion(TestApplication):
         results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
-            '/api/v2/add_meetups',
+            '/api/v2/meetups',
             headers = dict(Authorization = "Bearer " + token),
             json=self.meetups,
             content_type='application/json'
             )
         
         response = self.client.post(
-            '/api/v2/1/post_question',
+            '/api/v2/1/question',
             headers = dict(Authorization = "Bearer " + token),
             json=self.questions, 
             content_type='application/json'

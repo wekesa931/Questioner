@@ -30,7 +30,7 @@ class UserViews:
             'message': 'You are not allowed!'
         }), 403
 
-    @mod_two.route('/v2/user/auth/<int:normal_user_id>/make_admin', methods = ['patch'])
+    @mod_two.route('/v2/user/auth/<int:normal_user_id>/admin', methods = ['patch'])
     @token_required
     def make_admin(normal_user_id,user_id,is_admin):
         super_admin = UserInfo.get_super(user_id)
@@ -42,6 +42,7 @@ class UserViews:
             return jsonify({
                 'status': 201,
                 'data':[{
+                    'user_id': normal_user_id,
                     'admin':update
                 }]
             }),201
@@ -79,7 +80,7 @@ class UserViews:
         if not validate.check_password(password):
             return jsonify({
                 'status': 400,
-                "message":"password is not valid should have at least one capita letter, a number and a special character"
+                "message":"password must have at least one capital letter, one small letter, one number and a special character"
                 }), 400
         if not validate.check_email(email):
             return jsonify({
@@ -87,6 +88,11 @@ class UserViews:
                 "message":"email is not valid"
             }), 400
         if validate.check_repeated(username):
+            return jsonify({
+                'status': 400,
+                "message":"username taken!"
+            }), 400
+        if validate.check_repeated(phoneNumber):
             return jsonify({
                 'status': 400,
                 "message":"username taken!"
@@ -128,21 +134,21 @@ class UserViews:
                         'data':[{
                             'token':token.decode('UTF-8'),
                             'user': {
-                                'Email':user['email'],
-                                'First Name':user['firstname'],
-                                'Last Name':user['lastname'],
-                                'Username':user['username']
+                                'email':user['email'],
+                                'firstname':user['firstname'],
+                                'lastname':user['lastname'],
+                                'username':user['username']
                                 }
                         }]
-                    })
+                    }), 200
                 else:
                     return jsonify({
                         'status': 403,
-                        'message':'Wrong password!'
+                        'error':'Wrong password!'
                     }), 403 
         return jsonify({
             'status': 404,
-            'message':'Username not found!'}), 404  
+            'error':'Username not found!'}), 404  
     
     @staticmethod
     def super_user():

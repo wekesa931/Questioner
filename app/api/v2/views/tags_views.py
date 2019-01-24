@@ -16,7 +16,7 @@ class TagsViews:
         if is_admin == False:
             return jsonify({
                 'status': 403,
-                'message': 'Permission denied!'
+                'error': 'Permission denied!'
             }), 403
         tags = request.get_json("tags")
         validate_info = ['tags']
@@ -24,7 +24,7 @@ class TagsViews:
         if len(error) > 0:
             return jsonify({
                 "status": 400,
-                "message":error
+                "error":error
             }), 400
         all_meetups = MeetupInfo.get_meetups()
         for meetup in all_meetups:
@@ -41,5 +41,5 @@ class TagsViews:
                 }), 201
         return jsonify({
             "status": 400,
-            "message":'meetup {} not found'.format(meetup_id)
+            "error":'meetup {} not found'.format(meetup_id)
         }), 400

@@ -6,7 +6,7 @@ class Validators():
     """ Validates user information on regisration """
     def check_password(self, password):
         """ Minimum eight characters, at least one letter and one number """
-        return re.match('^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$', password)
+        return re.match('[A-Za-z0-9@#$%^&+=]{8,}', password)
 
     def check_email(self, email):
         """ must have @ special character """

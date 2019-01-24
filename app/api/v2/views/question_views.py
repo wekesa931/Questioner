@@ -11,43 +11,42 @@ qsn_two = Blueprint('questions_api', __name__)
 
 class QuestionsVIews:
     """ Defines the question route """
-    @qsn_two.route('/v2/<int:meetup_id>/post_question', methods = ['POST'])
+    @qsn_two.route('/v2/<int:meetup_id>/question', methods = ['POST'])
     @token_required
     def post_question(meetup_id,is_admin,user_id):
         """ fetch the posted information from the user input """
-        all_meetups = MeetupInfo.get_meetups()
-        for meetup in all_meetups:
-            if meetup['id'] == meetup_id:
-                question = request.get_json("question")
-                validate_info = ['title','body']
-                error = check_fields(question, validate_info)
-                if len(error) > 0:
-                    return jsonify({
-                        "status": 400,
-                        "message":error
-                    }), 400
-                title = question['title']
-                body = question['body']
-                question_validation = check_valid_qsn(title,body)
-                if len(question_validation) > 0:
-                    return jsonify({
-                        "status": 400,
-                        "message":question_validation
-                    }), 400
-                question_object = AddQuestion(user_id,meetup_id,title,body)
-                questions = question_object.add_question()
+        current_meetup = MeetupInfo.get_one_meetup(meetup_id)         
+        if current_meetup:
+            question = request.get_json("question")
+            validate_info = ['title','body']
+            error = check_fields(question, validate_info)
+            if len(error) > 0:
                 return jsonify({
-                    'status': 201,
-                    'data':[{
-                        'Questions':questions
-                    }]
-                }), 201
+                    "status": 400,
+                    "error":error
+                }), 400
+            title = question['title']
+            body = question['body']
+            question_validation = check_valid_qsn(title,body)
+            if len(question_validation) > 0:
+                return jsonify({
+                    "status": 400,
+                    "error":question_validation
+                }), 400
+            question_object = AddQuestion(user_id,meetup_id,title,body)
+            questions = question_object.add_question()
+            return jsonify({
+                'status': 201,
+                'data':[{
+                    'Questions':questions
+                }]
+            }), 201
         return jsonify({
             "status": 404,
-            "message":"No metups found"
+            "error":"Meetup not found"
         }), 404
 
-    @qsn_two.route('/v2/<int:meetup_id>/get_all_questions', methods = ['GET'])
+    @qsn_two.route('/v2/<int:meetup_id>/questions', methods = ['GET'])
     @token_required
     def get_all_question(meetup_id,is_admin,user_id):
         all_questions = AddQuestion.get_questions()
@@ -56,7 +55,7 @@ class QuestionsVIews:
             return jsonify({
                 'status': 404,
                 'data':[{
-                    'message':'meetup not found'
+                    'error':'meetup not found'
                 }]
             }), 404
         all_meetup_questions = {}
@@ -66,7 +65,7 @@ class QuestionsVIews:
         if len(all_meetup_questions) == 0:
             return jsonify({
                 'status': 404,
-                'message':'Questions not found'
+                'error':'Questions not found'
             }), 404
         return jsonify({
             'status': 200,
@@ -78,38 +77,37 @@ class QuestionsVIews:
     @qsn_two.route('/v2/<int:question_id>/comment', methods = ['POST'])
     @token_required
     def post_comment(user_id, is_admin,question_id):
-        all_questions = AddQuestion.get_questions()
-        for question in all_questions:
-            if question['id'] == question_id:
-                comment = request.get_json("comment")
-                validate_info = ['comment']
-                error = check_fields(comment, validate_info)
-                if len(error) > 0:
-                    return jsonify({
-                        'status': 400,
-                        'message':error
-                    }), 400
-                my_comment = comment['comment']
-                comment_object = AddComment(user_id,question_id,my_comment)
-                comments = comment_object.add_comment()
-                com = comments['comments']
-                cdon = comments['createdon']
+        question = AddQuestion.get_one_question(question_id)
+        if question:
+            comment = request.get_json("comment")
+            validate_info = ['comment']
+            error = check_fields(comment, validate_info)
+            if len(error) > 0:
                 return jsonify({
-                        'status': 201,
-                        'data':[{
-                            'Question':question,
-                            'comment':{
-                                'Comment':com,
-                                'Created On':cdon
-                            }
-                        }]
-                    }), 201
+                    'status': 400,
+                    'message':error
+                }), 400
+            my_comment = comment['comment']
+            comment_object = AddComment(user_id,question_id,my_comment)
+            comments = comment_object.add_comment()
+            com = comments['comments']
+            cdon = comments['createdon']
+            return jsonify({
+                    'status': 201,
+                    'data':[{
+                        'Question':question,
+                        'comment':{
+                            'Comment':com,
+                            'Created On':cdon
+                        }
+                    }]
+                }), 201
         return jsonify({
             'status': 404,
-            'message':'Question not found'
+            'error':'Question not found'
         }), 404
     
-    @qsn_two.route('/v2/<int:question_id>/get_qsn', methods = ['GET'])
+    @qsn_two.route('/v2/<int:question_id>/question', methods = ['GET'])
     @token_required
     def get_qsn(user_id, is_admin,question_id):
         question = AddQuestion.get_one_question(question_id)
@@ -117,7 +115,7 @@ class QuestionsVIews:
             return jsonify({
                 'status': 400,
                 'data':[{
-                    'message': 'Question not found'
+                    'error': 'Question not found'
                 }]
             })
         all_comments = AddComment.get_comments()

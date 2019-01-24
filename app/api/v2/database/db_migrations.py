@@ -22,8 +22,10 @@ class Database:
         connection.autocommit = True
         #cursor can access the connection object
         #cursors encapsulate queries and executes them stepwise
+        #This helps me reference columns in the table by name
         cur_con = connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
         database = self.config.get('database')
+        #check if databas exists
         cur_con.execute("select * from pg_database where datname = %(database_name)s", {'database_name': database})
         dbs = cur_con.fetchall()
         if len(dbs) > 0:

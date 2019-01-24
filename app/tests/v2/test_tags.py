@@ -10,7 +10,7 @@ class TestTags(TestApplication):
         results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
-            '/api/v2/add_meetups',
+            '/api/v2/meetups',
             headers = dict(Authorization = "Bearer " + token),
             json=self.meetups,
             content_type='application/json'
@@ -32,7 +32,7 @@ class TestTags(TestApplication):
         results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
-            '/api/v2/add_meetups',
+            '/api/v2/meetups',
             headers = dict(Authorization = "Bearer " + token),
             json=self.meetups,
             content_type='application/json'
@@ -53,7 +53,7 @@ class TestTags(TestApplication):
         results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
-            '/api/v2/add_meetups',
+            '/api/v2/meetups',
             headers = dict(Authorization = "Bearer " + token),
             json=self.meetups,
             content_type='application/json'

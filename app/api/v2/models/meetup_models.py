@@ -28,7 +28,7 @@ class MeetupInfo:
             ))
             con.commit()
             response = cur.fetchone()
-        except Exception as e:
+        except Exception:
             con.close()
         con.close()
         return response
@@ -36,7 +36,7 @@ class MeetupInfo:
     @staticmethod
     def get_meetups():
         config = database_configuration()
-        con, response = psycopg2.connect(**config), None
+        con= psycopg2.connect(**config)
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
             query = "SELECT * FROM meetups; "
@@ -47,11 +47,26 @@ class MeetupInfo:
         except Exception as e:
             con.close()
             return e
+            
+    @staticmethod
+    def get_one_meetup(meetup_id):
+        config = database_configuration()
+        con = psycopg2.connect(**config)
+        cur = con.cursor(cursor_factory=RealDictCursor)
+        try:
+            query = "SELECT * FROM meetups WHERE id='{}'".format(meetup_id)
+            cur.execute(query)
+            meetup = cur.fetchone()
+            con.close()
+            return meetup
+        except Exception as e:
+            con.close()
+            return e
 
     @staticmethod
     def del_meetup(meetup_id):
         config = database_configuration()
-        con, response = psycopg2.connect(**config), None
+        con = psycopg2.connect(**config)
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
             query = "DELETE FROM meetups WHERE id='{}';".format(meetup_id)
@@ -61,4 +76,4 @@ class MeetupInfo:
             return True
         except Exception as e:
             con.close()
-            return False
+            return e
