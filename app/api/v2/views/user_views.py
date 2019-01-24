@@ -41,8 +41,10 @@ class UserViews:
             update = UserInfo.update_user(is_admin,normal_user_id)
             return jsonify({
                 'status': 201,
-                'admin':update
-            })
+                'data':[{
+                    'admin':update
+                }]
+            }),201
         return jsonify({
                 'status': 403,
                 'message': 'You are not allowed!'
@@ -77,7 +79,7 @@ class UserViews:
         if not validate.check_password(password):
             return jsonify({
                 'status': 400,
-                "message":"password is not valid"
+                "message":"password is not valid should have at least one capita letter, a number and a special character"
                 }), 400
         if not validate.check_email(email):
             return jsonify({

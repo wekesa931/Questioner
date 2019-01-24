@@ -4,6 +4,7 @@ from app.api.v2.models.meetup_models import MeetupInfo
 from app.api.v2.models.comments_models import AddComment
 from app.validators.shared_validators import check_fields
 from app.validators.token_validation import token_required
+from app.validators.repeat_validation import check_valid_qsn
 
 #set up question views blueprints
 qsn_two = Blueprint('questions_api', __name__)
@@ -27,6 +28,12 @@ class QuestionsVIews:
                     }), 400
                 title = question['title']
                 body = question['body']
+                question_validation = check_valid_qsn(title,body)
+                if len(question_validation) > 0:
+                    return jsonify({
+                        "status": 400,
+                        "message":question_validation
+                    }), 400
                 question_object = AddQuestion(user_id,meetup_id,title,body)
                 questions = question_object.add_question()
                 return jsonify({
@@ -101,3 +108,29 @@ class QuestionsVIews:
             'status': 404,
             'message':'Question not found'
         }), 404
+    
+    @qsn_two.route('/v2/<int:question_id>/get_qsn', methods = ['GET'])
+    @token_required
+    def get_qsn(user_id, is_admin,question_id):
+        question = AddQuestion.get_one_question(question_id)
+        if question == False:
+            return jsonify({
+                'status': 400,
+                'data':[{
+                    'message': 'Question not found'
+                }]
+            })
+        all_comments = AddComment.get_comments()
+        comment_list = []
+        for comment in all_comments:
+            if comment['question_id']== question_id:
+                body = [comment['comments'],
+                        comment['user_id']]
+                comment_list.append(body)
+        return jsonify({
+            'status': 200,
+            'data':[{
+                'question': question,
+                'comments': comment_list
+            }]
+        })

@@ -65,3 +65,11 @@ class AddQuestion:
             response = False
         con.close()
         return response
+
+    @staticmethod
+    def get_one_question(question_id):
+        all_questions = AddQuestion.get_questions()
+        for question in all_questions:
+            if question['id'] == question_id:
+                return question
+        return False

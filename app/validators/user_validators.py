@@ -20,6 +20,9 @@ class Validators():
                 if dict_value == item:
                     return True
         return False
+
     def check_date(self,happeningOn):
         return re.match('^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$',happeningOn) 
         
+    def check_url(self,url):
+        return re.match('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$',url)

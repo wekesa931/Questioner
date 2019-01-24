@@ -39,8 +39,7 @@ class VoteOnQuestions:
         for question in all_questions:            
             if question['id'] == question_id:
                 votes = question['votes']
-                if votes > 0:
-                    votes = votes - 1
+                votes = votes - 1
                 updated_qsn = AddQuestion.update_question(votes,question_id)
                 return jsonify({
                     'status': 200,
