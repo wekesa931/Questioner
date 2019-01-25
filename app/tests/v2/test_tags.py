@@ -6,8 +6,7 @@ class TestTags(TestApplication):
     
     def test_add_tags_successful(self):
         """ test if question is successfuly added """
-        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
-        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.super_user, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
             '/api/v2/meetups',
@@ -28,8 +27,7 @@ class TestTags(TestApplication):
     def test_add_tags_failure(self):
         """ test if question is successfuly added """
         tags={}
-        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
-        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.super_user, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
             '/api/v2/meetups',
@@ -49,8 +47,7 @@ class TestTags(TestApplication):
 
     def test_add_tags_field_absent(self):
         """ test if question is successfuly added """
-        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
-        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.super_user, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
             '/api/v2/meetups',

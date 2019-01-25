@@ -6,8 +6,7 @@ class TestQuestion(TestApplication):
     
     def test_add_question_successful(self):
         """ test if question is successfuly added """
-        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
-        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.super_user, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
             '/api/v2/meetups',
@@ -27,8 +26,7 @@ class TestQuestion(TestApplication):
     def test_add_question_failure(self):
         """ test if question fails validation """
         questions = {}
-        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
-        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.super_user, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
             '/api/v2/meetups',
@@ -48,8 +46,7 @@ class TestQuestion(TestApplication):
 
     def test_if_question_data_available(self):
         """ test if specific question id is existent """
-        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
-        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.super_user, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
             '/api/v2/meetups',
@@ -68,8 +65,7 @@ class TestQuestion(TestApplication):
 
     def test_if_question_field_available(self):
         """ test if specific question id is existent """
-        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
-        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.super_user, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
             '/api/v2/meetups',
@@ -88,8 +84,7 @@ class TestQuestion(TestApplication):
 
     def test_upvote(self):
         """ test the upvote api """
-        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
-        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.super_user, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
             '/api/v2/meetups',
@@ -116,8 +111,7 @@ class TestQuestion(TestApplication):
 
     def test_downvote(self):
         """ test the downvote api """
-        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
-        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.super_user, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
             '/api/v2/meetups',
@@ -142,8 +136,7 @@ class TestQuestion(TestApplication):
 
     def test_add_comment(self):
         """ test the downvote api """
-        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
-        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.super_user, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
             '/api/v2/meetups',

@@ -5,8 +5,7 @@ class TestMeetup(TestApplication):
     """ test the meetup endpoints"""
     def test_add_meetup_successful(self):
         """ test if meetups are added successfuly """
-        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
-        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.super_user, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         response = self.client.post(
             '/api/v2/meetups',
@@ -20,9 +19,7 @@ class TestMeetup(TestApplication):
     def test_add_meetup_failure(self):
         """ test if meetups addition fail """
         meetups = {}
-
-        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
-        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.super_user, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         response = self.client.post(
             '/api/v2/meetups',
@@ -35,8 +32,7 @@ class TestMeetup(TestApplication):
 
     def test_get_meetups_sucessful(self):     
         """ test if meetups are returned on call """   
-        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
-        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.super_user, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
             '/api/v2/meetups',
@@ -45,7 +41,7 @@ class TestMeetup(TestApplication):
             content_type='application/json'
             )
         response = self.client.get(
-            '/api/v2/get_meetups',
+            '/api/v2/meetups',
             headers = dict(Authorization="Bearer " + token))
         self.assertIn(u'online', response.data.decode())
         self.assertEqual(response.status_code, 200)
@@ -53,8 +49,7 @@ class TestMeetup(TestApplication):
     def test_get_meetup_failure(self):
         """ confirms the status response on failure """
         meetups = {}
-        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
-        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.super_user, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
             '/api/v2/meetups',
@@ -69,9 +64,7 @@ class TestMeetup(TestApplication):
 
     def test_create_reservation(self):
         """ test if reservatios are created """
-
-        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
-        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.super_user, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
             '/api/v2/meetups',
@@ -88,8 +81,7 @@ class TestMeetup(TestApplication):
     
     def test_get_specific_meetup_sucessful(self):
         """ test if specific meetup can be obtained """
-        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
-        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.super_user, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
             '/api/v2/meetups',
@@ -105,8 +97,7 @@ class TestMeetup(TestApplication):
     def test_get_specific_meetup_failure(self):
         """ test if specific meetup can be obtained """
         meetups = {}
-        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
-        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.super_user, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         self.client.post(
             '/api/v2/meetups',
@@ -121,8 +112,7 @@ class TestMeetup(TestApplication):
 
     def test_if_meetup_data_available(self):
         """ test if meetup fields are available """
-        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
-        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.super_user, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         response = self.client.post(
             '/api/v2/meetups',
@@ -133,8 +123,7 @@ class TestMeetup(TestApplication):
 
     def test_if_meetup_field_available(self):
         """ test if meetup data is available """
-        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
-        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.super_user, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         response = self.client.post(
             '/api/v2/meetups',
@@ -145,8 +134,7 @@ class TestMeetup(TestApplication):
 
     def test_delete_meetup_successful(self):
         """ test if meetups are added successfuly """
-        self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
-        results = self.client.post('/api/v2/user/auth/login', json=self.users, content_type='application/json')
+        results = self.client.post('/api/v2/user/auth/login', json=self.super_user, content_type='application/json')
         token = json.loads(results.data.decode())['data'][0]['token']
         res = self.client.post(
             '/api/v2/meetups',
@@ -162,3 +150,23 @@ class TestMeetup(TestApplication):
             )
         self.assertIn(u'meetup deleted successfully!', response.data.decode())
         self.assertEqual(response.status_code, 200)
+
+    def test_get_rsvp_meetups(self):
+        """ test if meetup data is available """
+        results = self.client.post('/api/v2/user/auth/login', json=self.super_user, content_type='application/json')
+        token = json.loads(results.data.decode())['data'][0]['token']
+        self.client.post(
+            '/api/v2/meetups',
+            headers = dict(Authorization="Bearer " + token),
+            json=self.meetups,
+            content_type='application/json')
+        self.client.post(
+            '/api/v2/1/rsvp',
+            headers = dict(Authorization="Bearer " + token),
+            json=self.reservation, 
+            content_type='application/json')
+        response = self.client.get(
+            '/api/v2/rsvp',
+            headers = dict(Authorization="Bearer " + token))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(u'javascript', response.data.decode())

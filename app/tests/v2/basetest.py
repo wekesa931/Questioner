@@ -9,6 +9,11 @@ class TestApplication(unittest.TestCase):
         #set up the test client
         self.client = self.app.test_client()
         """ set up user information test data """
+        self.super_user = {
+                "username":"wekesabill",
+                "password":"Tintinabu@12"
+        }
+
         self.users = {
                 "firstname":"bill",
                 "lastname":"wekesa",
@@ -16,8 +21,7 @@ class TestApplication(unittest.TestCase):
                 "username":"wekebill",
                 "email":"ill@wek.com",
                 "phoneNumber":"526",
-                "password":"Tintinabu12",
-                "isAdmin":False
+                "password":"TIntinabu12@"
             }
         self.users_register = {
                 "firstname":"john",
@@ -26,8 +30,7 @@ class TestApplication(unittest.TestCase):
                 "username":"teredo",
                 "email":"terense@wek.com",
                 "phoneNumber":"5246",
-                "password":"Tintinabu12",
-                "isAdmin":False
+                "password":"TIntinabu12@"
             }
         
         self.users_two = {
@@ -37,18 +40,16 @@ class TestApplication(unittest.TestCase):
                 "username":"wekebill",
                 "email":"ill@wek.com",
                 "phoneNumber":"526",
-                "password":"Tintinabu12",
-                "isAdmin":False
+                "password":"TIntinabu12@"
         }
         self.users_three = {
                 "firstname":"bill",
                 "lastname":"wekesa",
                 "othername":"adams",
-                "username":"wekesabill",
+                "username":"wekesadamsbill",
                 "email":"ill@wek.com",
-                "phoneNumber":"526",
-                "password":"Tintinabu12",
-                "isAdmin":False
+                "phoneNumber":"5236",
+                "password":"TIntinabu12@"
         }
         self.users_four = {
                 "firstname":"bill",
@@ -57,8 +58,7 @@ class TestApplication(unittest.TestCase):
                 "username":"wekbill",
                 "email":"il@wek.com",
                 "phoneNumber":"526",
-                "password":"tintinabu",
-                "isAdmin":False
+                "password":"TIntin"
         }
         self.users_five = {
                 "firstname":"bill",
@@ -67,16 +67,15 @@ class TestApplication(unittest.TestCase):
                 "username":"wekbill",
                 "email":"ilwek.com",
                 "phoneNumber":"526",
-                "password":"Tintinabu12",
-                "isAdmin":False
+                "password":"TIntinabu12@"
         }
 
         """ set up meetup information test data """
         self.meetups = {
                 "location":"online",
-                "images":"youtube.com/images",
+                "images":"youtube.com",
                 "topic":"javascript",
-                "happeningOn":"12/12/2030",
+                "happeningOn":"2030-10-10",
                 "tags":"classes"
             }
         self.meetups_one = {
@@ -99,7 +98,7 @@ class TestApplication(unittest.TestCase):
                 "comment":"welcome to the world"
         }
         self.image = {
-                "image":"my awesome image"
+                "image":"image.com"
         }
         self.image_one = {
                 "image":""

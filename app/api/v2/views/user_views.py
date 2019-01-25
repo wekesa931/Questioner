@@ -15,7 +15,7 @@ mod_two = Blueprint('api', __name__)
 
 class UserViews:
     """ Defines the user route """
-    @mod_two.route('/v2/user/auth/all_users', methods = ['GET'])
+    @mod_two.route('/v2/user/auth/users', methods = ['GET'])
     @token_required
     def get_all_users(user_id, is_admin):
         """ fetch all users from the database """
@@ -56,10 +56,7 @@ class UserViews:
         UserViews.super_user()
         """ defines user sign up """
         user_info = request.get_json("user")
-        all_users = UserInfo.get_all_users()
         isadmin = False
-        if len(all_users)==0:
-            isadmin = True
         validate_info = ['firstname','lastname','othername','username','email','phoneNumber','password']
         #validate posted information
         error = check_fields(user_info, validate_info)
@@ -90,12 +87,12 @@ class UserViews:
         if validate.check_repeated(username):
             return jsonify({
                 'status': 400,
-                "message":"username taken!"
+                "message":"username is taken!"
             }), 400
         if validate.check_repeated(phoneNumber):
             return jsonify({
                 'status': 400,
-                "message":"username taken!"
+                "message":"Phone number already exists!"
             }), 400
         if validate.check_repeated(email):
             return jsonify({
@@ -124,6 +121,8 @@ class UserViews:
             if user['username'] == username:
                 if check_password_hash(user['password'], password):
                     secret_key = current_app.config['SECRET']
+                    print(user)
+                    print(user['isadmin'])
                     token = jwt.encode({
                         'user_id':user['id'],
                         'isadmin':user['isadmin'],
@@ -160,7 +159,7 @@ class UserViews:
             username = 'wekesabill'
             email = 'wekesabill@gmail.com'
             phoneNumber = '0715338188'
-            password = 'Tintinabu12'
+            password = 'Tintinabu@12'
             isadmin = True
             is_super = True
             UserInfo(firstname, lastname, othername, username, email, phoneNumber, password, isadmin, is_super).add_user()

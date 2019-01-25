@@ -23,7 +23,7 @@ class AddComment:
             ))
             con.commit()
             response = cur.fetchone()
-        except Exception as e:
+        except Exception:
             con.close()
         con.close()
         return response
@@ -31,7 +31,7 @@ class AddComment:
     @staticmethod
     def get_comments():
         config = database_configuration()
-        con, response = psycopg2.connect(**config), None
+        con = psycopg2.connect(**config)
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
             query = "SELECT * FROM comments; "

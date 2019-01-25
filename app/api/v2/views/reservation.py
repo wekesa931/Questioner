@@ -36,3 +36,22 @@ class GetReservation:
             'status': 404,
             "error": "no meetup found"
         }), 404
+
+    @rsv_two.route('/v2/rsvp', methods = ['GET'])
+    @token_required
+    def get_reservations(user_id,is_admin):
+        """ gets all reservations """
+        all_meetups = MeetupInfo.get_meetups()   
+        all_reservations = []  
+        if all_meetups:
+            my_rsvp = Reservation.attendance()
+            if len(my_rsvp) > 0:
+                for meetup in all_meetups:
+                    for rsvp in my_rsvp:
+                        if rsvp['meetup_id'] == meetup['id']:
+                            all_reservations.append(meetup)
+                return jsonify({'status': 200,"data":[{'reservations':all_reservations}]}), 200
+
+            return jsonify({'status': 404,"error":"no reservations made"}), 404
+
+        return jsonify({'status': 404,"error":"no meetups found"}), 404

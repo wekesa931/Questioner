@@ -21,7 +21,7 @@ class TestUser(TestApplication):
         self.client.post('/api/v2/user/auth/signup', json=self.users, content_type='application/json')
         response = self.client.post('/api/v2/user/auth/signup', json=self.users_two, content_type='application/json')
         self.assertEqual(response.status_code, 400)
-        self.assertIn(u'username taken', response.data.decode())
+        self.assertIn(u'username is taken!', response.data.decode())
 
     def test_if_email_is_taken(self):
         """ Test if email is taken """
@@ -40,4 +40,4 @@ class TestUser(TestApplication):
         """ test if password is valid """
         response = self.client.post('/api/v2/user/auth/signup', json=self.users_four, content_type='application/json')
         self.assertEqual(response.status_code, 400)
-        self.assertIn(u'password is not valid', response.data.decode())
+        self.assertIn(u'password must have', response.data.decode())
