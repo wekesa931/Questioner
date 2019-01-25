@@ -12,7 +12,7 @@ class AddImage:
 
     def add_image(self):
         """ Appends user information to user db """
-        con, response = psycopg2.connect(**self.config), None
+        con = psycopg2.connect(**self.config)
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
             query = "INSERT INTO images(meetup_id,topic,image) VALUES(%s,%s,%s) RETURNING *; "
@@ -23,7 +23,7 @@ class AddImage:
             ))
             con.commit()
             response = cur.fetchone()
-        except Exception as e:
+        except Exception:
             con.close()
         con.close()
         return response
@@ -31,7 +31,7 @@ class AddImage:
     @staticmethod
     def get_image():
         config = database_configuration()
-        con, response = psycopg2.connect(**config), None
+        con = psycopg2.connect(**config)
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
             query = "SELECT * FROM images; "

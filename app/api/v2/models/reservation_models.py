@@ -12,7 +12,7 @@ class Reservation:
         self.status = status
 
     def make_reservation(self):
-        con, response = psycopg2.connect(**self.config), None
+        con = psycopg2.connect(**self.config)
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
             query = "INSERT INTO reservations(user_id,meetup_id,topic,status) VALUES(%s, %s, %s, %s) RETURNING *; "
@@ -24,7 +24,31 @@ class Reservation:
             ))
             con.commit()
             response = cur.fetchone()
-        except Exception as e:
+        except Exception:
             con.close()
         con.close()
         return response
+
+    @staticmethod
+    def get_reservations():
+        config = database_configuration()
+        con= psycopg2.connect(**config)
+        cur = con.cursor(cursor_factory=RealDictCursor)
+        try:
+            query = "SELECT * FROM reservations; "
+            cur.execute(query)
+            reservations = cur.fetchall()
+            con.close()
+            return reservations
+        except Exception as e:
+            con.close()
+            return e
+
+    @staticmethod
+    def attendance():
+        all_reservations = Reservation.get_reservations()
+        my_reservations = []
+        for reservation in all_reservations:
+            if reservation['status'] == "YES" or reservation['status'] == "MAYBE":
+                my_reservations.append(reservation)
+        return my_reservations

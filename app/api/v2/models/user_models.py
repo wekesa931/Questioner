@@ -35,7 +35,7 @@ class UserInfo:
             ))
             con.commit()
             response = cur.fetchone()
-        except Exception as e:
+        except Exception:
             con.close()
         con.close()
         return response
@@ -43,7 +43,7 @@ class UserInfo:
     @staticmethod
     def get_all_users():
         config = database_configuration()
-        con, response = psycopg2.connect(**config), None
+        con = psycopg2.connect(**config)
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
             query = "SELECT * FROM users;"
@@ -58,7 +58,7 @@ class UserInfo:
     @staticmethod
     def get_one_user(user_id):
         config = database_configuration()
-        con, response = psycopg2.connect(**config), None
+        con = psycopg2.connect(**config)
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
             query = "SELECT * FROM users WHERE id='{}'".format(user_id)
@@ -73,7 +73,7 @@ class UserInfo:
     @staticmethod
     def update_user(is_admin, normal_user_id):
         config = database_configuration()
-        con, response = psycopg2.connect(**config), None
+        con = psycopg2.connect(**config)
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
             query = "UPDATE users SET isadmin=%s WHERE id=%s;"
@@ -83,7 +83,7 @@ class UserInfo:
             ))
             con.commit()
             response = True
-        except Exception as e:
+        except Exception:
             con.close()
             response = False
         con.close()

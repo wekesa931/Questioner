@@ -27,7 +27,7 @@ class AddQuestion:
             ))
             con.commit()
             response = cur.fetchone()
-        except Exception as e:
+        except Exception:
             con.close()
         con.close()
         return response
@@ -35,7 +35,7 @@ class AddQuestion:
     @staticmethod
     def get_questions():
         config = database_configuration()
-        con, response = psycopg2.connect(**config), None
+        con = psycopg2.connect(**config)
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
             query = "SELECT * FROM question; "
@@ -60,7 +60,7 @@ class AddQuestion:
             ))
             con.commit()
             response = True
-        except Exception as e:
+        except Exception:
             con.close()
             response = False
         con.close()
