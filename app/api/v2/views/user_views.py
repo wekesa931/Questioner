@@ -77,7 +77,7 @@ class UserViews:
         if not validate.check_password(password):
             return jsonify({
                 'status': 400,
-                "message":"password must have at least one capital letter, one small letter, one number and a special character"
+                "message":"password must be at least 7 characters long, have at least one letter, one number and a special character"
                 }), 400
         if not validate.check_email(email):
             return jsonify({

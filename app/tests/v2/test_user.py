@@ -40,4 +40,4 @@ class TestUser(TestApplication):
         """ test if password is valid """
         response = self.client.post('/api/v2/user/auth/signup', json=self.users_four, content_type='application/json')
         self.assertEqual(response.status_code, 400)
-        self.assertIn(u'password must have', response.data.decode())
+        self.assertIn(u'password must be', response.data.decode())

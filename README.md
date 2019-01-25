@@ -22,9 +22,6 @@ The appliction has been developed with:
 8. The user can comment on specific questions.
 9. A user can update their password and other account settings
 
-## Single page web application
-This is a single page web application. An **SPA** is a website that re-renders its content in response to navigation actions (e.g. clicking a link) without making a request to the server to fetch new HTML. This means that it dynamically rewrites the current page rather than loading entire new pages hence making access faster and can work offline.
-
 ## The following are the API Endpoints
 ### User Authentication
 | METHOD | END-POINT | DESCRIPTION |   PROTECTED |RIGHTS |
