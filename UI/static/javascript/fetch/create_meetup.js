@@ -162,3 +162,129 @@ function deleteData(meetup_id){
     })
 
 }
+
+function getMeetupInfo(meetup_id){
+    view_meetup.classList.toggle('modal-hide');
+    mtp_url = 'http://127.0.0.1:5000/api/v2/meetups/';
+    fetch(mtp_url + meetup_id,{
+    method: 'GET',
+    headers: {
+        'Authorization': `Bearer ${localStorage['currentuser']}`,
+        'content-Type':'application/json'
+    },
+})
+.then(response => response.json())
+.then(data =>
+    {
+    let qsn_string = "";
+    let string = "";
+    let object = data;
+    questions = object['questions'];
+    string =`
+        <i class="fa fa-window-close" aria-hidden="true" onclick="closeWindow();"></i>
+        <div class="modal-meetup-item">
+
+            <div class="modal-user">
+                <div class="modal-date-holder">
+                    <div class="modal-meetup-image">
+                        <img src="${object['images']}" alt="myimage" class="meet-up-image">
+                    </div>
+                    <div class="modal-meetup-date-holder">
+                        <p>posted on ${object['createdon']}</p>
+                    </div>
+                </div>
+                <div class="modal-meetup-title-holder"><p>${object['topic']}</p></div>
+                <div class="modal-meetup-details"><p>Happening at ${object['location']} on <span>${object['happeningon']}</span></p></div>
+                <div class="modal-meetup-details">
+                    <i class="fa fa-tag" aria-hidden="true">${object['tags']}</i>
+                    <div id="modal-btn-input">
+                        <input type="button" value="Post Question" class="modal-post-question" id="question-button" onClick="postQuestion();">
+                    </div> 
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-question-input modal-hide">
+            <div class="modal-comment">
+                <form name="questionform" method="POST">
+                    <input type="text" name="title" id="title-holder" placeholder="Title" required>
+                    <br><br>
+                    <textarea name="body" placeholder="Post Question"></textarea>
+                </form>
+            </div>
+            <div class="modal-sub-btn">
+                    <input type="button" value="Post Question" class="modal-post-question" onclick="submitQuestionInfo(${object['id']});">
+            </div> 
+        </div>
+    `
+    view_meetup.insertAdjacentHTML("afterbegin", string)
+    
+    for(let item in questions){
+        let votes_holder=0;
+        votes_holder +=1;
+        questionItem = questions[item]
+        votes =null;
+        qsn_string = `
+            <div class="modal-user modal-question-item-holder">
+                <div class="modal-meetup-title-holder"><h3></h3></div>
+                <div class="modal-date-holder">Posted on ${questionItem['createdon']} BY:&nbsp;&nbsp;<b>${questionItem['firstname']} ${questionItem['lastname']}</b></div>
+                <div class="modal-meetup-details">
+                    <p>
+                        ${questionItem['title']}
+                    </p>
+                    <p>
+                        ${questionItem['body']}
+                    </p>
+                </div>
+                <div class="modal-comment${questionItem['qsn_id']}">
+                    <form name="commentform${questionItem['qsn_id']}" method="POST">
+                        <textarea name="comment" placeholder="Post Comment"></textarea>
+                        <div class="modal-sub-btn">
+                            <input type="button" value="Post Comment" class="modal-post-question" onclick="submitCommentInfo(${questionItem['qsn_id']});">
+                        </div>  
+                    </form>
+                </div>
+                        
+                <div class="modal-vote modal-vote${questionItem['qsn_id']}">
+                    <i class="fa fa-thumbs-up" onclick="upvoteInfo(${questionItem['qsn_id']})"></i>
+                        <div class="votes-holder votes-holder${questionItem['qsn_id']}">
+                            ${questionItem['votes']}                        
+                        </div>
+                    <i class="fa fa-thumbs-down" onclick="downvoteInfo(${questionItem['qsn_id']})"></i>
+                </div>
+                <div class="com-item modal-comment-statements${questionItem['qsn_id']}"></div>
+            </div>
+        `
+        add_question.insertAdjacentHTML('afterbegin',qsn_string)
+    
+        let comment_piece = document.querySelector(`.modal-comment-statements${questionItem['qsn_id']}`);
+        comment_items = questionItem['comments']
+        comment_items.forEach(element =>{
+            let comment_str = `
+                    <p class="comment-text">
+                        ${element[0]}
+                        <span><b>- ${element[1]}  ${element[2]}</b></span>
+                    </p>             
+                `
+                comment_piece.insertAdjacentHTML("beforeend", comment_str)
+        })
+    }
+    
+    if(string == 'Token is invalid'){
+        window.location = "file:///home/wekesa/Desktop/Questioner-gh-pages/UI/routes/user.html";
+    }  
+})
+.catch(error => console.log('bad request', error))
+}
+function postQuestion(){   
+    let inpt = document.querySelector('.modal-question-input');
+    inpt.classList.toggle('modal-hide');
+ }
+function closeWindow(){
+    //let modalItem = document.querySelector('.meetup-modal');
+    window.location.reload()
+}
+function logOut(){
+    localStorage.clear();
+    window.location = "file:///home/wekesa/Desktop/Questioner-gh-pages/UI/routes/user.html";
+}
