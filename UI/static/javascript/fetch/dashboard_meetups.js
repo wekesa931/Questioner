@@ -74,3 +74,29 @@ fetch('http://127.0.0.1:5000/api/v2/meetups',{
     
 })
 .catch(error => console.log('bad request', error))
+
+fetch('http://127.0.0.1:5000/api/v2/user/name',{
+    method: 'GET',
+    headers: {
+        'Authorization': `Bearer ${localStorage['currentuser']}`,
+        'content-Type':'application/json'
+    }
+})
+.then(response => response.json())
+.then(data => {
+    let string = "";
+    let object = data;
+    for (let message in object) {
+        string += object[message];
+    }
+    if(string == 'Token is invalid'){
+        window.location = "file:///home/wekesa/Desktop/Questioner-gh-pages/UI/routes/user.html";
+    }
+        let user_person =`
+                <p class="full-profile">${object['firstname']} ${object['lastname']}</p>         
+            `
+            let user_item = document.querySelector('.profile-name-holder')
+            user_item.insertAdjacentHTML("afterbegin",user_person)
+    
+})
+.catch(error => console.log('bad request', error))
