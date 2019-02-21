@@ -1,7 +1,9 @@
+//let meetup = document.querySelector('.meetup-form');
 let view_meetup = document.querySelector('.meetup-modal');
 let error_message = document.querySelector('.error-message');
 let add_meetup = document.querySelector('.created-meetups');
 let add_question = document.querySelector('.append-items');
+//const inpt = document.querySelector('.modal-question-input');
 let meetup_template = '';
 let new_meetup = '';
 let all_meetup = '';
@@ -131,6 +133,7 @@ function submitMeetupInfo(){
     })
     .catch(error => console.log('bad request', error))
 }
+
 function deleteData(meetup_id){
     let del_url ='http://127.0.0.1:5000/api/v2/meetups/';
     fetch(del_url + meetup_id,{
@@ -288,3 +291,28 @@ function logOut(){
     localStorage.clear();
     window.location = "file:///home/wekesa/Desktop/Questioner-gh-pages/UI/routes/user.html";
 }
+fetch('http://127.0.0.1:5000/api/v2/user/name',{
+    method: 'GET',
+    headers: {
+        'Authorization': `Bearer ${localStorage['currentuser']}`,
+        'content-Type':'application/json'
+    }
+})
+.then(response => response.json())
+.then(data => {
+    let string = "";
+    let object = data;
+    for (let message in object) {
+        string += object[message];
+    }
+    if(string == 'Token is invalid'){
+        window.location = "file:///home/wekesa/Desktop/Questioner-gh-pages/UI/routes/user.html";
+    }
+        let user_person =`
+                <p class="full-profile">${object['firstname']} ${object['lastname']}</p>         
+            `
+            let user_item = document.querySelector('#admin-user')
+            user_item.insertAdjacentHTML("afterbegin",user_person)
+    
+})
+.catch(error => console.log('bad request', error))
