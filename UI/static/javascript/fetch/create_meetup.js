@@ -131,3 +131,34 @@ function submitMeetupInfo(){
     })
     .catch(error => console.log('bad request', error))
 }
+function deleteData(meetup_id){
+    let del_url ='http://127.0.0.1:5000/api/v2/meetups/';
+    fetch(del_url + meetup_id,{
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${localStorage['currentuser']}`,
+            'content-Type':'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        let string = "";
+        let object = data;
+        for (let message in object) {
+            string += object[message];
+        }
+        if(string == 'Token is invalid' || string == 'Permission denied!'){
+            window.location = "file:///home/wekesa/Desktop/Questioner-gh-pages/UI/routes/user.html";
+        }
+        else if(string == 'meetup deleted successfully!'){
+            location.reload();
+            meetup_template +=`
+                <p>${string}</p>
+            `
+            error_message.innerHTML=" "
+            error_message.insertAdjacentHTML("afterbegin", meetup_template)
+
+        }
+    })
+
+}
