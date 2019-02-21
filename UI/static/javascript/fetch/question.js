@@ -81,3 +81,55 @@ function submitQuestionInfo(metup_id){
    })
     .catch(error => console.log('bad request', error))
 }
+
+function submitCommentInfo(question_id){
+    const url = 'http://127.0.0.1:5000/api/v2/'+ question_id +'/comment';
+    let form = document.forms[`commentform${question_id}`];
+    let formData = new FormData(form);
+    let data = {};
+    for (let [key, prop] of formData){
+        data[key] = prop;
+    }
+    VALUE = JSON.stringify(data);
+    console.log(VALUE);
+    console.log('---------------------------')
+    fetch(url,{
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${localStorage['currentuser']}`,
+            'content-Type':'application/json'
+        },
+        body: VALUE
+    })
+    .then(response => response.json())
+    .then(data => {
+        let string = "";
+        let object = data;
+        console.log(object);
+        for (let message in object) {
+            string += object[message];
+        }
+        
+        if(string == 'Token is invalid' || string == 'Permission denied!'){
+            window.location = "file:///home/wekesa/Desktop/Questioner-gh-pages/UI/routes/user.html";
+        }
+        else if(string == 'comment is missing a value'){
+            commErrorMessage +=`
+                <p>${string}</p>
+            `
+            let comment_template = document.querySelector(`.modal-vote${question_id}`);
+            comment_template.insertAdjacentHTML("beforebegin", commErrorMessage)
+        }
+        else{
+            new_comment_string = `
+                    <p class="comment-text">
+                        ${object['comment']}
+                        <span><b>- ${object['firstname']}  ${object['lastname']}</b></span>
+                    </p>  
+                `
+                let new_comment = document.querySelector(`.modal-comment-statements${question_id}`);
+                new_comment.insertAdjacentHTML("afterbegin", new_comment_string);
+        }
+   })
+    .catch(error => console.log('bad request', error))
+}
