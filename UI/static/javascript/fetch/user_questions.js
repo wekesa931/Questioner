@@ -25,7 +25,7 @@ let question_couter = 0;
 for(let item in object){
     qsn_string += object[item];   
     if(qsn_string == 'Token is invalid' || qsn_string == 'Token is missing!'){
-        window.location = "../../routes/user.html";
+        window.location = "https://wekesa931.github.io/Questioner/UI/routes/user.html";
     }
     else if(qsn_string == 'you have not posted any question'){
         string = `
@@ -110,7 +110,7 @@ function questionFeeds(){
     for(let item_feed in object_feed){
         qsn_string += object_feed[item_feed];   
         if(qsn_string == 'Token is invalid' || qsn_string == 'Token is missing!'){
-            window.location = "../../routes/user.html";
+            window.location = "https://wekesa931.github.io/Questioner/UI/routes/user.html";
         }
         else if(qsn_string == 'no questions found'){
             feedString = `
