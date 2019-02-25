@@ -287,7 +287,7 @@ function closeWindow(){
 }
 function logOut(){
     localStorage.clear();
-    window.location = "file:///home/wekesa/Desktop/challengeFour/Questioner-gh-pages/UI/routes/user.html";
+    window.location = "../../routes/user.html";
 }
 fetch('https://questionerapplication.herokuapp.com/api/v2/user/name',{
     method: 'GET',
@@ -304,7 +304,7 @@ fetch('https://questionerapplication.herokuapp.com/api/v2/user/name',{
         string += object[message];
     }
     if(string == 'Token is invalid'){
-        window.location = "file:///home/wekesa/Desktop/challengeFour/Questioner-gh-pages/UI/routes/user.html";
+        window.location = "../../routes/user.html";
     }
         let user_person =`
                 <p class="full-profile" style="text-transform: capitalize;">${object['firstname']} ${object['lastname']}</p>         
