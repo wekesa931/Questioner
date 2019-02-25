@@ -24,8 +24,8 @@
         <div class="profile-pic-holder"></div>
         <div class="profile-name-holder">
             <p id="admin-user"></p>
-            <button class="log-out" onclick="logOut();">Log Out</button>
             <p id="all-users">All Users</p>
+            <button class="log-out" onclick="logOut();">Log Out</button>
         </div>
         <div class="hum-icon">
             <i class="fa fa-bars"></i>
@@ -61,9 +61,11 @@
                         <br>
                         <input type="text" name="images" placeholder="images" required>
                         <br>
-                        <input type="text" name="topic" placeholder="Topic" required>
+                        <textarea name="topic" class="topictext" placeholder="Topic" required></textarea>
                         <br>
                         <input type="text" name="happeningOn" placeholder="Meetup Date" required>
+                        <br>
+                        <input type="text" name="happeningat" placeholder="Meetup Time" required>
                         <br>
                         <input type="text" name="tags" placeholder="Tag" required>
                         <br><br>

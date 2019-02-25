@@ -1,9 +1,10 @@
+
 let new_qsn_string = '';
 let commErrorMessage='';
 let new_comment_item = '';
 
 function submitQuestionInfo(metup_id){
-    const url = 'http://127.0.0.1:5000/api/v2/'+ metup_id +'/question';
+    const url = 'https://questionerapplication.herokuapp.com/api/v2/'+ metup_id +'/question';
     let form = document.forms['questionform'];
     let formData = new FormData(form);
     let data = {};
@@ -11,6 +12,7 @@ function submitQuestionInfo(metup_id){
         data[key] = prop;
     }
     VALUE = JSON.stringify(data);
+    console.log(VALUE);
     fetch(url,{
         method: 'POST',
         headers: {
@@ -27,7 +29,7 @@ function submitQuestionInfo(metup_id){
             string += object[message];
         }
         if(string == 'Token is invalid' || string == 'Permission denied!'){
-            window.location = "file:///home/wekesa/Desktop/Questioner-gh-pages/UI/routes/user.html";
+            window.location = "../../routes/user.html";
         }
         else if(string == 'body is missing a value' || string == 'title is missing a value' 
                             || string == 'A question with that title already exists in this meetup!'
@@ -45,10 +47,10 @@ function submitQuestionInfo(metup_id){
             new_qsn_string = `
                     <div class="modal-user modal-question-item-holder">
                         <div class="modal-meetup-title-holder"><h3></h3></div>
-                        <div class="modal-date-holder">Posted on ${question_feedback['createdon']} BY:&nbsp;&nbsp;<b>${question_feedback['firstname']} ${question_feedback['lastname']}</b></div>
+                        <div class="modal-date-holder">Posted on ${question_feedback['createdon'].split(' ', 4).join(' ')} BY:&nbsp;&nbsp;<b>${question_feedback['firstname']} ${question_feedback['lastname']}</b></div>
                         <div class="modal-meetup-details">
                             <p>
-                                ${question_feedback['title']}
+                                <b>${question_feedback['title']}</b>
                             </p>
                             <p>
                                 ${question_feedback['body']}
@@ -83,7 +85,7 @@ function submitQuestionInfo(metup_id){
 }
 
 function submitCommentInfo(question_id){
-    const url = 'http://127.0.0.1:5000/api/v2/'+ question_id +'/comment';
+    const url = 'https://questionerapplication.herokuapp.com/api/v2/'+ question_id +'/comment';
     let form = document.forms[`commentform${question_id}`];
     let formData = new FormData(form);
     let data = {};
@@ -91,8 +93,6 @@ function submitCommentInfo(question_id){
         data[key] = prop;
     }
     VALUE = JSON.stringify(data);
-    console.log(VALUE);
-    console.log('---------------------------')
     fetch(url,{
         method: 'POST',
         headers: {
@@ -111,7 +111,7 @@ function submitCommentInfo(question_id){
         }
         
         if(string == 'Token is invalid' || string == 'Permission denied!'){
-            window.location = "file:///home/wekesa/Desktop/Questioner-gh-pages/UI/routes/user.html";
+            window.location = "../../routes/user.html";
         }
         else if(string == 'comment is missing a value'){
             commErrorMessage +=`

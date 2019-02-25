@@ -10,10 +10,7 @@ let all_meetup = '';
 let comment_str = '';
 let questionItem = null
 
-let meetup_item = []
-
-
-fetch('http://127.0.0.1:5000/api/v2/meetups',{
+fetch('https://questionerapplication.herokuapp.com/api/v2/meetups',{
     method: 'GET',
     headers: {
         'Authorization': `Bearer ${localStorage['currentuser']}`,
@@ -28,11 +25,10 @@ fetch('http://127.0.0.1:5000/api/v2/meetups',{
         string += object[message];
     }
     if(string == 'Token is invalid'){
-        window.location = "file:///home/wekesa/Desktop/Questioner-gh-pages/UI/routes/user.html";
+        window.location = "../../routes/user.html";
     }
     for(let item in object){
         object[item].forEach(element => {
-            meetup_item.push(element['id']);
             all_meetup =`
                 <div class="user">
                     <div class="date-holder">
@@ -40,11 +36,11 @@ fetch('http://127.0.0.1:5000/api/v2/meetups',{
                             <img src="${element['images']}" alt="myimage" class="meet-up-image">
                         </div>
                         <div class="meetup-date-holder">
-                            <p>posted on ${element['createdon']}</p>
+                            <p>Posted on ${element['createdon'].split(' ', 4).join(' ')}</p>
                         </div>
                     </div>
-                    <div class="meetup-title-holder"><p>${element['id']}: ${element['topic']}</p></div>
-                    <div class="meetup-details"><p>Happening at ${element['location']} on <span>${element['happeningon']}</span></p></div>
+                    <div class="meetup-title-holder"><p>${element['topic']}</p></div>
+                    <div class="meetup-details"><p>Happening at <b>${element['location']}</b> on <span>${element['happeningon'].split(' ', 4).join(' ')} at <b>${element['happeningat']}</b></span></p></div>
                     <div class="meetup-details">
                         <i class="fa fa-tag" aria-hidden="true">${element['tags']}</i>
                     </div>
@@ -63,7 +59,7 @@ fetch('http://127.0.0.1:5000/api/v2/meetups',{
 .catch(error => console.log('bad request', error))
 
 function submitMeetupInfo(){
-    const url = 'http://127.0.0.1:5000/api/v2/meetups';
+    const url = 'https://questionerapplication.herokuapp.com/api/v2/meetups';
     let form = document.forms['meetupform'];
     let formData = new FormData(form);
     let data = {};
@@ -71,6 +67,7 @@ function submitMeetupInfo(){
         data[key] = prop;
     }
     VALUE = JSON.stringify(data);
+    console.log(VALUE)
     fetch(url,{
         method: 'POST',
         headers: {
@@ -87,7 +84,7 @@ function submitMeetupInfo(){
             string += object[message];
         }
         if(string == 'Token is invalid' || string == 'Permission denied!'){
-            window.location = "file:///home/wekesa/Desktop/Questioner-gh-pages/UI/routes/user.html";
+            window.location = "../../routes/user.html";
         }
         else if(string == 'tags is missing a value' || string == 'happeningOn is missing a value' || string == 'topic is missing a value'
                             || string == 'images is missing a value' || string == 'location is missing a value' || string == 'image URL is not valid'
@@ -102,6 +99,7 @@ function submitMeetupInfo(){
             
         }
         else{
+            console.log(data['id']);
             new_meetup = `
                 <div class="user">
                     <div class="date-holder">
@@ -109,17 +107,17 @@ function submitMeetupInfo(){
                             <img src="${data['images']}" alt="myimage" class="meet-up-image">
                         </div>
                         <div class="meetup-date-holder">
-                            <p>posted on ${data['createdon']}</p>
+                            <p>posted on ${data['createdon'].split(' ', 4).join(' ')}</p>
                         </div>
                     </div>
-                    <div class="meetup-title-holder"><h3>${data['topic']}</h3></div>
-                    <div class="meetup-details"><p>Happening at ${data['location']} on <span>${data['happeningon']}</span></p></div>
+                    <div class="meetup-title-holder"><p>${data['topic']}</p></div>
+                    <div class="meetup-details"><p>Happening at <b>${data['location']}</b> on <span>${data['happeningon'].split(' ', 4).join(' ')} at <b>${data['happeningat']}</b></span></p></div>
                     <div class="meetup-details">
                         <i class="fa fa-tag" aria-hidden="true">${data['tags']}</i>
                     </div>
                     <div class="delete-holder ">
-                        <div class="btn-one"><button class="delete view-qs">View Questions</button></div>
-                        <div class="btn-two"><button class="delete">Delete</button></div>                            
+                        <div class="btn-one"><button class="delete view-qs" onClick="getMeetupInfo(${data['id']});">View Questions</button></div>
+                        <div class="btn-two"><button class="delete" onClick="deleteData(${data['id']});">Delete</button></div>                            
                     </div>
                 </div>
                 `
@@ -135,7 +133,7 @@ function submitMeetupInfo(){
 }
 
 function deleteData(meetup_id){
-    let del_url ='http://127.0.0.1:5000/api/v2/meetups/';
+    let del_url ='https://questionerapplication.herokuapp.com/api/v2/meetups/';
     fetch(del_url + meetup_id,{
         method: 'DELETE',
         headers: {
@@ -151,7 +149,7 @@ function deleteData(meetup_id){
             string += object[message];
         }
         if(string == 'Token is invalid' || string == 'Permission denied!'){
-            window.location = "file:///home/wekesa/Desktop/Questioner-gh-pages/UI/routes/user.html";
+            window.location = "../../routes/user.html";
         }
         else if(string == 'meetup deleted successfully!'){
             location.reload();
@@ -168,7 +166,7 @@ function deleteData(meetup_id){
 
 function getMeetupInfo(meetup_id){
     view_meetup.classList.toggle('modal-hide');
-    mtp_url = 'http://127.0.0.1:5000/api/v2/meetups/';
+    mtp_url = 'https://questionerapplication.herokuapp.com/api/v2/meetups/';
     fetch(mtp_url + meetup_id,{
     method: 'GET',
     headers: {
@@ -193,15 +191,15 @@ function getMeetupInfo(meetup_id){
                         <img src="${object['images']}" alt="myimage" class="meet-up-image">
                     </div>
                     <div class="modal-meetup-date-holder">
-                        <p>posted on ${object['createdon']}</p>
+                        <p>Posted on ${object['createdon'].split(' ', 4).join(' ')}</p>
                     </div>
                 </div>
                 <div class="modal-meetup-title-holder"><p>${object['topic']}</p></div>
-                <div class="modal-meetup-details"><p>Happening at ${object['location']} on <span>${object['happeningon']}</span></p></div>
+                <div class="modal-meetup-details"><p>Happening at <b>${object['location']}</b> on <span>${object['happeningon'].split(' ', 4).join(' ')} at <b>${object['happeningat']}</span></p></div>
                 <div class="modal-meetup-details">
                     <i class="fa fa-tag" aria-hidden="true">${object['tags']}</i>
                     <div id="modal-btn-input">
-                        <input type="button" value="Post Question" class="modal-post-question" id="question-button" onClick="postQuestion();">
+                        <input type="button" value="Post Question" class="modal-post-question" id="question-button" onClick="postQuestion();" style="width: 100%;padding: 4%;">
                     </div> 
                 </div>
             </div>
@@ -216,7 +214,7 @@ function getMeetupInfo(meetup_id){
                 </form>
             </div>
             <div class="modal-sub-btn">
-                    <input type="button" value="Post Question" class="modal-post-question" onclick="submitQuestionInfo(${object['id']});">
+                    <input type="button" value="Post Question" class="modal-post-question" onclick="submitQuestionInfo(${object['id']});" style="width: 18%;padding: 1%;">
             </div> 
         </div>
     `
@@ -274,7 +272,7 @@ function getMeetupInfo(meetup_id){
     }
     
     if(string == 'Token is invalid'){
-        window.location = "file:///home/wekesa/Desktop/Questioner-gh-pages/UI/routes/user.html";
+        window.location = "../../routes/user.html";
     }  
 })
 .catch(error => console.log('bad request', error))
@@ -289,9 +287,9 @@ function closeWindow(){
 }
 function logOut(){
     localStorage.clear();
-    window.location = "file:///home/wekesa/Desktop/Questioner-gh-pages/UI/routes/user.html";
+    window.location = "file:///home/wekesa/Desktop/challengeFour/Questioner-gh-pages/UI/routes/user.html";
 }
-fetch('http://127.0.0.1:5000/api/v2/user/name',{
+fetch('https://questionerapplication.herokuapp.com/api/v2/user/name',{
     method: 'GET',
     headers: {
         'Authorization': `Bearer ${localStorage['currentuser']}`,
@@ -306,10 +304,10 @@ fetch('http://127.0.0.1:5000/api/v2/user/name',{
         string += object[message];
     }
     if(string == 'Token is invalid'){
-        window.location = "file:///home/wekesa/Desktop/Questioner-gh-pages/UI/routes/user.html";
+        window.location = "file:///home/wekesa/Desktop/challengeFour/Questioner-gh-pages/UI/routes/user.html";
     }
         let user_person =`
-                <p class="full-profile">${object['firstname']} ${object['lastname']}</p>         
+                <p class="full-profile" style="text-transform: capitalize;">${object['firstname']} ${object['lastname']}</p>         
             `
             let user_item = document.querySelector('#admin-user')
             user_item.insertAdjacentHTML("afterbegin",user_person)

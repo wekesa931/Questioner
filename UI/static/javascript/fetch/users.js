@@ -1,4 +1,4 @@
-fetch('http://127.0.0.1:5000/api/v2/user/auth/users',{
+fetch('https://questionerapplication.herokuapp.com/api/v2/user/auth/users',{
     method: 'GET',
     headers: {
         'Authorization': `Bearer ${localStorage['currentuser']}`,
@@ -56,7 +56,7 @@ fetch('http://127.0.0.1:5000/api/v2/user/auth/users',{
 .catch(error => console.log('bad request', error))
 
 function makeAdmin(user_id){
-    fetch('http://127.0.0.1:5000/api/v2/user/auth/'+user_id+'/admin',{
+    fetch('https://questionerapplication.herokuapp.com/api/v2/user/auth/'+user_id+'/admin',{
     method: 'PATCH',
     headers: {
         'Authorization': `Bearer ${localStorage['currentuser']}`,
@@ -70,7 +70,7 @@ function makeAdmin(user_id){
     location.reload()
 }
 function removeAdmin(user_id){
-    fetch('http://127.0.0.1:5000/api/v2/user/auth/'+user_id+'/_admin',{
+    fetch('https://questionerapplication.herokuapp.com/api/v2/user/auth/'+user_id+'/_admin',{
     method: 'PATCH',
     headers: {
         'Authorization': `Bearer ${localStorage['currentuser']}`,

@@ -18,6 +18,20 @@ input {
 span{
     color: blue;
 }
+.modal-log{
+    cursor: pointer;
+}
+.success-modal {
+    width: 40%;
+    position: absolute;
+    background: #74749e;
+    margin: 0px 30%;
+    text-align: center;
+    color: white;
+    height: 27%;
+    font-size: 22px;
+    box-shadow: 1px 1px 12px 3px #888585;
+}
 .alt-message{
     color: #4c4a37;
     font-family: 'Source Sans Pro', sans-serif;
@@ -25,11 +39,16 @@ span{
     text-align: center;
     background-color: #f8f8fb;
 }
+.form-message, .signupform-message{
+    text-align: center;
+    color: red;
+}
 .form-detail{
     background-color: #f8f8fb;
     padding-bottom: 5%;
 }
 button{
+    cursor: pointer;
     color: #fff !important;
     text-transform: uppercase;
     background: #e46361;
