@@ -25,7 +25,7 @@ fetch('https://questionerapplication.herokuapp.com/api/v2/meetups',{
         string += object[message];
     }
     if(string == 'Token is invalid'){
-        window.location = "../../routes/user.html";
+        window.location = "https://wekesa931.github.io/Questioner/UI/routes/user.html";
     }
     for(let item in object){
         object[item].forEach(element => {
@@ -84,7 +84,7 @@ function submitMeetupInfo(){
             string += object[message];
         }
         if(string == 'Token is invalid' || string == 'Permission denied!'){
-            window.location = "../../routes/user.html";
+            window.location = "https://wekesa931.github.io/Questioner/UI/routes/user.html";
         }
         else if(string == 'tags is missing a value' || string == 'happeningOn is missing a value' || string == 'topic is missing a value'
                             || string == 'images is missing a value' || string == 'location is missing a value' || string == 'image URL is not valid'
@@ -149,7 +149,7 @@ function deleteData(meetup_id){
             string += object[message];
         }
         if(string == 'Token is invalid' || string == 'Permission denied!'){
-            window.location = "../../routes/user.html";
+            window.location = "https://wekesa931.github.io/Questioner/UI/routes/user.html";
         }
         else if(string == 'meetup deleted successfully!'){
             location.reload();
@@ -184,7 +184,6 @@ function getMeetupInfo(meetup_id){
     string =`
         <i class="fa fa-window-close" aria-hidden="true" onclick="closeWindow();"></i>
         <div class="modal-meetup-item">
-
             <div class="modal-user">
                 <div class="modal-date-holder">
                     <div class="modal-meetup-image">
@@ -203,7 +202,6 @@ function getMeetupInfo(meetup_id){
                     </div> 
                 </div>
             </div>
-
         </div>
         <div class="modal-question-input modal-hide">
             <div class="modal-comment">
@@ -272,7 +270,7 @@ function getMeetupInfo(meetup_id){
     }
     
     if(string == 'Token is invalid'){
-        window.location = "../../routes/user.html";
+        window.location = "https://wekesa931.github.io/Questioner/UI/routes/user.html";
     }  
 })
 .catch(error => console.log('bad request', error))
@@ -287,7 +285,7 @@ function closeWindow(){
 }
 function logOut(){
     localStorage.clear();
-    window.location = "../../routes/user.html";
+    window.location = "../routes/user.html";
 }
 fetch('https://questionerapplication.herokuapp.com/api/v2/user/name',{
     method: 'GET',
@@ -304,7 +302,7 @@ fetch('https://questionerapplication.herokuapp.com/api/v2/user/name',{
         string += object[message];
     }
     if(string == 'Token is invalid'){
-        window.location = "../../routes/user.html";
+        window.location = "https://wekesa931.github.io/Questioner/UI/routes/user.html";
     }
         let user_person =`
                 <p class="full-profile" style="text-transform: capitalize;">${object['firstname']} ${object['lastname']}</p>         

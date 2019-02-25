@@ -7,9 +7,11 @@
     <title>Questioner</title>
 
     <link rel="stylesheet" href="../static/styles/dashboard.css">
+    <link rel="stylesheet" href="../static/styles/meetup.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 </head>
 <body>
+        
 
     <!-- This is the navigation bar-->
     <div class="navbar">
@@ -28,16 +30,13 @@
         <div class="hum-icon">
             <i class="fa fa-bars"></i>
         </div>
-        <div class="profile-pic-holder">
-            <div class="circular-holder">
-                <img src="../static/images/me.png" alt="profile picture" class="profile-pic">
-            </div>
-        </div>
         <div class="profile-name-holder">
-            <p class="full-profile">Bill Wekesa</p>
+            <p class="chan-psw">Change Password</p>
+            <button class="log-out" onclick="logOut();">Log Out</button>
         </div>
         <div class="change-full-profile hide">
             <div class="change-main-password">
+                <i class="fa fa-window-close" id="pass" aria-hidden="true" onclick="togglePass();"></i>
                 <form name="passwordform" method="PATCH">
                     <input type="text" name="oldpassword" placeholder="Enter old password" required>
                     <br>
@@ -53,10 +52,11 @@
 
     <!-- Main Section-->
     <main>
-        <div class="meetup-modal modal-hide">
-            <div class="append-items">
-            </div>
-        </div>
+            <div class="meetup-modal modal-hide">
+                    <div class="append-items">
+                    </div>
+                </div>
+
         <div class="add-meetup hide sidenav">
                 <div class="profile-pic-container">
                     <div class="circular-container">
@@ -81,156 +81,41 @@
                     </div>
                 </div>
             </div>
-
+<!-- --------Displays all the questions the user has asked--------------- -->
         <div class="questions-holder">
-                <p>Asked Questions 
-                    <span id="counter"></span></p>
-    
-                            <div class="meet-up-container">
-                                <div class="user qsn-template">
-                                    
-                                </div>
+            <p>Asked Questions 
+                <span id="counter"></span></p>
+
+                        <div class="meet-up-container">
+                            <div class="user qsn-template">
+                                
                             </div>
                         </div>
                     </div>
-            </div>
-    <!-- --------Displays all the meetups created by the admin user------------ -->
-            <div class="meetup-holder">
-                <p>Meetups</p>
-                <div class="user-meetups-display"></div>
-    
-            </div>
-    <!-- ---------Question feeds ---------------------------------------------------->
-            <div class="feeds">
-                <p>Question feeds</p> 
-                <div class="user qsn_feeds">
-                    <!DOCTYPE html>
-                    <html lang="en">
-                    <head>
-                        <meta charset="UTF-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-                        <title>Questioner</title>
-                    
-                        <link rel="stylesheet" href="../static/styles/dashboard.css">
-                        <link rel="stylesheet" href="../static/styles/meetup.css">
-                        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-                    </head>
-                    <body>
-                            
-                    
-                        <!-- This is the navigation bar-->
-                        <div class="navbar">
-                            <div class="logo-holder">
-                                <img src="../static/images/download.png" alt="logo" class="logo">
-                            </div>
-                            <div class="title-holder">
-                                <h3>Questioner</h3>
-                            </div>
-                            <div class="searchbox-holder">
-                                <form action="/action_page.php">
-                                    <input type="text" placeholder="Search.." name="search">
-                                    <button type="submit"><i class="fa fa-search"></i></button>
-                                </form>
-                            </div>
-                            <div class="hum-icon">
-                                <i class="fa fa-bars"></i>
-                            </div>
-                            <div class="profile-name-holder">
-                                <p class="chan-psw">Change Password</p>
-                                <button class="log-out" onclick="logOut();">Log Out</button>
-                            </div>
-                            <div class="change-full-profile hide">
-                                <div class="change-main-password">
-                                    <i class="fa fa-window-close" id="pass" aria-hidden="true" onclick="togglePass();"></i>
-                                    <form name="passwordform" method="PATCH">
-                                        <input type="text" name="oldpassword" placeholder="Enter old password" required>
-                                        <br>
-                                        <input type="text" name="newpassword" placeholder="Enter new password" required>
-                                        <br><br>
-                                        <button type="button" onclick="changePassword();">
-                                            Change Password
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <!-- Main Section-->
-                        <main>
-                                <div class="meetup-modal modal-hide">
-                                        <div class="append-items">
-                                        </div>
-                                    </div>
-                    
-                            <div class="add-meetup hide sidenav">
-                                    <div class="profile-pic-container">
-                                        <div class="circular-container">
-                                            <img src="../static/images/me.png" alt="profile picture" class="my-profile-picture">
-                                        </div>
-                                    </div>
-                                    <div class="profile-name-container">
-                                        <p>Bill Wekesa</p>
-                                        <div class="profile-info">
-                                            <p>Change password</p>
-                                            <div class="change-password hide">
-                                                <form action="" class="form">
-                                                    <input type="text" name="oldpswd" placeholder="Enter old password" required>
-                                                    <br>
-                                                    <input type="text" name="newpswd" placeholder="Enter new password" required>
-                                                    <br><br>
-                                                    <button type="">
-                                                        Change Password
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                    <!-- --------Displays all the questions the user has asked--------------- -->
-                            <div class="questions-holder">
-                                <p>Asked Questions 
-                                    <span id="counter"></span></p>
-                    
-                                            <div class="meet-up-container">
-                                                <div class="user qsn-template">
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>
-                    <!-- --------Displays all the meetups created by the admin user------------ -->
-                            <div class="meetup-holder">
-                                <p>Meetups</p>
-                                <div class="user-meetups-display"></div>
-                    
-                            </div>
-                    <!-- ---------Question feeds ---------------------------------------------------->
-                            <div class="feeds">
-                                <p>Question feeds</p> 
-                                <div class="user qsn_feeds">
-                                        
-                                        
-                                </div>
-                            </div>
-                        </main>
-                        
-                        <script src="../static/javascript/admin.js"></script>
-                        <script src="../static/javascript/fetch/dashboard_meetups.js"></script>
-                        <script src="../static/javascript/fetch/create_meetup.js"></script>
-                        <script src="../static/javascript/fetch/user_questions.js"></script>
-                        <script src="../static/javascript/fetch/question.js"></script>
-                        <script src="../static/javascript/fetch/rsvp.js"></script>
-                        <script src="../static/javascript/fetch/votes.js"></script>
-                    </body>
-                    </html>
-                        
                 </div>
+        </div>
+<!-- --------Displays all the meetups created by the admin user------------ -->
+        <div class="meetup-holder">
+            <p>Meetups</p>
+            <div class="user-meetups-display"></div>
+
+        </div>
+<!-- ---------Question feeds ---------------------------------------------------->
+        <div class="feeds">
+            <p>Question feeds</p> 
+            <div class="user qsn_feeds">
+                    
+                    
             </div>
-        </main>
+        </div>
+    </main>
+    
     <script src="../static/javascript/admin.js"></script>
+    <script src="../static/javascript/fetch/dashboard_meetups.js"></script>
+    <script src="../static/javascript/fetch/create_meetup.js"></script>
     <script src="../static/javascript/fetch/user_questions.js"></script>
     <script src="../static/javascript/fetch/question.js"></script>
+    <script src="../static/javascript/fetch/rsvp.js"></script>
+    <script src="../static/javascript/fetch/votes.js"></script>
 </body>
 </html>

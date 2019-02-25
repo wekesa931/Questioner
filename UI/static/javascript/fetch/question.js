@@ -29,7 +29,7 @@ function submitQuestionInfo(metup_id){
             string += object[message];
         }
         if(string == 'Token is invalid' || string == 'Permission denied!'){
-            window.location = "../../routes/user.html";
+            window.location = "https://wekesa931.github.io/Questioner/UI/routes/user.html";
         }
         else if(string == 'body is missing a value' || string == 'title is missing a value' 
                             || string == 'A question with that title already exists in this meetup!'

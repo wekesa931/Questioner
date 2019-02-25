@@ -16,7 +16,7 @@ fetch('https://questionerapplication.herokuapp.com/api/v2/meetups',{
         string += object[message];
     }
     if(string == 'Token is invalid'){
-        window.location = "../../routes/user.html";
+        window.location = "https://wekesa931.github.io/Questioner/UI/routes/user.html";
     }
     for(let item in object){
         object[item].forEach(element => {
@@ -104,7 +104,7 @@ fetch('https://questionerapplication.herokuapp.com/api/v2/user/name',{
         string += object[message];
     }
     if(string == 'Token is invalid'){
-        window.location = "../../routes/user.html";
+        window.location = "https://wekesa931.github.io/Questioner/UI/routes/user.html";
     }
         let user_person =`
                 <p class="full-profile">${object['firstname']} ${object['lastname']}</p>         
@@ -144,7 +144,7 @@ function changePassword(){
         let object = data;
         string = object['message'];
         if(string == 'Token is invalid' || string == 'Permission denied!'){
-            window.location = "../../routes/user.html";
+            window.location = "https://wekesa931.github.io/Questioner/UI/routes/user.html";
         }            
             let psw_template=`
                 <p class="err-msg">${string}</p>
@@ -158,5 +158,5 @@ function changePassword(){
 }
 function logOut(){
     localStorage.clear();
-    window.location = "../../routes/user.html";
+    window.location = "../routes/user.html";
 }
