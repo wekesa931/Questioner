@@ -25,8 +25,11 @@ body{
     width: 32%;
     padding-top: 1%;
 }
+#pass{
+    color: white;
+}
 .hide,.hum-icon{
-    display: none;
+    display: none !important;
 }
 form{
    float: right;
@@ -50,14 +53,15 @@ main{
     box-shadow: 1px 1px 8px 0px;
     background: white;
 }
-.meetup-holder{
-    width: 43%;
+.meetup-holder {
+    width: 39%;
     text-align: center;
     font-family: sans-serif;
     font-size: 19px;
     border: 1px solid #b9aeae;
     box-shadow: 1px 1px 8px 0px;
     margin: 0 3%;
+    padding: 1%;
     background: white;
 }
 .profile-name-holder{
@@ -73,6 +77,11 @@ main{
 }
 .form{
     float: none;
+}
+.log-out{
+    width: 100%;
+    background: none;
+    cursor: pointer;
 }
 .profile-pic-holder{
     padding-top: 1%;
@@ -96,22 +105,30 @@ main{
     position: absolute;
     float: right;
     margin: 85px 70%;
-    background: #0000005e;
+    background: #000000ba;
     padding: 5%;
 }
 
 .hum-icon{
     display: none;
 }
+.err-msg{
+    color: white;
+}
+#qsn_item{
+    border: 1px solid #f9f9d9;
+    box-shadow: 3px 3px 20px 0px #c7c795;
+    background: #f9f9d9;
+    width: 100%;
+    margin-bottom: 6%;
+    padding-bottom: 2%;
+}
 .user{
     display: flex;
     flex-wrap: wrap;
-    border: 1px solid #f9f9d9;
-    box-shadow: 3px 3px 20px 0px #c7c795;
     width: 90%;
     margin: 0 auto;
     font-size: 14px;
-    background: #f9f9d9;
     min-height: 19vh;
     padding: 1%;
     margin-bottom: 3%;
@@ -145,21 +162,25 @@ main{
     display: flex;
     flex-wrap: wrap;
 }
-.btn-one{
-    margin-left: 2%;
-    width: 10%;
-}
-.btn-two{
+.btn-two, .btn-two{
     width: 100%;
+}
+.btn-holer{
+    display: flex;
+}
+.btn-holer form{
+    margin-right: 12%;
+    float: right;
 }
 .delete{
     background: red;
-    width: 23%;
+    width: 53%;
+    cursor: pointer;
     padding: 2%;
     font-size: 10px;
 }
 .attend,.maybe,.not-attend{
-    width: 116%;
+    width: 117%;
     padding: 12%;
     margin-top: 20%;
     background: #464646;
@@ -177,12 +198,16 @@ main{
     font-weight: 900;
     margin-right: 3%;
 }
+.full-profile{
+    text-transform: capitalize;
+}
 .view-qns {
     background: #09a209;
     width: 19%;
     padding: 2%;
 }
 button {
+    cursor: pointer;
     color: #fff !important;
     text-transform: uppercase;
     background: #5a5a59;
@@ -208,7 +233,7 @@ a{
     width: 50%;
 }
 .hide-item-view{
-    display: none;
+    display: none !important;
 }
 
 
@@ -259,7 +284,7 @@ a{
         display: none;
     }
     .hide{
-        display: none;
+        display: none !important;
     }
     .questions-holder, .feeds {
         width: 96%;
@@ -335,7 +360,11 @@ a{
         display: none;
     }
     .hide{
-        display: none;
+        display: none !important;
+    }
+    
+    .notattend{
+        background-color: #191818;
     }
     .questions-holder, .feeds {
         width: 100%;

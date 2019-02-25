@@ -1,4 +1,4 @@
-body{
+/* body{
     margin: 0;
     background: #f3f3ed;
 }
@@ -34,7 +34,8 @@ main{
     width: 100%;
     margin-top: 1%;
 }
-.questions-holder,.feeds{
+ 
+ .questions-holder,.feeds{
     width: 25%;
     text-align: center;
     font-family: sans-serif;
@@ -43,7 +44,7 @@ main{
     box-shadow: 1px 1px 8px 0px;
     background: white;
 }
-.meetup-holder{
+/* .meetup-holder{
     width: 43%;
     text-align: center;
     font-family: sans-serif;
@@ -52,16 +53,17 @@ main{
     box-shadow: 1px 1px 8px 0px;
     margin: 0 3%;
     background: white;
-}
-.profile-name-holder p{
+} */
+/* .profile-name-holder p{
     float: right;
-}
-.hide{
+}*/
+.modal-hide{
     display: none;
 }
-.sub-btn button{
+.modal-sub-btn button{
+    cursor: pointer;
     margin-top: 1%;
-}
+}/*
 .profile-name-holder{
     cursor: pointer;
     font-family: sans-serif;
@@ -71,34 +73,43 @@ main{
 }
 .hum-icon{
     display: none;
+}*/
+.com-item{
+    width: 100%;
 }
-.comment-box{
+.modal-comment-box{
     width: 73%;
     padding: 1%;
 }
-.comment{
+.modal-comment{
     width: 100%;
 }
-.vote{
+.modal-vote{
     width: 100%;
     font-size: 15px;
 }
-.sub-btn{
+.modal-sub-btn{
     margin-top: 1%;
     width: 100%;
 }
-#btn-input{
+#modal-btn-input{
     margin-top: 2%;
 }
 .fa-thumbs-up,.fa-thumbs-down{
-    margin: 0 1%;
     cursor: pointer;
 }
-.vote {
+.fa-window-close:before {
+    content: "\f410";
+    float: right;
+    cursor: pointer;
+    padding: 4px;
+    font-size: 22px;
+}
+.modal-vote {
     padding-top: 3%;
     width: 100%;
     font-size: 26px;
-}
+}/*
 .form input{
     padding: 1%;
     margin: 1%;
@@ -137,77 +148,121 @@ main{
 .post-question input{
     float: right;
     margin-right: 5%;
+} */
+.append-user-items{
+    width: 100%;
 }
-.question-item-holder{
+.user-modal{
+    min-height: 91vh;
+    background: white;
+    width: 71%;
+    margin: 0px 15%;
+    box-shadow: 3px 3px 20px 0px #c7c795;
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+}
+.modal-question-item-holder{
     border: 1px solid #fdfde4 !important;
     box-shadow: 3px 3px 20px 10px #f7f7f2 !important;
     background: white !important;
 }
-.user{
+.modal-user{
     display: flex;
     flex-wrap: wrap;
     border: 1px solid #f9f9d9;
     box-shadow: 3px 3px 20px 0px #c7c795;
     width: 90%;
-    margin: 0 auto;
+    margin: 28px auto;
     font-size: 14px;
     background: #f9f9d9;
     min-height: 19vh;
     padding: 1%;
     margin-bottom: 3%;
 }
-.meetup-title-holder,.date-holder{
+.modal-meetup-title-holder,.modal-date-holder{
     width: 100%;
 }
-.meetup-image{
+.modal-meetup-image{
     width: 6%;
 }
-.meet-up-image{
+.modal-meet-up-image{
     width: 88%;
 }
-.meetup-date-holder{
+.meetup-modal-date-holder{
     width: 87%;
 }
-.meetup-title-holder{
+.modal-meetup-title-holder{
     text-align: initial;
-    font-size: 14px;
+    font-size: 20px;
     padding-left: 1%;
-    text-align: center;
-    text-decoration: underline;
+    text-align: justify;
 }
-.fa-tag {
+.modal-post-question{
+    cursor: pointer;
+    width: 18%;
+    padding: 1%;
+    margin: 0;
+}
+/* .fa-tag {
     font-weight: 900;
     margin-right: 3%;
+} */
+.modal-meetup-date-holder{
+    width: 87%;
 }
-.meetup-details{
+.modal-meetup-details{
     width: 100%;
     text-align: justify;
 }
-.date-holder {
+.modal-date-holder {
     margin-top: 2%;
     font-size: 14px;
     text-align: right;
     display: flex;
     flex-wrap: wrap;
 }
-.icons-holder,.delete-holder{
-    width: 47%
+textarea{
+    width: 62vw;
 }
-.commet-statements{
-    text-align: justify;
+.comment-text{
     border-top: 1px solid #c1bebe;
+    padding-top: 9px;
 }
-#input-question{
+/* .icons-holder,.delete-holder{
+    width: 47%
+}*/
+b{
+    text-transform: capitalize;
+}
+.modal-comment-statements{
+    text-align: justify;
+    width: 100%;
+}/*
+#modal-input-question{
     padding: 1%;
     width: 70%;
 }
-#input-post-question{
+#modal-input-post-question{
     padding: 1%;
     width: 106px;
+}*/
+.modal-question-input{
+    margin: 5%;
 }
-.question-input{
-    margin-bottom: 2%;
+.fa-thumbs-up:before {
+    content: "\f164";
+    cursor: pointer;
 }
+.meetup-modal{
+    display: flex;
+    flex-direction: column;
+    margin: 0 15%;
+    background: #f9f9f9;
+    position: absolute;
+    min-height: 100%;
+    box-shadow: 1px 1px 20px 2px;
+}/*
 
 @media screen and (min-width: 1280px) {
     .questions-holder,.feeds,.meetup-holder{
@@ -336,10 +391,10 @@ main{
     
     .searchbox-holder {
         display: none;
-    }
-    .hide{
+    }*/
+    .modal-hide{
         display: none;
-    }
+    }/*
     .questions-holder, .feeds {
         width: 100%;
         text-align: center;
@@ -377,4 +432,4 @@ main{
         font-size: 29px;
         padding-top: 5%;
     }
-  }
+  } */

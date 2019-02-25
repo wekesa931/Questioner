@@ -1,5 +1,5 @@
 function upvoteInfo(question_id){
-    const url = 'http://127.0.0.1:5000/api/v2/' + question_id + '/upvote';
+    const url = 'https://questionerapplication.herokuapp.com/api/v2/' + question_id + '/upvote';
     fetch(url,{
         method: 'PATCH',
         headers: {
@@ -27,7 +27,7 @@ function upvoteInfo(question_id){
 }
 
 function downvoteInfo(question_id){
-    const url = 'http://127.0.0.1:5000/api/v2/' + question_id + '/downvote';
+    const url = 'https://questionerapplication.herokuapp.com/api/v2/' + question_id + '/downvote';
     fetch(url,{
         method: 'PATCH',
         headers: {

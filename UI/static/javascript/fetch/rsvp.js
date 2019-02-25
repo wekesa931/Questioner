@@ -1,8 +1,6 @@
 function attendRsvp(metup_id){
-    const url = 'http://127.0.0.1:5000/api/v2/'+ metup_id +'/rsvp';
-    let btn_hldr = document.querySelector(`#btn-holer${metup_id}`);
-    btn_hldr.classList.toggle('hide');
-    let form = document.forms['attendform'];
+    const url = 'https://questionerapplication.herokuapp.com/api/v2/'+ metup_id +'/rsvp';
+    let form = document.forms['atendform'];
     let formData = new FormData(form);
     let data = {};
     for (let [key, prop] of formData){
@@ -20,7 +18,6 @@ function attendRsvp(metup_id){
     .then(response => response.json())
     .then(data => {
         location.reload();
-        let string = "";
         let object = data;
         console.log(object);
    })
@@ -28,7 +25,7 @@ function attendRsvp(metup_id){
 }
 
 function maybeRsvp(metup_id){
-    const url = 'http://127.0.0.1:5000/api/v2/'+ metup_id +'/rsvp';
+    const url = 'https://questionerapplication.herokuapp.com/api/v2/'+ metup_id +'/rsvp';
     let form = document.forms['maybeform'];
     let formData = new FormData(form);
     let data = {};
@@ -36,7 +33,6 @@ function maybeRsvp(metup_id){
         data[key] = prop;
     }
     VALUE = JSON.stringify(data);
-    console.log(VALUE);
     fetch(url,{
         method: 'POST',
         headers: {
@@ -48,7 +44,6 @@ function maybeRsvp(metup_id){
     .then(response => response.json())
     .then(data => {
         location.reload();
-        let string = "";
         let object = data;
         console.log(object);
    })
@@ -56,21 +51,25 @@ function maybeRsvp(metup_id){
 }
 
 function notAttendRsvp(metup_id){
-    const url = 'http://127.0.0.1:5000/api/v2/'+ metup_id +'/rsvp';
+    const url = 'https://questionerapplication.herokuapp.com/api/v2/'+ metup_id +'/rsvp';
+    let form = document.forms['notatendform'];
+    let formData = new FormData(form);
+    let data = {};
+    for (let [key, prop] of formData){
+        data[key] = prop;
+    }
+    VALUE = JSON.stringify(data);
     fetch(url,{
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${localStorage['currentuser']}`,
             'content-Type':'application/json'
         },
-        body: {
-            'status': 'NOT ATTEND'
-        }
+        body: VALUE
     })
     .then(response => response.json())
     .then(data => {
         location.reload();
-        let string = "";
         let object = data;
         console.log(object);
    })

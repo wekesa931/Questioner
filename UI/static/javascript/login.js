@@ -1,5 +1,6 @@
+
 function submitInfo(){
-    const url = 'http://127.0.0.1:5000/api/v2/user/auth/login';
+    const url = 'https://questionerapplication.herokuapp.com/api/v2/user/auth/login';
     let form = document.forms['loginForm'];
     let formData = new FormData(form);
     let data = {};
@@ -28,10 +29,10 @@ function submitInfo(){
             message.insertAdjacentHTML("beforeend", string)
             }
             else if(object['isadmin'] == true){
-                window.location = "file:///home/wekesa/Desktop/Questioner-gh-pages/UI/routes/admin.html";
+                window.location = "../routes/admin.html";
             }
             else if(object['isadmin'] == false){
-                window.location = "file:///home/wekesa/Desktop/Questioner-gh-pages/UI/routes/dashboard.html";
+                window.location = "../routes/dashboard.html";
             }
         }
     })
